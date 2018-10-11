@@ -10,9 +10,6 @@ Project-Collab is a platform for UofT students to post and discover new software
 A mockups is currently available via the link below:
 https://xd.adobe.com/view/32527a67-5e67-4048-6f9a-01cbefa7bc59-4463/?fullscreen
 
-  A mockups is currently available via the link below:
-  https://xd.adobe.com/view/32527a67-5e67-4048-6f9a-01cbefa7bc59-4463/?fullscreen
-
 
 #### Q2: Who are your target users?
 
