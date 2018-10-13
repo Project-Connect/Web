@@ -1,8 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
-
- > _Note:_ This document is meant to be written during (or shortly after) your initial planning meeting.     
- > It does not really make sense for you to edit this document much (if at all) while working on the project - Instead, at the end of the planning phase, you can refer back to this document and decide which parts of your plan you are happy with and which parts you would like to change.
-
+# Project Collab
 
 ## Iteration 1
 
@@ -10,8 +6,6 @@
  * End date: October 9th, 2018
 
 ## Process
-
-_This entire section is optional. Note that you will have to fill it out and more for the next 3 deliverables so it's good to start soon and get feedback._
 
 #### Roles & responsibilities
 
@@ -47,8 +41,6 @@ Development (Everyone)
 -  We will be actively using Github Projects to keep track of todo lists. The project will consist of milestones that specify what components needs to be done for which milestone, which will ensure prioritization of the project. The task will be assigned via Github issues, which will then be tickets that each team member will work on.
 
 ## Product
-
-_This entire section is mandatory._
 
 #### Goals and tasks
 
