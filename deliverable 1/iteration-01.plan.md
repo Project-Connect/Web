@@ -38,7 +38,7 @@ Development (Everyone)
 
 - On top of our additional in person meeting, we will have an optional meeting at 6pm every Saturday online. The purpose of the meeting will be to discussion any issue or changes that have come up as members were working on the project and will be a time for members to get insite/help on any issues they have before the next in person meeting.
 
--lastly, we are planning to have a kind of paired programming/review system where each week via the scrum master, members would decide who they have matching schedules/free-time with and would be willing to having a coding session and/or code review session, if possible.
+- lastly, we are planning to have a kind of paired programming/review system where each week via the scrum master, members would decide who they have matching schedules/free-time with and would be willing to having a coding session and/or code review session, if possible.
 
 #### Artifacts
 
