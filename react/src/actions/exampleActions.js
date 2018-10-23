@@ -9,8 +9,7 @@ This file exports functions that dispatch events to the store.
 * then the payload, with is the data used to mutate the current state.
 */
 
-import axios from "axios"
-// Normally with out the redux-thunk middleware, would dispatch the event as the
+// Normally without the redux-thunk middleware, would dispatch the event as the
 // following:
 export const ADD_TODO = 'ADD_TODO'
 export function addTodo(text) {

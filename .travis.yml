@@ -1,0 +1,17 @@
+install:
+    - cd react && npm install
+
+script:
+    # beware of which route you are in after cd commands
+    - npm run build
+
+cache:
+  directories:
+    - "node_modules"
+    - "public"
+# specify language
+language:
+    - node_js
+
+node_js:
+    - "8.12.0"
