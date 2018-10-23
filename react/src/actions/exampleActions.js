@@ -42,6 +42,17 @@ export function callExampleTwo(number) {
   }
 }
 
+// we can create a function that takes a parameter and attach it as a payload
+// to update some attribute to the store
+export function callNewProjectComponent(number) {
+    return function (dispatch) {
+        dispatch({
+            type: "ANOTHER_EXAMPLE",
+            payload: number
+        })
+    }
+}
+
 /*
 * Normally the payload is a some parameter value we delared as an input of the function,
 * but in this case, we can specify it as a promise.
@@ -53,6 +64,15 @@ export function callAsyncExample(param) {
           payload: delay(1000, param)
         })
   }
+}
+
+export function callAsyncExample2(param) {
+    return function (dispatch) {
+        dispatch({
+            type: "FETCH_EVENT2",
+            payload: delay(100, param)
+        })
+    }
 }
 
 //an async function that return a promise that will eventually resolve by returning v
