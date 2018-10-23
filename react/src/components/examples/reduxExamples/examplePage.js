@@ -10,6 +10,8 @@ class ReduxExamples extends Component {
   render() {
     return (
       <div className="redux-examples">
+        Open up the developer console,
+        then click on the "Click Me" button to see redux in action
         <ExampleComponent/>
         <ExampleComponentTwo/>
       </div>
