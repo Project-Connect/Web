@@ -1,9 +1,12 @@
+before_install:
+  - psql -U postgres < node/db/schema.sql
+  - psql -U postgres < node/db/sample_data.sql
+
 install:
-    - cd react && npm install
+  - cd $TEST_DIR && npm install
 
 script:
-    # beware of which route you are in after cd commands
-    - npm run build
+  - npm run setup_test
 
 cache:
   directories:
@@ -15,3 +18,16 @@ language:
 
 node_js:
     - "8.12.0"
+
+matrix:
+  include:
+  - node: "8.12.0"
+    env: TEST_DIR=node
+  - node: "8.12.0"
+    env: TEST_DIR=react
+env:
+  global:
+      - PGPORT=5432
+
+addons:
+  postgresql: "9.4"
