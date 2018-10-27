@@ -10,7 +10,6 @@ class HomePage extends Component {
       <div className="home-page">
         HOMEPAGE!!!!
         Checkout /ReduxExamples for the redux example
-        Checkout /NewProject for (the start of) a new project page
       </div>
     );
   }

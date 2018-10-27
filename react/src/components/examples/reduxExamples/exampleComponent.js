@@ -18,12 +18,9 @@ class Example extends Component {
   }
 
   render() {
-    if (!this.props.attribute5) {
-        return (
-            <h1> EXAMPLE!!!! </h1>
-        );
-    }
-    return null;
+    return (
+      <h1> EXAMPLE!!!! </h1>
+    );
   }
 }
 
@@ -36,8 +33,7 @@ const mapStateToProps = (state) => ({
   attribute2: state.example1.attribute2,
   attribute3: state.example1.attribute3,
   //we can combine states from multiple reducers
-  attribute4: state.example2.attribute1,
-  attribute5: state.newProjVar.attribute1
+  attribute4: state.example2.attribute1
 })
 // this is the convention for connection the states from the store into the component
 export default connect(mapStateToProps)(Example)

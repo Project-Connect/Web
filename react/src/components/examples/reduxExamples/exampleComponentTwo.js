@@ -16,40 +16,29 @@ class ExampleTwo extends Component {
     // here we call the function in exampleActions.js under actions
     this.props.dispatch(example.callExampleTwo(2));
     this.async_dispatch = this.async_dispatch.bind(this);
-    this.async_dispatch2 = this.async_dispatch2.bind(this);
   }
 
   async_dispatch(){
     let flip = this.props.attribute4 ? false : true
     this.props.dispatch(example.callAsyncExample(flip));
   }
-
-  async_dispatch2(){
-    let flip2 = this.props.attribute5 ? false : true
-    this.props.dispatch(example.callAsyncExample2(flip2));
-  }
-
   render() {
-      if (this.props.attribute4) {
-          return (
-              <div>
-                  <h1>WHOA HIDDEN EXAMPLE!?!?</h1>
-                  <button onClick={this.async_dispatch}>CLICK ME</button>
-                  <button onClick={this.async_dispatch2}>New Project</button>
-              </div>
-          );
-      }
-      if (!this.props.attribute5){
-          return (
-              <div>
-                  <h1> EXAMPLE!!!! </h1>
-                  <button onClick={this.async_dispatch}>CLICK ME</button>
-              </div>
-          );
-      }
-      return null;
-  }
+    if (this.props.attribute4) {
+      return (
+        <div>
+            <h1>WHOA HIDDEN EXAMPLE!?!?</h1>
+            <button onClick={this.async_dispatch}>CLICK ME</button>
+        </div>
+      );
+    }
 
+    return (
+      <div>
+          <h1> EXAMPLE!!!! </h1>
+          <button onClick={this.async_dispatch}>CLICK ME</button>
+      </div>
+    );
+  }
 }
 
 // here we map the states in the store onto the component, the left hand side
@@ -61,8 +50,7 @@ const mapStateToProps = (state) => ({
   attribute2: state.example1.attribute2,
   attribute3: state.example1.attribute3,
   //we can combine states from multiple reducers
-  attribute4: state.example2.attribute1,
-  attribute5: state.newProjVar.attribute1
+  attribute4: state.example2.attribute1
 })
 // this is the convention for connection the states from the store into the component
 export default connect(mapStateToProps)(ExampleTwo)
