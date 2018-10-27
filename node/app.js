@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 // Set up the express app
 const app = express();
 
+//post to listen to
+app.set('port', 8000);
+
 // Log requests to the console.
 app.use(logger('dev'));
 
