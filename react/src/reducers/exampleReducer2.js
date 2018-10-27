@@ -31,6 +31,13 @@ const eventReducer = (state = initialState, action) => {
         fetched: true,
         attribute1: action.payload,
       }
+      case "FETCH_EVENT2_FULFILLED":
+          return {
+              ...state,
+              fetching: false,
+              fetched: true,
+              attribute1: false,
+          }
     default: return state;
   }
 }
