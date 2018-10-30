@@ -1,0 +1,21 @@
+/*
+CSS file for the miniaturized view of the project.
+*/
+
+body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    color: #303030;
+    margin: 20px;
+  }
+  
+ol, ul {
+    padding-left: 30px;
+  }
+
+.txtTitle {
+    font: 30px "Century Gothic", Futura, sans-serif;
+    color: #303030;
+}
+.txtDesc {
+      resize:none;
+  }
