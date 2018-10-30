@@ -62,14 +62,16 @@ if __name__ == "__main__":
     # as some mixed
     # example insert statment:
     # INSERT INTO users VALUES ('prof0',0,1,0,'prof0',NULL);
+    gen_user_id = 1
     for _ in range(10):
         names = [gen.name() for _ in range(10)]
-        user_ids = [gen.user_id(name) for name in names]
+        user_names = [gen.user_id(name) for name in names]
         password = gen.password()
         bio = gen.sentence()
-        for name, user_id in zip(names, user_ids):
-            q = "INSERT INTO users (id, name, bio, password) VALUES ('{}','{}','{}','{}');".format(user_id, name, bio, password)
-            current_data_set['users'][user_id] = {'name': name}
+        for name, user_name in zip(names, user_names):
+            q = "INSERT INTO users (username, name, bio, password) VALUES ('{}','{}','{}','{}');".format(user_name, name, bio, password)
+            current_data_set['users'][user_name] = {'name': name , 'id': gen_user_id }
+            gen_user_id+=1
             out.append(q)
     out.append("")
     id = 1
@@ -82,10 +84,12 @@ if __name__ == "__main__":
         out.append(q)
     out.append("")
 
-    for user_id in current_data_set['users'].keys():
+    for user in current_data_set['users'].keys():
         project_name = random.choice(current_data_set['projects'].keys())
         project_id = current_data_set['projects'][project_name]['id']
-        q = "INSERT INTO user_associations (user_id, project_id) VALUES ('{}',{});".format(user_id, project_id)
+        user_id = current_data_set['users'][user]['id']
+        admin_status = True if random.randint(0,10) < 3 else False
+        q = "INSERT INTO user_associations (user_id, project_id, is_admin) VALUES ({},{},{});".format(user_id, project_id, admin_status)
         out.append(q)
 
     print("\n".join(out))

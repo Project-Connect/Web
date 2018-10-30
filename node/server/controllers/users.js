@@ -14,7 +14,7 @@ module.exports = {
         linked_in: req.body.linked_in,
         github: req.body.github
       })
-      .then(users => res.status(201).send(users))
+      .then(users => res.status(200).send("okay"))
       .catch(error => res.status(400).send(error));
   },
 
