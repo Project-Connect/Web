@@ -23,7 +23,7 @@ class MiniProjectComponent extends Component {
 
         <div className="modal" style={modalStyle}>
             <div className="txtTitle" >
-                Title
+                Title {this.props.id}
             </div>
             <br />
             <div>

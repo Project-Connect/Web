@@ -8,17 +8,18 @@ import { Provider } from 'react-redux'
 import PropTypes from 'prop-types';
 
 import ReduxExamples from "./examples/reduxExamples/examplePage"
-import HomePage from "./homePage/homePage"
 import newProjectComponent from "./newProject/newProjectComponent";
+
+import Projects from "./projects/projects";
 
 // Just add your component onto a path below
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <div>
-        <Route exact path="/" component={HomePage} />
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
         <Route exact path="/newProject" component={newProjectComponent}/>
+        <Route exact path="/" component={Projects}/>
       </div>
     </Router>
   </Provider>
