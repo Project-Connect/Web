@@ -1,6 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,7 +22,10 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {});
   users.associate = function(models) {
-    // associations can be defined here
+    users.hasMany(models.user_associations, {
+        foreignKey: 'user_id',
+        as: 'user_associations',
+    });
   };
   return users;
 };

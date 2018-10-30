@@ -55,7 +55,7 @@ if __name__ == "__main__":
     # project
     # user_associations
 
-    out.append('\c test;')
+    out.append('\c project-collab-db;')
     current_data_set['users'] = {}
     current_data_set['projects'] = {}
     # users add admins (1,0,0), instructors (0,1,0), and tas (0,0,1) as well
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         password = gen.password()
         bio = gen.sentence()
         for name, user_id in zip(names, user_ids):
-            q = "INSERT INTO users (user_id, name, bio, password) VALUES ('{}','{}','{}','{}');".format(user_id, name, bio, password)
+            q = "INSERT INTO users (id, name, bio, password) VALUES ('{}','{}','{}','{}');".format(user_id, name, bio, password)
             current_data_set['users'][user_id] = {'name': name}
             out.append(q)
     out.append("")
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     for name in gen.project_name:
         description = gen.paragraph()
         date = gen.get_start_date()
-        q = "INSERT INTO projects (project_name, description, project_start_date) VALUES ('{}','{}','{}');".format(name, description, date)
+        q = "INSERT INTO projects (name, description, project_start_date) VALUES ('{}','{}','{}');".format(name, description, date)
         current_data_set['projects'][name] = {'name': name, 'id': id}
         id += 1
         out.append(q)

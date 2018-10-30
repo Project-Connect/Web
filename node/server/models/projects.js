@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     project_start_date: DataTypes.DATE
   }, {});
   projects.associate = function(models) {
-    // associations can be defined here
+    projects.hasMany(models.user_associations, {
+        foreignKey: 'project_id',
+        as: 'user_associations',
+    });
   };
   return projects;
 };

@@ -32,9 +32,17 @@ module.exports = {
   list(req, res) {
     return Projects
       .findAll({
-        order: [
-          ['createdAt', 'DESC'],
-        ],
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
+      })
+      .then((projects) => res.status(200).send(projects))
+      .catch((error) => res.status(400).send(error));
+  },
+
+  // get a single porject
+  getProject(req, res) {
+    return Projects
+      .findById( req.params.project, {
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
       })
       .then((projects) => res.status(200).send(projects))
       .catch((error) => res.status(400).send(error));

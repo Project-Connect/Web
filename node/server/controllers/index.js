@@ -6,5 +6,5 @@ module.exports = {
   users,
   projects,
   user_associations,
-  
+
 };

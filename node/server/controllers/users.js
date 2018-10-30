@@ -6,6 +6,7 @@ module.exports = {
     return Users
       .create({
         name: req.body.name,
+        username: req.body.username,
         bio: req.body.bio,
         password: req.body.password,
         email: req.body.email,
@@ -21,6 +22,19 @@ module.exports = {
   list(req, res) {
     return Users
       .findAll({
+        attributes: ['id', 'username', 'name', 'bio'],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      })
+      .then((users) => res.status(200).send(users))
+      .catch((error) => res.status(400).send(error));
+  },
+
+  // list all users
+  getUser(req, res) {
+    return Users
+      .findById( req.params.user, {
         attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
         order: [
           ['createdAt', 'DESC'],
@@ -30,6 +44,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  //update a user
   update(req, res) {
   return Users
     .findById(req.body.id, {
