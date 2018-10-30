@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import ReduxExamples from "./examples/reduxExamples/examplePage"
 import newProjectComponent from "./newProject/newProjectComponent";
+import loginPage from "./loginPage/loginPage"
 
 import Projects from "./projects/projects";
 import ProjectDetail from "./projectDetail/projectDetail";
@@ -22,6 +23,7 @@ const Root = ({ store }) => (
         <Route exact path="/newProject" component={newProjectComponent}/>
         <Route exact path="/" component={Projects}/>
         <Route path={"/project/:project_id"} component={ProjectDetail}/>
+        <Route exact path="/loginPage" component={loginPage}/>
       </div>
     </Router>
   </Provider>
