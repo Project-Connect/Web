@@ -41,7 +41,7 @@ class Projects extends Component {
 
                 <div>
                 {this.state.ids.map((id) => (
-                    <button className="project" onClick={()=>console.log(id)} key={id}>
+                    <button className="project" onClick={()=>this.props.history.push(`/project/${id}`)} key={id}>
                         <MiniProjectComponent id={id}/>
                     </button>
                 ))}
