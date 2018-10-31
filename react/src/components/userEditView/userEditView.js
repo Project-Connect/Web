@@ -32,7 +32,7 @@ const validate = values => {
 
 const onSubmit = values => {
 		console.log(values)
-    alert('Sent data: for project ' + values.title)
+    alert('Updating user information: ' + values.id)
     fetch('https://localhost:8000/api/user/update', {
         method: "POST",
         body: JSON.stringify({

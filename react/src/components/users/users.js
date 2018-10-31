@@ -5,7 +5,6 @@
  */
 import React, { Component } from "react";
 
-import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import UserEditView from "../userEditView/userEditView.js";
 import Modal from "react-modal";
 
@@ -14,7 +13,13 @@ class Users extends Component {
     constructor(props){
         super(props);
         this.state={
-            ids:[],
+            id:"",
+            name:"",
+            bio:"",
+            email:"",
+            photo:"",
+            linked_in:"",
+            github:"",
             displayModal:false
         }
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -41,12 +46,28 @@ class Users extends Component {
                 </div>
 
                 <div>
-                  <h1> Send GET request on load of this component.. </h1>
+                  <h1> Send GET request on load data.. </h1>
+									<p> {this.state.id} </p>
+									<p> {this.state.name} </p>
+									<p> {this.state.bio} </p>
+									<p> {this.state.email} </p>
+									<p> {this.state.photo} </p>
+									<p> {this.state.linked_in} </p>
+									<p> {this.state.github} </p>
                 </div>
 
 
             </div>
         );
+    }
+
+
+    componentDidMount() {
+				alert('Loading user information: ' + this.state.id)
+
+        fetch('http://localhost:8000/api/user' + this.state.id)
+        .then(res => res.json())
+        .then((data) => { this.setState({ name : data.name }) });
     }
 
     handleOpenModal () {
@@ -56,12 +77,6 @@ class Users extends Component {
 
     handleCloseModal () {
         this.setState({ displayModal: false });
-    }
-
-    componentDidMount(){
-        this.setState({ids:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}, ()=>{
-            console.log(this.state.ids)
-        })
     }
 }
 
