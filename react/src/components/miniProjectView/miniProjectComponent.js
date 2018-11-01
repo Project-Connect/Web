@@ -8,6 +8,20 @@ import './miniProjectComponent.css';
 
 class MiniProjectComponent extends Component {
 
+ 
+    constructor() {
+        super()
+        this.state = {
+            results: {
+              id: '',
+              name: '',
+              description: '',
+              github: '',
+              url: '',
+              project_start_date: ''
+            }}
+    }
+
     render() {
 
         const modalStyle = {
@@ -23,20 +37,37 @@ class MiniProjectComponent extends Component {
 
         <div className="modal" style={modalStyle}>
             <div className="txtTitle" >
-                Title {this.props.id}
+                {this.state.results.name}
             </div>
             <br />
             <div>
-                Project Description
+                {this.state.results.description}
             </div>
             <br />
             <div>
-                Stacks
+                {this.state.results.project_start_date}
             </div>
         </div>
 
         );
-  }
+    }
+
+
+    componentDidMount() {
+        let urlData = "http://127.0.0.1:8000/api/project/"  + this.props.id;
+        
+        fetch(urlData)
+        .then(res => res.json())
+        .then(res =>
+            this.setState({
+                results: res
+            })
+        )
+        .catch(function (err) {
+            console.log(err)
+        })
+
+    }
 }
 
 export default MiniProjectComponent

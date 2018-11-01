@@ -12,9 +12,19 @@
 ## Process
 
 For this iteration, we plan to do a two week sprint.
-- First week is a test sprint as many of us are busy with midterm, we will mostly working on setup of the projects, task will be oriented around establishing frameworks and tools.
-- Second week will focus on completing the core functionalities for deliverable 2.
+First week is a test sprint as many of us are busy with midterm, we will mostly working on setup of the projects, task will be oriented around establishing frameworks and tools. Task in this iteration involves:
+  - Database setup
+  - Front-end routing setup
+  - Continuous integration setup with basic tests
 
+
+The Second week will focus on completing the core functionalities for deliverable 2, this includes items in the backlog such as:
+  - component for creating new projects
+  - component for miniturized view of list of projects involved in
+  - component for dashboard for project
+  - dashboard for user
+  - component for miniturized view of all users involved in a projects
+  - API endpoint for all the components above
 
 #### Roles & responsibilities
 
@@ -66,6 +76,15 @@ List/describe the artifacts you will produce in order to organize your team.
    - lastly, we are planning to have a kind of paired programming/review system where each week via the scrum master, members would decide who they have matching schedules/free-time with and would be willing to having a coding session and/or code review session, if possible.
 
 #### Git / GitHub workflow
+
+
+1. issues are assigned to users via github issues from team discussions.
+2. issues are tagged to different projects and milestones depending on the nature of the issue.
+3. issue is assigned to a member in the group who will take on the work, assignment is derived from meetings.
+4. Whenever an issue fixed and code is being checked it, it must be done via a Pull Request(PR) to the master branch, tagging the issue the code solves.
+5. We enabled branch protection on the master branch(Thanks to Carson) so that all PR to the master branch can only be merged if there is at least 1 review who approved the PR.
+6. In addition to approval, we've setup Travis CI to test all code that is coming in, build must pass for every PR before it is allowed to be merged.
+7. Once both steps 5 and 6 has passed then the code is allowed to be merged in, anyone involved in the PR (Developer and review) may then merge the PR into the master branch.
 
 Describe your Git / GitHub workflow.     
 Essentially, we want to understand how your team members share a codebase and avoid conflicts. You must incorporate 'Pull Requests' into your process.

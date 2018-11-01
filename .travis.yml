@@ -1,6 +1,5 @@
 before_install:
-  - psql -U postgres < node/db/schema.sql
-  - psql -U postgres < node/db/sample_data.sql
+  - psql -U postgres < node/db/setup.sql
 
 install:
   - cd $TEST_DIR && npm install
@@ -12,6 +11,7 @@ cache:
   directories:
     - "node_modules"
     - "public"
+
 # specify language
 language:
     - node_js
@@ -31,7 +31,7 @@ env:
 
 addons:
   postgresql: "9.4"
- 
+
 branches:
   # whitelist
   only:
