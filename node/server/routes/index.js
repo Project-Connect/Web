@@ -19,7 +19,7 @@ module.exports = (app) => {
   // remove a single user TODO
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
-
+  app.post('/api/user/createFind', usersController.createOrFind);
   // * login routes *
 
 

@@ -18,6 +18,21 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
+  //find user, if it doesn't exist, create user
+  createOrFind(req, res) {
+    return Users
+      .findOrCreate({
+        where: {
+          username: req.body.username
+        },
+        defaults: {
+          name: req.body.username,
+          password: "temp"
+        }
+      })
+      .then(users => res.status(200).send("okay"));
+  },
+
   // list all users
   list(req, res) {
     return Users
