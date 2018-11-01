@@ -17,7 +17,7 @@ module.exports = (app) => {
   // get a single user info TODO
   app.get('/api/users/:user', usersController.getUser);
   // remove a single user TODO
-
+  app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
 
   // * login routes *

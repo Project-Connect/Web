@@ -34,8 +34,10 @@ module.exports = {
   // list all users
   getUser(req, res) {
     return Users
-      .findById( req.params.user, {
-        attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
+      .findById(req.params.user, {
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt']
+        },
         order: [
           ['createdAt', 'DESC'],
         ],
@@ -46,29 +48,45 @@ module.exports = {
 
   //update a user
   update(req, res) {
-  return Users
-    .findById(req.body.id, {
-      attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
-    })
-    .then(users => {
-      if (!users) {
-        return res.status(404).send({
-          message: 'User Not Found',
-        });
-      }
-      return users
-        .update({
-          name: req.body.name,
-          bio: req.body.bio,
-          email: req.body.email,
-          photo: req.body.photo,
-          linked_in: req.body.linked_in,
-          github: req.body.github
+    return Users
+      .findById(req.body.id, {
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt']
+        },
+      })
+      .then(users => {
+        if (!users) {
+          return res.status(404).send({
+            message: 'User Not Found',
+          });
+        }
+        return users
+          .update({
+            name: req.body.name,
+            bio: req.body.bio,
+            email: req.body.email,
+            photo: req.body.photo,
+            linked_in: req.body.linked_in,
+            github: req.body.github
+          })
+          .then((users) => res.status(200).send(users))
+          .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
+  },
+
+  //remove a user
+  removeUser(req, res) {
+    return Users
+      .findById(
+        req.body.id
+      )
+      .then(user => {
+        return user.destroy()
+          .then(() => res.status(200).send("user deleted"))
+          .catch((error) => res.status(400).send(error));
         })
-        .then((users) => res.status(200).send(users))
-        .catch((error) => res.status(400).send(error));
-    })
-    .catch((error) => res.status(400).send(error));
-},
+      .catch(error => res.status(400).send(error));
+  },
 
 };
