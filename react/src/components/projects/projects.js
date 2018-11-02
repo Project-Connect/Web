@@ -53,7 +53,6 @@ class Projects extends Component {
 
     handleOpenModal () {
         this.setState({ displayModal: true });
-        console.log(this.state.displayModal)
     }
 
     handleCloseModal () {
@@ -61,9 +60,16 @@ class Projects extends Component {
     }
 
     componentDidMount(){
-        this.setState({ids:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}, ()=>{
-            console.log(this.state.ids)
-        })
+        this.getData();
+    }
+
+    async getData(){
+        let url="http://127.0.0.1:8000/api/user_associations/user/5"
+        let fetched = await fetch(url)
+        let fetchedJson = await fetched.json()
+        let project_ids = []
+        fetchedJson.map((element)=>project_ids.push(element.project_id))
+        this.setState({ids:project_ids})
     }
 }
 
