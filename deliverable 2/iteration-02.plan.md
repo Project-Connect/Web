@@ -1,13 +1,9 @@
-# YOUR PRODUCT/TEAM NAME
-
- > _Note:_ This document is meant to be written during (or shortly after) your initial planning meeting.     
- > It does not really make sense for you to edit this document much (if at all) while working on the project - Instead, at the end of the planning phase, you can refer back to this document and decide which parts of your plan you are happy with and which parts you would like to change.
-
+# Group 20 - Project-Collab
 
 ## Iteration 02
 
  * Start date: October 16th
- * End date: October 30th
+ * End date: November 1st
 
 ## Process
 
@@ -19,60 +15,60 @@ First week is a test sprint as many of us are busy with midterm, we will mostly 
 
 
 The Second week will focus on completing the core functionalities for deliverable 2, this includes items in the backlog such as:
+
+Front end:  
   - component for creating new projects
-  - component for miniturized view of list of projects involved in
-  - component for dashboard for project
-  - dashboard for user
-  - component for miniturized view of all users involved in a projects
-  - API endpoint for all the components above
+  - component that displays an existing project in a small, condensed form with only important information
+  - component that displays an existing project in large expanded view with all information
+  - page to display all projects the user owns
+  - dashboard to display user information
+  - navigation bar for application
+  
+Back end:
+  - API endpoints for fetching, updating and removing data for users, projects and their associations
+  - Design database schema
+  - setup and integrate sequelize with postgres
+  - create python script to create sql files for populating the database
+
+Other:
+  - Setup yml file for travis build
 
 #### Roles & responsibilities
 
-Describe the different roles on the team and the responsibilities associated with each role.
-
-Scrum Master
+Scrum Master (Richard)
 - 	Coming up with meeting agenda each week
 - 	Guiding discussions, ensuring on track with meeting agenda
 - 	Assign issues to individual members
 
-Product Owner
+Product Owner (Daniel)
 - 	Engaging with the product, engaging with end users.
 - 	Engage with Scrum Master to come up meeting agenda.
 - 	Actively collecting data on user needs.
 
-Project Facilitator
+Project Facilitator (Nathaniel)
 - 	Reach out to individuals to ensure tasks are done on time
 - 	Keep track of project progress
 -   Taking meeting minutes
 
-Development (Everyone)
-- 	Staying on top of task
-- 	Reach out for help when needed
-- 	Actively communicate issues
-- 	Code Review
+Development Front-End (Alex, Ryan, Richard and Nathaniel)
+- 	team covering all of the front-end developement, overseen by Richard
+
+Development Back-End (Sheeha, Daniel and Sohail)
+- 	team covering all of the front-end developement, overseen by Daniel
+
 
 #### Events
-
-Describe meetings (and other events) you are planning to have:
-
- * When and where? In-person or online?
- * What's the purpose of each meeting?
- * Other events could be coding sessions, code reviews, quick weekly sync' meeting online, etc.
+ 
+ - We plan to have the front-end and back-end teams both meet separately on Saturday (the 27th). We will need to see what tools are working and make sure that everyone on each team has learned the tools by then. During this meeting we will continue to divide work to be done and meet after everyone has completed their midterms Monday and Tuesday with a plan of everyone meeting in BA3200 whenever they have free time to work.
+ 
+ - Between the tutorial on Tuesday the 30th and our weekly 6pm meeting almost everyone is free and each team (front-end and back-end) will be meeting in Bahen so we can hopefully meet to connect the two at the 6pm weekly Tuesday meeting 
+ 
+ - On Thursday November First we are planning on whoever is available to be in Bahen to help with the video and any final touches that are needed before D2 is due. By then everyone will be done their midterms and free to finish whatever parts of the deliverables that have yet to be completed. 
 
 #### Artifacts
 
-List/describe the artifacts you will produce in order to organize your team.       
-
- * Artifacts can be To-do lists, Task boards, schedule(s), etc.
- * We want to understand:
-   * How do you keep track of what needs to get done?
-   * How do you prioritize tasks?
-   * How do tasks get assigned to team members?
-
    -  We will have an additional meeting at 6pm every Tuesday in person at BA3200, the purpose of the meeting will be to wrap up discussion during tutorial meeting, discussions on project workflow, roadblocks and issues that may come up before the next meeting.
-
    - On top of our additional in person meeting, we will have an optional meeting at 6pm every Saturday online. The purpose of the meeting will be to discussion any issue or changes that have come up as members were working on the project and will be a time for members to get insite/help on any issues they have before the next in person meeting.
-
    - lastly, we are planning to have a kind of paired programming/review system where each week via the scrum master, members would decide who they have matching schedules/free-time with and would be willing to having a coding session and/or code review session, if possible.
 
 #### Git / GitHub workflow
@@ -86,29 +82,48 @@ List/describe the artifacts you will produce in order to organize your team.
 6. In addition to approval, we've setup Travis CI to test all code that is coming in, build must pass for every PR before it is allowed to be merged.
 7. Once both steps 5 and 6 has passed then the code is allowed to be merged in, anyone involved in the PR (Developer and review) may then merge the PR into the master branch.
 
-Describe your Git / GitHub workflow.     
-Essentially, we want to understand how your team members share a codebase and avoid conflicts. You must incorporate 'Pull Requests' into your process.
-
- * Be concise, yet precise.      
-For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.
- * If applicable, specify any naming conventions or standards you decide to adopt.
- * Don't forget to **explain why** you chose this workflow.
-
-
-
 ## Product
 
 #### Goals and tasks
 
- * Describe your goals for this iteration and the tasks that you will have to complete in order to achieve these goals.
- * Order the items from most to least important.
- * Feel free (but not obligated) to specify some/all tasks as user stories.
+- We have three categories of goals for this deliverable, each of these is described in an issue on GitHub with more information: 
 
+  - General
+    1) Set up Travis before anyone starts committing
+    2) Add branch protection as a safety measure
+    
+  - Back-end
+    1) Database design
+    2) Set up javascript linter 
+    3) Initial project setup:
+        - set up PostgresSQL, Node, and Sequelize Project
+    4) Implement our planned file structure
+    5) Create sample data
+    6) Design and implement endpoints for projects
+    7) Design and implement endpoints for users 
+    
+  - Front-end
+    1) Set up javascript linter 
+    2) Initial project setup:
+       - set up react project
+    3) Create projects page
+        - displays miniature views of numerous project, allows users to go into a project or a button for creating new a project
+    4) Project overview page
+        - Each page connects to the backend to fetch and display data about one project
+    5) Create new project page
+        - Allows users to add a new project, sends data to back-end to form a new project
+    6) Login page
+        - Allows users to login, possibly authenticate using GitHub
+    7) User Page
+        - Displays a user's profile
+    
+    
 #### Artifacts
 
-List/describe the artifacts you will produce in order to present your project idea.
-
- * Artifacts can be text, code, images, videos, interactive mock-ups and/or any other useful artifact you can think of.
- * Make sure to explain the purpose of each artifact (i.e. Why is it on your to-do list? Why is it useful for your team?)
- * Be concise, yet precise.         
-   For example: "Build the website" is not precise at all, but "Build a static home page and upload it somewhere, so that it is publicly accessible" is much clearer.
+  - Code:
+    - All of our code will be on GitHub in our team repository, instructions to run it will be in the README files
+  - Interactive mock-ups:
+    - Our orignal mock-ups is still relevant however if our front-end is working we may not update it (available via the link below: https://xd.adobe.com/view/32527a67-5e67-4048-6f9a-01cbefa7bc59-4463/?fullscreen)
+  - Video:
+    - We will give a demonstration of what we have accomplished in a short video at the end of D2
+  
