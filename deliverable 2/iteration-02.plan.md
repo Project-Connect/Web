@@ -13,7 +13,6 @@ First week is a test sprint as many of us are busy with midterm, we will mostly 
   - Front-end routing setup
   - Continuous integration setup with basic tests
 
-
 The Second week will focus on completing the core functionalities for deliverable 2, this includes items in the backlog such as:
 
 Front end:  
@@ -23,7 +22,7 @@ Front end:
   - page to display all projects the user owns
   - dashboard to display user information
   - navigation bar for application
-  
+
 Back end:
   - API endpoints for fetching, updating and removing data for users, projects and their associations
   - Design database schema
@@ -31,7 +30,7 @@ Back end:
   - create python script to create sql files for populating the database
 
 Other:
-  - Setup yml file for travis build
+  - Setup yml file for travis builds
 
 #### Roles & responsibilities
 
@@ -54,26 +53,27 @@ Development Front-End (Alex, Ryan, Richard and Nathaniel)
 - 	team covering all of the front-end developement, overseen by Richard
 
 Development Back-End (Sheeha, Daniel and Sohail)
-- 	team covering all of the front-end developement, overseen by Daniel
+- 	team covering all of the back-end developement, overseen by Daniel
 
 
 #### Events
- 
+
  - We plan to have the front-end and back-end teams both meet separately on Saturday (the 27th). We will need to see what tools are working and make sure that everyone on each team has learned the tools by then. During this meeting we will continue to divide work to be done and meet after everyone has completed their midterms Monday and Tuesday with a plan of everyone meeting in BA3200 whenever they have free time to work.
- 
- - Between the tutorial on Tuesday the 30th and our weekly 6pm meeting almost everyone is free and each team (front-end and back-end) will be meeting in Bahen so we can hopefully meet to connect the two at the 6pm weekly Tuesday meeting 
- 
- - On Thursday November First we are planning on whoever is available to be in Bahen to help with the video and any final touches that are needed before D2 is due. By then everyone will be done their midterms and free to finish whatever parts of the deliverables that have yet to be completed. 
+
+ - Between the tutorial on Tuesday the 30th and our weekly 6pm meeting almost everyone is free and each team (front-end and back-end) will be meeting in Bahen so we can hopefully meet to connect the two at the 6pm weekly Tuesday meeting
+
+ - On Thursday November First we are planning on whoever is available to be in Bahen to help with the video and any final touches that are needed before D2 is due. By then everyone will be done their midterms and free to finish whatever parts of the deliverables that have yet to be completed.
+
+ -  We will have an additional meeting at 6pm every Tuesday in person at BA3200, the purpose of the meeting will be to wrap up discussion during tutorial meeting, discussions on project workflow, roadblocks and issues that may come up before the next meeting.
+ - On top of our additional in person meeting, we will have an optional meeting at 6pm every Saturday online. The purpose of the meeting will be to discussion any issue or changes that have come up as members were working on the project and will be a time for members to get insite/help on any issues they have before the next in person meeting.
+ - lastly, we are planning to have a kind of paired programming/review system where each week via the scrum master, members would decide who they have matching schedules/free-time with and would be willing to having a coding session and/or code review session, if possible.
 
 #### Artifacts
+ - We will use Github issues to manage and maintain current tasks.
+ - We will use Github project's scrum-board to produce a streamlined workflow, where we will be able to see progress of all users, and assign instance when needed via scrum master. We use tags to prioritize issues.
+ - We will produce meeting notes every Tuesday for everyone to review decisions and discussion on upcoming week's progress, and high level view of what we aim to achieve.
 
-   -  We will have an additional meeting at 6pm every Tuesday in person at BA3200, the purpose of the meeting will be to wrap up discussion during tutorial meeting, discussions on project workflow, roadblocks and issues that may come up before the next meeting.
-   - On top of our additional in person meeting, we will have an optional meeting at 6pm every Saturday online. The purpose of the meeting will be to discussion any issue or changes that have come up as members were working on the project and will be a time for members to get insite/help on any issues they have before the next in person meeting.
-   - lastly, we are planning to have a kind of paired programming/review system where each week via the scrum master, members would decide who they have matching schedules/free-time with and would be willing to having a coding session and/or code review session, if possible.
-
-#### Git / GitHub workflow
-
-
+#### Git / GitHub workflows
 1. issues are assigned to users via github issues from team discussions.
 2. issues are tagged to different projects and milestones depending on the nature of the issue.
 3. issue is assigned to a member in the group who will take on the work, assignment is derived from meetings.
@@ -86,24 +86,24 @@ Development Back-End (Sheeha, Daniel and Sohail)
 
 #### Goals and tasks
 
-- We have three categories of goals for this deliverable, each of these is described in an issue on GitHub with more information: 
+- We have three categories of goals for this deliverable, each of these is described in an issue on GitHub with more information:
 
   - General
     1) Set up Travis before anyone starts committing
     2) Add branch protection as a safety measure
-    
+
   - Back-end
     1) Database design
-    2) Set up javascript linter 
+    2) Set up javascript linter
     3) Initial project setup:
         - set up PostgresSQL, Node, and Sequelize Project
     4) Implement our planned file structure
     5) Create sample data
     6) Design and implement endpoints for projects
-    7) Design and implement endpoints for users 
-    
+    7) Design and implement endpoints for users
+
   - Front-end
-    1) Set up javascript linter 
+    1) Set up javascript linter
     2) Initial project setup:
        - set up react project
     3) Create projects page
@@ -116,8 +116,8 @@ Development Back-End (Sheeha, Daniel and Sohail)
         - Allows users to login, possibly authenticate using GitHub
     7) User Page
         - Displays a user's profile
-    
-    
+
+
 #### Artifacts
 
   - Code:
@@ -126,4 +126,3 @@ Development Back-End (Sheeha, Daniel and Sohail)
     - Our orignal mock-ups is still relevant however if our front-end is working we may not update it (available via the link below: https://xd.adobe.com/view/32527a67-5e67-4048-6f9a-01cbefa7bc59-4463/?fullscreen)
   - Video:
     - We will give a demonstration of what we have accomplished in a short video at the end of D2
-  
