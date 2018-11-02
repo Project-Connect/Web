@@ -48,5 +48,19 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  // remove a project
+  removeProject(req, res) {
+    return Projects
+      .findById(
+        req.body.id
+      )
+      .then(project => {
+        return project.destroy()
+          .then(() => res.status(200).send("project deleted"))
+          .catch((error) => res.status(400).send(error));
+        })
+      .catch(error => res.status(400).send(error));
+  },
+
 
 };

@@ -34,8 +34,8 @@ module.exports = (app) => {
   app.post('/api/project', projectsController.create);
   // update a project TODO
 
-  // remove a porject TODO
-
+  // remove a porject
+  app.post('/api/project/remove', projectsController.removeProject);
   // gets all projects
   app.get('/api/projects', projectsController.list);
   // get a single project
