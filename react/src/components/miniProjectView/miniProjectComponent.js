@@ -71,7 +71,6 @@ class MiniProjectComponent extends Component {
         .catch(function (err) {
             console.log(err)
         })
-
     }
 }
 

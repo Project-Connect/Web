@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import "./projectDetail.css";
 
 class ProjectDetail extends Component {
+
     constructor(props){
         super(props);
         this.state={
@@ -15,25 +16,58 @@ class ProjectDetail extends Component {
             github_url:"",
             project_url:"",
             stack:"",
-            additonal_info:""
+            additonal_info:"",
+            projData: {
+              },
+            usersData: []
+                    
         }
     }
     render() {
-
         return (
             <div className="project-details">
-                <h1>{this.state.title}</h1>
-                <h2>{this.state.description}</h2>
-                <h3>{this.state.start_date}</h3>
-                <h3>{this.state.group_size}</h3>
-                <h3>{this.state.github_url}</h3>
-                <h3>{this.state.stack}</h3>
-                <h3>{this.state.additonal_info}</h3>
+                <br />
+                <br />
+                <h1>{this.state.projData.name}</h1>
+                <h4>{this.state.projData.description}</h4>
+                <h4>{this.state.projData.project_start_date}</h4>
+                <h4>{this.state.github}</h4>
+                <br />
+                <br />
+                <h2>PARTICPATING MEMBERS:</h2> 
+                <div>
+                    { this.state.usersData.map(data => (
+                        <h3>{data.user.username}</h3>
+                    ))}
+                </div>
+                
             </div>
         );
     }
 
     componentDidMount(){
+        console.log(this.props.match.params.project_id)
+
+        let urlProjectData = "http://127.0.0.1:8000/api/project/"  + this.props.match.params.project_id;
+        let urlUsersData = "http://127.0.0.1:8000/api/user_associations/project/" + this.props.match.params.project_id;
+        fetch(urlProjectData)
+        .then(res => res.json())
+        .then(res =>
+            this.setState({
+                projData: res
+            })
+            )
+        .catch(function (err) {
+            console.log(err)
+        })
+        
+        fetch(urlUsersData)
+        .then(res => res.json())
+        .then(res =>
+            this.setState({
+                usersData: res
+        }))
+
         this.setState({
             title:"title",
             description:"this is the description",
