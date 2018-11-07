@@ -1,6 +1,9 @@
 const Projects = require('../models').projects;
 const Users = require('../models').users;
 const Associations = require('../models').user_associations;
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
 
 module.exports = {
   //create a new association aka add a person to a group
@@ -53,9 +56,38 @@ module.exports = {
         }],
         attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] }
       })
-      .then((associations) => res.status(200).send(associations));
+      .then((associations) => res.status(200).send(associations))
+      .catch((error) => res.status(400).send(error));
   },
 
+  listNotInProjects(req, res) {
+    return Associations
+      .findAll({
+        where: {
+          user_id: req.params.user,
+        },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+        attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] }
+      })
+      .then((associations) => {
+        let my_projects = []
+        for(association of associations){
+           my_projects.push(association.project_id);
+        }
+        return Projects.findAll({
+          where: {
+            id: {
+              [Op.notIn]: my_projects
+            }
+          }
+        })
+        .then((porject) => res.status(200).send(porject))
+        .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
+  },
 
 
 };
