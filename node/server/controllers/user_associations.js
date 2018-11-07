@@ -56,7 +56,8 @@ module.exports = {
         }],
         attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] }
       })
-      .then((associations) => res.status(200).send(associations));
+      .then((associations) => res.status(200).send(associations))
+      .catch((error) => res.status(400).send(error));
   },
 
   listNotInProjects(req, res) {
@@ -82,8 +83,10 @@ module.exports = {
             }
           }
         })
-        .then((porject) => res.status(200).send(porject));
-      });
+        .then((porject) => res.status(200).send(porject))
+        .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
   },
 
 
