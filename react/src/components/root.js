@@ -15,6 +15,7 @@ import loginPageGitHub from "./loginPage/loginPageGitHub"
 
 import Projects from "./projects/projects";
 import ProjectDetail from "./projectDetail/projectDetail";
+import Discover from "./discover/discover";
 
 
 // Just add your component onto a path below
@@ -29,6 +30,7 @@ const Root = ({ store }) => (
         <Route exact path="/loginPageGitHub" component={loginPageGitHub}/>
         <Route exact path="/" component={Projects}/>
         <Route path={"/project/:project_id"} component={ProjectDetail}/>
+        <Route exact path="/discover" component={Discover}/>
       </div>
     </Router>
   </Provider>

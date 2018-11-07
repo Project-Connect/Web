@@ -15,6 +15,9 @@ class Navigation extends React.Component{
                     <Button color="inherit" href="/">Project Collab</Button>
                   </IconButton>
                   <Typography variant="h6" color="inherit">
+                    <Button color="inherit" href="/">My Projects</Button>
+                  </Typography>
+                  <Typography variant="h6" color="inherit">
                     <Button color="inherit" href="/discover">Discover</Button>
                   </Typography>
                   <Button color="inherit" href="/users">Profile</Button>
