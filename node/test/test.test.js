@@ -51,7 +51,7 @@ describe('Testing POST requests', () => {
                                                     photo: 'req.body.photo',
                                                     linked_in: 'req.body.linked_in',
                                                     github: 'req.body.github' })
-                                            .expect(200);
+        expect(response.statusCode).toBe(200);
     });
 
     test('should add project to database', async () => {
@@ -61,6 +61,6 @@ describe('Testing POST requests', () => {
                                                   github: 'req.body.github',
                                                   url: 'req.body.url',
                                                   user_id: 1})
-    console.log(response.error);
+      expect(response.statusCode).toBe(200);
     });
 })
