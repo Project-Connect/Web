@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./bin/www",
-    "test": "echo \" Setup Working \" && exit 0",
+    "test": "jest",
     "setup_test": "node_modules/.bin/sequelize db:migrate && psql -U postgres < db/sample_data.sql && npm run test"
   },
   "keywords": [],
@@ -21,6 +21,11 @@
     "sequelize-cli": "^5.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4",
+    "superagent": "^4.0.0-beta.5",
+    "supertest": "^3.3.0"
   }
 }
