@@ -50,8 +50,10 @@ module.exports = (app) => {
   app.post('/api/user_associations/add', userAssociationsController.create);
   // get all users associations for a project (equal to getting all users for a project)
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
-  //get all all users associations for a User (equal to getting all porjects for a User)
+  //get all users associations for a User (equal to getting all porjects for a User)
   app.get('/api/user_associations/user/:user', userAssociationsController.listProjects);
+  // get all users associations a user is not aprt (equal to getting all porjects a user is not apart of)
+  app.get('/api/user_associations/user/:user/not', userAssociationsController.listNotInProjects);
 
   // remove a users association user TODO
 

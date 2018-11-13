@@ -9,11 +9,14 @@ class Navigation extends React.Component{
     render(){
         return(
             <div>
-              <AppBar position="fixed" color="primary">
+              <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196F3' }}>
                 <Toolbar>
                   <IconButton color="inherit" aria-label="Menu">
                     <Button color="inherit" href="/">Project Collab</Button>
                   </IconButton>
+                  <Typography variant="h6" color="inherit">
+                    <Button color="inherit" href="/">My Projects</Button>
+                  </Typography>
                   <Typography variant="h6" color="inherit">
                     <Button color="inherit" href="/discover">Discover</Button>
                   </Typography>
