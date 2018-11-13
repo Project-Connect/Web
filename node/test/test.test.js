@@ -56,11 +56,13 @@ describe('Testing POST requests', () => {
 
     test('should add project to database', async () => {
       const response = await request(app).post('/api/project')
-                                          .send({ name: 'req.body',
+                                          .send({ name: 'what the heck?',
                                                   description: 'req.body.description',
                                                   github: 'req.body.github',
                                                   url: 'req.body.url',
-                                                  user_id: 1})
+                                                  user_id: 1
+                                                })
+      console.log(response.error)
       expect(response.statusCode).toBe(200);
     });
 })
