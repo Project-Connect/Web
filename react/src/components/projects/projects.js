@@ -5,36 +5,23 @@
 import React, { Component } from "react";
 
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
-import ProjectView from "../newProject/newProjectComponent";
-import Modal from "react-modal";
 import './projects.css';
 
 class Projects extends Component {
     constructor(props){
         super(props);
         this.state={
-            ids:[],
-            displayModal:false
+            ids:[]
         }
-        this.handleOpenModal = this.handleOpenModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     render() {
 
         return (
             <div>
-
-                <Modal isOpen={this.state.displayModal} contentLabel="Minimal Modal" ariaHideApp={false}>
-                    <div className="modal">
-                        <ProjectView/>
-                        <button onClick={this.handleCloseModal}>Cancel</button>
-                    </div>
-                </Modal>
-
                 <h1>Projects</h1>
 
                 <div className="buttonSurrounding">
-                    <button className="add" onClick={this.handleOpenModal}>
+                    <button className="add" onClick={()=>{this.props.history.push("/newProject")}}>
                         Add project
                     </button>
                 </div>
@@ -49,14 +36,6 @@ class Projects extends Component {
 
             </div>
         );
-    }
-
-    handleOpenModal () {
-        this.setState({ displayModal: true });
-    }
-
-    handleCloseModal () {
-        this.setState({ displayModal: false });
     }
 
     componentDidMount(){
