@@ -54,16 +54,25 @@ class ProjectDetail extends Component {
                     PARTICPATING MEMBERS
                 </Typography>
 
-                <div>
-                    { this.state.usersData.map(data => (
-                        <Button
-                        color="primary"
-                        onClick={()=>this.props.history.push(`/users/${data.user.username}`)}
-                        key={data.user.username}>
-                            {data.user.username}
-                        </Button>
-                    ))}
-                </div>
+                {this.renderUsers()}
+            </div>
+        );
+    }
+
+    /**
+     * Renders a button for every participant 
+     */
+    renderUsers(){
+        return(
+            <div>
+            { this.state.usersData.map(data => (
+                <Button
+                color="primary"
+                onClick={()=>this.props.history.push(`/users/${data.user.username}`)}
+                key={data.user.username}>
+                    {data.user.username}
+                </Button>
+            ))}
             </div>
         );
     }
