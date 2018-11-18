@@ -1,3 +1,15 @@
 .project-details{
-    text-align: center
+    text-align: center;
+    margin:auto;
+    margin-top: 100px;
+    width:400px;
+}
+
+.title{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.members{
+    padding-top:15px;
 }

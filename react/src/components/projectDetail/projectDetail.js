@@ -3,6 +3,9 @@
  */
 import React, { Component } from "react";
 import "./projectDetail.css";
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 
 class ProjectDetail extends Component {
 
@@ -20,27 +23,47 @@ class ProjectDetail extends Component {
             projData: {
               },
             usersData: []
-                    
+
         }
     }
     render() {
         return (
             <div className="project-details">
-                <br />
-                <br />
-                <h1>{this.state.projData.name}</h1>
-                <h4>{this.state.projData.description}</h4>
-                <h4>{this.state.projData.project_start_date}</h4>
-                <h4>{this.state.github}</h4>
-                <br />
-                <br />
-                <h2>PARTICPATING MEMBERS:</h2> 
+
+                <Typography variant="h3" gutterBottom className="title">
+                    {this.state.projData.name}
+                </Typography>
+
+                <Divider></Divider>
+
+                <Typography variant="body1" gutterBottom>
+                    {this.state.projData.description}
+                </Typography>
+
+                <Typography variant="body1" gutterBottom>
+                    {this.state.projData.project_start_date}
+                </Typography>
+
+                <Typography variant="body1" gutterBottom>
+                    {this.state.github}
+                </Typography>
+
+                <Divider></Divider>
+
+                <Typography variant="h6" gutterBottom className="members">
+                    PARTICPATING MEMBERS
+                </Typography>
+
                 <div>
                     { this.state.usersData.map(data => (
-                        <h3>{data.user.username}</h3>
+                        <Button
+                        color="primary"
+                        onClick={()=>this.props.history.push(`/users/${data.user.username}`)}
+                        key={data.user.username}>
+                            {data.user.username}
+                        </Button>
                     ))}
                 </div>
-                
             </div>
         );
     }
@@ -60,24 +83,13 @@ class ProjectDetail extends Component {
         .catch(function (err) {
             console.log(err)
         })
-        
+
         fetch(urlUsersData)
         .then(res => res.json())
         .then(res =>
             this.setState({
                 usersData: res
         }))
-
-        this.setState({
-            title:"title",
-            description:"this is the description",
-            start_date:"start date",
-            group_size:3,
-            github_url:"github.com/jboner",
-            project_url:"www.myproject.com",
-            stack:"overflow",
-            additonal_info:""
-        })
     }
 }
 
