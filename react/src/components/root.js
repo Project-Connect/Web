@@ -24,7 +24,7 @@ const Root = ({ store }) => (
     <Router>
       <div>
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
-        <Route exact path="/users" component={Users}/>
+        <Route exact path={"/users/:user_id"} component={Users}/>
         <Route exact path="/newProject" component={NewProject}/>
         <Route exact path="/loginPage" component={loginPage}/>
         <Route exact path="/loginPageGitHub" component={loginPageGitHub}/>

@@ -7,6 +7,9 @@ import React, { Component } from "react";
 
 import UserEditView from "../userEditView/userEditView.js";
 import Modal from "react-modal";
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import "./users.css";
 
 
 class Users extends Component {
@@ -45,34 +48,52 @@ class Users extends Component {
                     </button>
                 </div>
 
-                <div>
-                  <h1> Send GET request on load data.. </h1>
-									<p> {this.state.id} </p>
-									<p> {this.state.name} </p>
-									<p> {this.state.bio} </p>
-									<p> {this.state.email} </p>
-									<p> {this.state.photo} </p>
-									<p> {this.state.linked_in} </p>
-									<p> {this.state.github} </p>
+                <div className="user-data">
+                    <Typography variant="h4" gutterBottom className="title">
+                        {this.state.name}
+                    </Typography>
+
+                    <Typography variant="h5" gutterBottom className="title">
+                        {this.state.username}
+                    </Typography>
+
+                    <Divider></Divider>
+
+                    <Typography variant="body1" gutterBottom className="title">
+                        {this.state.bio}
+                    </Typography>
+
+                    <Typography variant="body1" gutterBottom className="title">
+                        {this.state.linked_in}
+                    </Typography>
+
+                    <Typography variant="body1" gutterBottom className="title">
+                        {this.state.github}
+                    </Typography>
                 </div>
-
-
             </div>
         );
     }
-
-
     componentDidMount() {
-				alert('Loading user information: ' + this.state.id)
-
-        fetch('http://localhost:8000/api/user' + this.state.id)
+        fetch('http://localhost:8000/api/users/' + this.props.match.params.user_id)
         .then(res => res.json())
-        .then((data) => { this.setState({ name : data.name }) });
+        .then((data) => this.parseData(data));
+    }
+
+    parseData(data){
+        this.setState({
+            id:data.id,
+            name:data.name,
+            bio:data.bio,
+            email:data.email,
+            photo:data.photo,
+            linked_in:data.linked_in,
+            github:data.github
+        })
     }
 
     handleOpenModal () {
         this.setState({ displayModal: true });
-        console.log(this.state.displayModal)
     }
 
     handleCloseModal () {
