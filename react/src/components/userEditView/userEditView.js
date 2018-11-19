@@ -1,5 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import {showError} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 
 const validate = values => {
     const errors = {};
@@ -46,7 +48,7 @@ const onSubmit = values => {
         })
     }).then(res => res.json())
         .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
+        .catch(error => this.props.showError(error.toString()));
 };
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
@@ -81,8 +83,14 @@ const userEditView = (props) => {
     )
 };
 
-export default reduxForm({
+const userEditForm = reduxForm({
     form: 'userEditView',  // a unique identifier for this form
     onSubmit,
     validate,                // <--- validation function given to redux-form
 })(userEditView)
+
+const mapDispatchToProps = {
+  showError,
+}
+
+export default connect(null,mapDispatchToProps)(userEditForm);

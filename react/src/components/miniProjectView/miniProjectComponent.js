@@ -6,6 +6,8 @@ import React, { Component } from "react";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import {showError} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 
 import './miniProjectComponent.css';
 
@@ -36,7 +38,7 @@ class MiniProjectComponent extends Component {
         };
 
         return (
-        
+
             <div style={modalStyle}>
                 <Card style={{ backgroundColor: '#F5F5F5'}}>
                     <CardContent>
@@ -52,7 +54,7 @@ class MiniProjectComponent extends Component {
                     </CardContent>
                 </Card>
             </div>
-        
+
 
         );
     }
@@ -60,7 +62,7 @@ class MiniProjectComponent extends Component {
 
     componentDidMount() {
         let urlData = "http://127.0.0.1:8000/api/project/"  + this.props.id;
-        
+
         fetch(urlData)
         .then(res => res.json())
         .then(res =>
@@ -69,9 +71,13 @@ class MiniProjectComponent extends Component {
             })
         )
         .catch(function (err) {
-            console.log(err)
+            this.props.showError(err.toString())
         })
     }
 }
 
-export default MiniProjectComponent
+const mapDispatchToProps = {
+  showError,
+}
+
+export default connect(null,mapDispatchToProps)(MiniProjectComponent);
