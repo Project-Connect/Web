@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 // This is the core of connecting react to redux
 import { connect } from "react-redux";
 // these are the functions we will call to dispatch out functions
-import * as popupActions from "../../actions/globalPopupAction";
+import {closeError} from "../../actions/globalPopupAction";
 
 const styles = theme => ({
   margin: {
@@ -15,7 +15,7 @@ const styles = theme => ({
 
 class Error extends Component {
   handleClose = () => {
-      this.props.dispatch(popupActions.closeError());
+      this.props.closeError();
   };
 
   render() {
@@ -46,5 +46,8 @@ const mapStateToProps = (state) => ({
   content: state.globalPopupReducer.errorContent
 })
 
+const mapDispatchToProps = {
+  closeError,
+}
 const ErrorComponent = withStyles(styles)(Error);
-export default connect(mapStateToProps)(ErrorComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorComponent);
