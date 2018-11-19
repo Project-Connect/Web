@@ -6,6 +6,8 @@ import React, { Component } from "react";
 
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import './discover.css';
+import {showError} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 
 class Discover extends Component {
     constructor(props){
@@ -35,14 +37,24 @@ class Discover extends Component {
         this.getData();
     }
 
-    async getData(){
+    getData(){
         let url="http://127.0.0.1:8000/api/user_associations/user/5/not"
-        let fetched = await fetch(url)
-        let fetchedJson = await fetched.json()
-        let project_ids = []
-        fetchedJson.map((element)=>project_ids.push(element.id))
-        this.setState({ids:project_ids})
+        fetch(url)
+        .then(res => res.json())
+        .then(res =>
+          {
+            let project_ids = []
+            res.map((element)=>project_ids.push(element.project_id))
+            this.setState({ids:project_ids})
+          }
+        ).catch(err => {
+          this.props.showError(err.toString())
+        })
     }
 }
 
-export default Discover
+const mapDispatchToProps = {
+  showError,
+}
+
+export default connect(null,mapDispatchToProps)(Discover);

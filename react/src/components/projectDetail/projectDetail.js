@@ -6,6 +6,8 @@ import "./projectDetail.css";
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import {showError} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 
 class ProjectDetail extends Component {
 
@@ -60,7 +62,7 @@ class ProjectDetail extends Component {
     }
 
     /**
-     * Renders a button for every participant 
+     * Renders a button for every participant
      */
     renderUsers(){
         return(
@@ -90,7 +92,8 @@ class ProjectDetail extends Component {
             })
             )
         .catch(function (err) {
-            console.log(err)
+            this.props.showError(err.toString())
+
         })
 
         fetch(urlUsersData)
@@ -99,7 +102,14 @@ class ProjectDetail extends Component {
             this.setState({
                 usersData: res
         }))
+        .catch(err => {
+          this.props.showError(err.toString())
+        })
     }
 }
 
-export default ProjectDetail
+const mapDispatchToProps = {
+  showError,
+}
+
+export default connect(null,mapDispatchToProps)(ProjectDetail);

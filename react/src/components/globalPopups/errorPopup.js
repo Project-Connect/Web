@@ -14,7 +14,6 @@ const styles = theme => ({
 });
 
 class Error extends Component {
-
   handleClose = () => {
       this.props.dispatch(popupActions.closeError());
   };

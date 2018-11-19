@@ -10,7 +10,8 @@ import Modal from "react-modal";
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import "./users.css";
-
+import {showError} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 
 class Users extends Component {
     constructor(props){
@@ -77,7 +78,12 @@ class Users extends Component {
     componentDidMount() {
         fetch('http://localhost:8000/api/users/' + this.props.match.params.user_id)
         .then(res => res.json())
-        .then((data) => this.parseData(data));
+        .then((data) => this.parseData(data))
+        .catch(err =>
+          {
+            this.props.showError(err.toString())
+          }
+        );
     }
 
     parseData(data){
@@ -101,4 +107,9 @@ class Users extends Component {
     }
 }
 
-export default Users
+
+const mapDispatchToProps = {
+  showError,
+}
+
+export default connect(null,mapDispatchToProps)(Users);
