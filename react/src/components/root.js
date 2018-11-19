@@ -17,6 +17,7 @@ import Projects from "./projects/projects";
 import ProjectDetail from "./projectDetail/projectDetail";
 import Discover from "./discover/discover";
 
+import Widgets from "./examples/widgets";
 
 // Just add your component onto a path below
 const Root = ({ store }) => (
@@ -31,6 +32,7 @@ const Root = ({ store }) => (
         <Route exact path="/" component={Projects}/>
         <Route path={"/project/:project_id"} component={ProjectDetail}/>
         <Route exact path="/discover" component={Discover}/>
+        <Route exact path="/widgets" component={Widgets}/>
       </div>
     </Router>
   </Provider>

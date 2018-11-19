@@ -1,8 +1,8 @@
 /*
 This file is responsible for creating the redux store and injecting middleware
 */
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { applyMiddleware, createStore } from 'redux';
+import reducer from "./reducers"
 
 // this is a used for easy debugging via browser console, with colorful displays
 // to highlight state before and after transition.
@@ -19,9 +19,5 @@ import thunk from "redux-thunk"
 // Checkout the exampleReducer2.js file under Reducers
 import promise from "redux-promise-middleware"
 
-
-const reducer = combineReducers({
-    form: reduxFormReducer, // mounted under "form"
-});
 const middleware = applyMiddleware(promise(), thunk, logger)
 export default createStore(reducer, middleware)
