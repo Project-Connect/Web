@@ -82,8 +82,8 @@ class ProjectDetail extends Component {
     componentDidMount(){
         console.log(this.props.match.params.project_id)
 
-        let urlProjectData = "http://127.0.0.1:8000/api/project/"  + this.props.match.params.project_id;
-        let urlUsersData = "http://127.0.0.1:8000/api/user_associations/project/" + this.props.match.params.project_id;
+        let urlProjectData = "https://collab-project.herokuapp.com/api/project/"  + this.props.match.params.project_id;
+        let urlUsersData = "https://collab-project.herokuapp.com/api/user_associations/project/" + this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>

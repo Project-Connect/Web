@@ -61,7 +61,7 @@ class MiniProjectComponent extends Component {
 
 
     componentDidMount() {
-        let urlData = "http://127.0.0.1:8000/api/project/"  + this.props.id;
+        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id;
 
         fetch(urlData)
         .then(res => res.json())

@@ -45,8 +45,8 @@ class Projects extends Component {
         this.getData();
     }
 
-    getData(){
-        let url="http://127.0.0.1:8000/api/user_associations/user/5"
+    async getData(){
+        let url="https://collab-project.herokuapp.com/api/user_associations/user/5"
         fetch(url)
         .then(res => res.json())
         .then(res =>
