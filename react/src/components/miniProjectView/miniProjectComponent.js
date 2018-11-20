@@ -6,6 +6,8 @@ import React, { Component } from "react";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import {showError} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 
 import './miniProjectComponent.css';
 
@@ -69,9 +71,13 @@ class MiniProjectComponent extends Component {
             })
         )
         .catch(function (err) {
-            console.log(err)
+            this.props.showError(err.toString())
         })
     }
 }
 
-export default MiniProjectComponent
+const mapDispatchToProps = {
+  showError,
+}
+
+export default connect(null,mapDispatchToProps)(MiniProjectComponent);

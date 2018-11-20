@@ -5,6 +5,9 @@
 import React, { Component } from "react";
 
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
+import { connect } from "react-redux";
+// these are the functions we will call to dispatch out functions
+import {showError} from "../../actions/globalPopupAction";
 import './projects.css';
 
 class Projects extends Component {
@@ -44,12 +47,21 @@ class Projects extends Component {
 
     async getData(){
         let url="https://collab-project.herokuapp.com/api/user_associations/user/5"
-        let fetched = await fetch(url)
-        let fetchedJson = await fetched.json()
-        let project_ids = []
-        fetchedJson.map((element)=>project_ids.push(element.project_id))
-        this.setState({ids:project_ids})
+        fetch(url)
+        .then(res => res.json())
+        .then(res =>
+          {
+            let project_ids = []
+            res.map((element)=>project_ids.push(element.project_id))
+            this.setState({ids:project_ids})
+          }
+        ).catch(err => {
+          this.props.showError(err.toString())
+        })
     }
 }
+const mapDispatchToProps = {
+  showError,
+}
 
-export default Projects
+export default connect(null,mapDispatchToProps)(Projects);
