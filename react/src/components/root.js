@@ -18,7 +18,8 @@ import ProjectDetail from "./projectDetail/projectDetail";
 import Discover from "./discover/discover";
 
 import Widgets from "./examples/widgets";
-import ErrorWidget from "./globalPopups/errorPopup"
+import ErrorPopup from "./globalPopups/errorPopup"
+import SuccessPopup from "./globalPopups/successPopup"
 import ButtonAppBar from "./navbar/navbar";
 
 // Just add your component onto a path below
@@ -27,7 +28,8 @@ const Root = ({ store }) => (
     <Router>
       <div>
         <ButtonAppBar/>
-        <ErrorWidget />
+        <SuccessPopup />
+        <ErrorPopup />
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
         <Route exact path={"/users/:user_id"} component={Users}/>
         <Route exact path="/newProject" component={NewProject}/>

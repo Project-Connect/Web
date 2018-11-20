@@ -18,3 +18,21 @@ export function closeError() {
     })
   }
 }
+
+
+export function showSuccess(content) {
+  return function (dispatch) {
+    dispatch({
+      type: "SHOW_SUCCESS",
+      payload: content
+    })
+  }
+}
+
+export function closeSuccess() {
+  return function (dispatch) {
+    dispatch({
+      type: "CLOSE_SUCCESS",
+    })
+  }
+}

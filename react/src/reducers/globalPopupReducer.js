@@ -5,7 +5,9 @@
 //specifying initial state of the component
 const initialState = {
   showError: false,
-  errorContent: ""
+  errorContent: "",
+  showSuccess: false,
+  successContent: ""
 }
 
 const globalPopupReducer = (state = initialState, action) => {
@@ -19,6 +21,14 @@ const globalPopupReducer = (state = initialState, action) => {
 
     case "CLOSE_ERROR":
       return { ...state, showError: false, errorContent: ""}
+
+    // By convention via online redux documentation, use ALL_CAPS for cases
+    case "SHOW_SUCCESS":
+      //checkout ES6 Spread syntax if you're not sure what {...Object} is doing
+      return { ...state, showSuccess: true, successContent: action.payload}
+
+    case "CLOSE_SUCCESS":
+      return { ...state, showSuccess: false, successContent: ""}
 
     default: return state;
   }

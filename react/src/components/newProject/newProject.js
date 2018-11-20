@@ -2,6 +2,8 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import "./newProject.css"
+import {showError,showSuccess} from "../../actions/globalPopupAction";
+import { connect } from "react-redux";
 class NewProject extends React.Component{
     constructor(props){
         super(props);
@@ -14,6 +16,10 @@ class NewProject extends React.Component{
             groupSize:0,
             additionalInfo:""
         }
+    }
+
+    submit(){
+      this.props.showSuccess("Working");
     }
 
     render(){
@@ -74,7 +80,7 @@ class NewProject extends React.Component{
                 fullWidth/>
 
                 <div>
-                    <Button color="primary">
+                    <Button color="primary" onClick={() => {this.submit()}}>
                         Submit
                     </Button>
 
@@ -87,4 +93,9 @@ class NewProject extends React.Component{
     }
 }
 
-export default NewProject
+const mapDispatchToProps = {
+  showError,
+  showSuccess
+}
+
+export default connect(null,mapDispatchToProps)(NewProject);
