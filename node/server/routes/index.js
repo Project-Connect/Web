@@ -14,7 +14,7 @@ module.exports = (app) => {
 
   // * user routes *
   // create new users
-  app.post('/api/users', usersController.create);
+  app.post('/api/users/:type', usersController.create);
   // update a single usesr
   app.post('/api/user/update', usersController.update);
   // get all users

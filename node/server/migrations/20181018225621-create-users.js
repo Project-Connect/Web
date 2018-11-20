@@ -36,6 +36,10 @@ module.exports = {
       github: {
         type: Sequelize.STRING
       },
+      type: {
+        type: Sequelize.ENUM,
+        values: ['student', 'admin', 'company', 'instructor']
+      },
       createdAt: {
         type: Sequelize.DATE
       },

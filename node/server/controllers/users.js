@@ -12,7 +12,8 @@ module.exports = {
         email: req.body.email,
         photo: req.body.photo,
         linked_in: req.body.linked_in,
-        github: req.body.github
+        github: req.body.github,
+        type: req.params.type
       })
       .then(users => res.status(200).send("okay"))
       .catch(error => res.status(400).send(error));
@@ -37,7 +38,7 @@ module.exports = {
   list(req, res) {
     return Users
       .findAll({
-        attributes: ['id', 'username', 'name', 'bio'],
+        attributes: ['id', 'username', 'name', 'bio', 'type'],
         order: [
           ['createdAt', 'DESC'],
         ],
