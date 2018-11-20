@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+class LoginPageGitHub extends Component {
 
     // Stole this from an example - not sure why importing oauthio-web package wouldn't work but kept not
     // sending request so I
@@ -31,4 +31,4 @@ class App extends Component {
         return <button onClick={this.handleClick.bind(this)} className="button"> Sign in with Github</button>;
     }
 }
-export default App;
+export default LoginPageGitHub;
