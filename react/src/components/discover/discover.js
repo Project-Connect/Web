@@ -36,7 +36,7 @@ class Discover extends Component {
     }
 
     async getData(){
-        let url="http://127.0.0.1:8000/api/user_associations/user/5/not"
+        let url="https://collab-project.herokuapp.com/api/user_associations/user/5/not"
         let fetched = await fetch(url)
         let fetchedJson = await fetched.json()
         let project_ids = []

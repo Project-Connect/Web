@@ -36,7 +36,7 @@ class MiniProjectComponent extends Component {
         };
 
         return (
-        
+
             <div style={modalStyle}>
                 <Card style={{ backgroundColor: '#F5F5F5'}}>
                     <CardContent>
@@ -52,15 +52,15 @@ class MiniProjectComponent extends Component {
                     </CardContent>
                 </Card>
             </div>
-        
+
 
         );
     }
 
 
     componentDidMount() {
-        let urlData = "http://127.0.0.1:8000/api/project/"  + this.props.id;
-        
+        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id;
+
         fetch(urlData)
         .then(res => res.json())
         .then(res =>
