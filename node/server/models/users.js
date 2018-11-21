@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     photo: DataTypes.STRING,
     linked_in: DataTypes.STRING,
     github: DataTypes.STRING ,
+    type: {
+      type: DataTypes.ENUM,
+      values: ['student', 'admin', 'company', 'instructor']
+    }
 
   }, {});
   users.associate = function(models) {

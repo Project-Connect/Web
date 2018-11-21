@@ -42,7 +42,7 @@ describe('Testing GET requests', () => {
 describe('Testing POST requests', () => {
     beforeAll(() => { models.sequelize.sync().then(()=>{ models.sequelize.close(); }) });
     test('should add user to database', async () => {
-        const response = await request(app).post('/api/users')
+        const response = await request(app).post('/api/users/student')
                                             .send({ name: 'req.body.name',
                                                     username: 'req.body.username',
                                                     bio: 'req.body.bio',

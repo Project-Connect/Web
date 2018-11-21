@@ -24,6 +24,9 @@ module.exports = {
       project_start_date: {
         type: Sequelize.DATE
       },
+      status: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         type: Sequelize.DATE
       },

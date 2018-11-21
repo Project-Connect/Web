@@ -9,7 +9,8 @@ module.exports = {
         name: req.body.name,
         description: req.body.description,
         github: req.body.github,
-        url: req.body.url
+        url: req.body.url,
+        status: false
       })
       .then(project => {
         if (!project) {
@@ -38,6 +39,19 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  // list all Porjects that are approved or that are unapproved
+  listApprovedOrUnapproved(req, res) {
+    return Projects
+      .findAll({
+        attributes: {exclude: ['createdAt', 'updatedAt'] },
+        where: {
+          status: req.params.status
+        }
+      })
+      .then((projects) => res.status(200).send(projects))
+      .catch((error) => res.status(400).send(error));
+  },
+
   // get a single porject
   getProject(req, res) {
     return Projects
@@ -60,6 +74,52 @@ module.exports = {
           .catch((error) => res.status(400).send(error));
         })
       .catch(error => res.status(400).send(error));
+  },
+
+  //update a project
+  update(req, res) {
+    return Projects
+      .findById( req.params.project, {
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
+      })
+      .then(project => {
+        if (!project) {
+          return res.status(404).send({
+            message: 'Project Not Found',
+          });
+        }
+        return project
+          .update({
+            name: req.body.name,
+            description: req.body.description,
+            github: req.body.github,
+            url: req.body.url
+          })
+          .then((project) => res.status(200).send(project))
+          .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
+  },
+  // approve a project
+  approveProject(req, res) {
+    return Projects
+      .findById( req.params.project, {
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
+      })
+      .then(project => {
+        if (!project) {
+          return res.status(404).send({
+            message: 'Project Not Found',
+          });
+        }
+        return project
+          .update({
+            status: true,
+          })
+          .then((project) => res.status(200).send(project))
+          .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
   },
 
 
