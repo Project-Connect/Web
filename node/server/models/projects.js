@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     github: DataTypes.STRING,
     url: DataTypes.STRING,
-    project_start_date: DataTypes.DATE
+    project_start_date: DataTypes.DATE,
+    status: DataTypes.BOOLEAN
   }, {});
   projects.associate = function(models) {
     projects.hasMany(models.user_associations, {

@@ -32,14 +32,18 @@ module.exports = (app) => {
   // creates and new project and
   // also a user association for the user creating the new project
   app.post('/api/project', projectsController.create);
-  // update a project TODO
-
+  // update a project
+  app.post('/api/project/:project/update', projectsController.update);
   // remove a porject
   app.post('/api/project/remove', projectsController.removeProject);
   // gets all projects
   app.get('/api/projects', projectsController.list);
+  // get all projects
+  app.get('/api/projects/:status', projectsController.listApprovedOrUnapproved)
   // get a single project
   app.get('/api/project/:project', projectsController.getProject);
+  // approve a project
+  app.post('/api/project/:project/approve', projectsController.approveProject);
 
 
 

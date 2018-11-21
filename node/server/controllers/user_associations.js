@@ -80,7 +80,8 @@ module.exports = {
           where: {
             id: {
               [Op.notIn]: my_projects
-            }
+            },
+            status: true
           }
         })
         .then((porject) => res.status(200).send(porject))
