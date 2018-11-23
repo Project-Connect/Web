@@ -31,14 +31,14 @@ const Root = ({ store }) => (
         <SuccessPopup />
         <ErrorPopup />
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
-        <Route exact path={"/users/:user_id"} component={Users}/>
-        <Route exact path="/newProject" component={NewProject}/>
-        <Route exact path="/loginPage" component={loginPage}/>
-        <Route exact path="/loginPageGitHub" component={loginPageGitHub}/>
-        <Route exact path="/" component={Projects}/>
-        <Route path={"/project/:project_id"} component={ProjectDetail}/>
-        <Route exact path="/discover" component={Discover}/>
-        <Route exact path="/widgets" component={Widgets}/>
+        <Route exact path={"/:user/users/:user_id"} component={Users}/>
+        <Route exact path="/:user/newProject" component={NewProject}/>
+        <Route exact path="/:user/loginPage" component={loginPage}/>
+        <Route exact path="/" component={loginPageGitHub}/>
+        <Route exact path="/:user/" component={Projects}/>
+        <Route path={"/:user/project/:project_id"} component={ProjectDetail}/>
+        <Route exact path="/:user/discover" component={Discover}/>
+        <Route exact path="/:user/widgets" component={Widgets}/>
       </div>
     </Router>
   </Provider>

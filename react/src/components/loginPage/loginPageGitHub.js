@@ -16,15 +16,43 @@ class LoginPageGitHub extends Component {
         window.OAuth.popup('github').then((provider) => {
             provider.me().then((data) => {
                 console.log("data: ", data);
-                alert("TODO: " + data.alias + " SEND TO SHEESHA'S ENDPOINT!");
-                if (true){ // TODO: VALID LOGIN
-                    window.location = '/';
-                } else {
-                    alert("Invalid User");
-                }
+                this.validateUser(data);
             });
 
         });
+    }
+
+    async validateUser(data){
+        let urlUsers = "https://collab-project.herokuapp.com/api/users/"
+        let newUser = "https://collab-project.herokuapp.com/api/users/company"
+        let users = await fetch(urlUsers)
+        let usersJSON = await users.json()
+        let notPresent = true
+        usersJSON.forEach(element=>{
+            if (element.username === data.alias){
+                notPresent = false;
+            }
+        })
+        if (notPresent){
+            console.log("new user created")
+            fetch(newUser,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body:JSON.stringify({
+                    "name":data.name,
+                    "username":data.alias,
+                    "bio":data.bio,
+                    "password":"",
+                    "email":data.email,
+                    "photo":"",
+                    "linked_in":"",
+                    "github":""
+                })
+            })
+        }
+        this.props.history.push(`${data.alias}`)
     }
 
     render() {
