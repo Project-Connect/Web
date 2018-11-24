@@ -24,6 +24,7 @@ class NewProject extends React.Component{
 
     render(){
         return(
+            <div>
             <div className={"input-field"}>
                 <TextField
                 label="Project Title"
@@ -88,6 +89,7 @@ class NewProject extends React.Component{
                         Clear
                     </Button>
                 </div>
+            </div>
             </div>
         )
     }

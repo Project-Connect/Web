@@ -52,11 +52,15 @@ class LoginPageGitHub extends Component {
                 })
             })
         }
-        this.props.history.push(`${data.alias}`)
+        this.props.history.push(`${data.alias}/projects`)
     }
 
     render() {
-        return <button onClick={this.handleClick.bind(this)} className="button"> Sign in with Github</button>;
+        return (
+            <div>
+                <button onClick={this.handleClick.bind(this)} className="button"> Sign in with Github</button>
+            </div>
+        )
     }
 }
 export default LoginPageGitHub;

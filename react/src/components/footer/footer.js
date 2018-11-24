@@ -1,14 +1,13 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 var style = {
-    backgroundColor: "#2196F3",
-    borderTop: "1px solid #E7E7E7",
+    backgroundColor: "#27DAAF",
     textAlign: "center",
     padding: "20px",
     position: "fixed",
     left: "0",
     bottom: "0",
-    height: "60px",
+    height: "120px",
     width: "100%",
 }
 

@@ -3,7 +3,6 @@
  *
  */
 import React, { Component } from "react";
-
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import './discover.css';
 import {showError} from "../../actions/globalPopupAction";
@@ -20,7 +19,6 @@ class Discover extends Component {
 
         return (
             <div>
-
                 <div className="project-section">
                 {this.state.ids.map((id) => (
                     <button className="project" onClick={()=>this.props.history.push(`/project/${id}`)} key={id}>

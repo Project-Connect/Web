@@ -3,30 +3,55 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { withRouter } from 'react-router';
 
 class Navigation extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            user:""
+        }
+        this.navigate = this.navigate.bind(this);
+    }
     render(){
         return(
             <div>
-              <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196F3' }}>
-                <Toolbar>
-                  <IconButton color="inherit" aria-label="Menu">
-                    <Button color="inherit" href="/">Project Collab</Button>
-                  </IconButton>
-                  <Typography variant="h6" color="inherit">
-                    <Button color="inherit" href="/">My Projects</Button>
-                  </Typography>
-                  <Typography variant="h6" color="inherit">
-                    <Button color="inherit" href="/discover">Discover</Button>
-                  </Typography>
-                  <Button color="inherit" href="/users">Profile</Button>
-                </Toolbar>
-              </AppBar>
+                {this.renderStuff()}
             </div>
         );
     }
 
+    renderStuff(){
+        return(
+            <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+              <Toolbar>
+
+                <Typography variant="h6" color="inherit">
+                  <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Collab</Button>
+                </Typography>
+
+                <Typography variant="h6" color="inherit">
+                  <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
+                </Typography>
+
+                <Typography variant="h6" color="inherit">
+                  <Button color="inherit" onClick={()=>this.navigate("discover")}>Discover</Button>
+                </Typography>
+
+                <Typography variant="h6" color="inherit">
+                  <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
+                </Typography>
+
+              </Toolbar>
+            </AppBar>
+        )
+    }
+
+    navigate(page){
+        console.log(this.props)
+        this.props.history.push(`${page}`)
+    }
+
 }
 
-export default Navigation;
+export default withRouter(Navigation);

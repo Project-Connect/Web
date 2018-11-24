@@ -3,7 +3,6 @@
  *
  */
 import React, { Component } from "react";
-
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import { connect } from "react-redux";
 // these are the functions we will call to dispatch out functions
