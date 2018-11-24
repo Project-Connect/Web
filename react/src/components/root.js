@@ -21,6 +21,7 @@ import Widgets from "./examples/widgets";
 import ErrorPopup from "./globalPopups/errorPopup"
 import SuccessPopup from "./globalPopups/successPopup"
 import ButtonAppBar from "./navbar/navbar";
+import Footer from "./footer/footer";
 
 // Just add your component onto a path below
 const Root = ({ store }) => (
@@ -39,6 +40,7 @@ const Root = ({ store }) => (
         <Route path={"/:user/project/:project_id"} component={ProjectDetail}/>
         <Route exact path="/:user/discover" component={Discover}/>
         <Route exact path="/:user/widgets" component={Widgets}/>
+        <Footer/>
       </div>
     </Router>
   </Provider>
