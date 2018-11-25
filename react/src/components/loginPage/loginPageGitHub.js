@@ -54,11 +54,13 @@ class LoginPageGitHub extends Component {
         let users = await fetch(urlUsers)
         let usersJSON = await users.json()
         let notPresent = true
-        usersJSON.forEach(element=>{
-            if (element.username === data.alias){
-                notPresent = false;
-            }
-        })
+        if (usersJSON.length>0){
+            usersJSON.forEach(element=>{
+                if (element.username === data.alias){
+                    notPresent = false;
+                }
+            })
+        }
         if (notPresent){
             console.log("new user created")
             fetch(newUser,{
