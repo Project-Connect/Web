@@ -42,6 +42,7 @@
     "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
+    "google-maps-react": "^2.0.2",
     "lint-staged": "^7.3.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.14.3",
