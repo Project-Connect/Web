@@ -24,11 +24,13 @@ class NewProject extends React.Component{
     }
 
     submit(){
-        if (this.state.title !== undefined 
-            || this.state.githubUrl != undefined 
-            || this.state.projectUrl != undefined 
-            || this.techStack != undefined 
-            || this.groupSize != undefined) {
+        if (this.state.title == "" 
+            || this.state.githubUrl == "" 
+            || this.state.projectUrl == "" 
+            || this.state.description == ""
+            || this.state.techStack == ""
+            || this.state.groupSize == 0
+            ) {
             this.props.showError("Please fill in input field(s)")
         } 
         else {
