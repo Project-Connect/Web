@@ -35,29 +35,85 @@ class Navigation extends React.Component{
                 </AppBar>
             )
         }
-        return(
-            <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
-              <Toolbar>
+        let type = JSON.parse(window.sessionStorage.current_user).type
+        console.log(type);
+        if (type==="student"){
+            return(
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                  <Toolbar>
 
-                <Typography variant="h6" color="inherit">
-                  <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Collab</Button>
-                </Typography>
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Project Collab</Button>
+                    </Typography>
 
-                <Typography variant="h6" color="inherit">
-                  <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
-                </Typography>
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Discover</Button>
+                    </Typography>
 
-                <Typography variant="h6" color="inherit">
-                  <Button color="inherit" onClick={()=>this.navigate("discover")}>Discover</Button>
-                </Typography>
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
+                    </Typography>
 
-                <Typography variant="h6" color="inherit">
-                  <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
-                </Typography>
+                  </Toolbar>
+                </AppBar>
+            )
+        }else if (type==="company"){
+            return(
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                  <Toolbar>
 
-              </Toolbar>
-            </AppBar>
-        )
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Collab</Button>
+                    </Typography>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
+                    </Typography>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
+                    </Typography>
+
+                  </Toolbar>
+                </AppBar>
+            )
+        }else if (type==="admin"){
+            return(
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                  <Toolbar>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Collab</Button>
+                    </Typography>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
+                    </Typography>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Discover</Button>
+                    </Typography>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
+                    </Typography>
+
+                  </Toolbar>
+                </AppBar>
+            );
+        }else{
+            return(
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                  <Toolbar>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit">Project Collab</Button>
+                    </Typography>
+
+                  </Toolbar>
+                </AppBar>
+            );
+        }
     }
 
     navigate(page){
