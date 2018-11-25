@@ -13,7 +13,8 @@ class Projects extends Component {
     constructor(props){
         super(props);
         this.state={
-            ids:[]
+            ids:[],
+            user: JSON.parse(window.sessionStorage.getItem("current_user"))
         }
     }
     render() {
@@ -45,17 +46,17 @@ class Projects extends Component {
     }
 
     async getData(){
-        let url="https://collab-project.herokuapp.com/api/user_associations/user/" + JSON.parse(window.sessionStorage.current_user).id
+        let url="https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user.id
         fetch(url)
         .then((res) => res.json())
         .then((res) =>
           {
+            console.log(res);
             if(res.lengh === 0){
               return
             }
-            let projects = res
             let project_ids = []
-            projects.map((element)=>project_ids.push(element.project_id))
+            res.map((element)=>project_ids.push(element.project_id))
             this.setState({ids:project_ids})
           }
         ).catch(err => {
