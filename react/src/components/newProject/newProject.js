@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import "./newProject.css"
 import {showError,showSuccess} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
+import IconButton from '@material-ui/core/IconButton';
+
+
 class NewProject extends React.Component{
     constructor(props){
         super(props);
@@ -16,6 +19,8 @@ class NewProject extends React.Component{
             groupSize:0,
             additionalInfo:""
         }
+        this.navigate = this.navigate.bind(this);
+
     }
 
     submit(){
@@ -39,6 +44,14 @@ class NewProject extends React.Component{
     render(){
         return(
             <div>
+
+                <div className={"close-button"}>
+                
+                    <IconButton onClick={()=>this.navigate("projects")}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg>         
+                    </IconButton>
+                </div>
+
             <div className={"input-field"}>
                 <TextField
                 label="Project Title"
@@ -106,6 +119,11 @@ class NewProject extends React.Component{
             </div>
             </div>
         )
+    }
+
+    navigate(page){
+        console.log(this.props)
+        this.props.history.push(`${page}`)
     }
 }
 
