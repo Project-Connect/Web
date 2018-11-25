@@ -41,6 +41,18 @@ class NewProject extends React.Component{
       })
     }
 
+    clear() {
+        this.setState({
+            title: "",
+            githubUrl: "",
+            projectUrl: "",
+            description: "",
+            techStack: "",
+            groupSize: "",
+            additionalInfo: ""
+          });
+    }
+
     render(){
         return(
             <div>
@@ -58,6 +70,7 @@ class NewProject extends React.Component{
                 id="standard-required"
                 placeholder="Project Title"
                 value={this.state.title}
+                ref={el => this.inputTitle = el}
                 onChange={(event)=>{this.setState({title:event.target.value})}}
                 fullWidth/>
 
@@ -112,7 +125,7 @@ class NewProject extends React.Component{
                         Submit
                     </Button>
 
-                    <Button color="secondary">
+                    <Button color="secondary" onClick={() => {this.clear()}}>
                         Clear
                     </Button>
                 </div>
