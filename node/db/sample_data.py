@@ -69,7 +69,7 @@ if __name__ == "__main__":
         password = gen.password()
         bio = gen.sentence()
         for name, user_name in zip(names, user_names):
-            q = "INSERT INTO users (username, name, bio, password) VALUES ('{}','{}','{}','{}');".format(user_name, name, bio, password)
+            q = "INSERT INTO users (username, name, bio, password, type) VALUES ('{}','{}','{}','{}', 'student');".format(user_name, name, bio, password)
             current_data_set['users'][user_name] = {'name': name , 'id': gen_user_id }
             gen_user_id+=1
             out.append(q)
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     for name in gen.project_name:
         description = gen.paragraph()
         date = gen.get_start_date()
-        q = "INSERT INTO projects (name, description, project_start_date) VALUES ('{}','{}','{}');".format(name, description, date)
+        q = "INSERT INTO projects (name, description, project_start_date, status) VALUES ('{}','{}','{}', 'true');".format(name, description, date)
         current_data_set['projects'][name] = {'name': name, 'id': id}
         id += 1
         out.append(q)
