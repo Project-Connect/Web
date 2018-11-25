@@ -9,19 +9,32 @@ class Navigation extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            user:""
+            id:""
         }
         this.navigate = this.navigate.bind(this);
     }
     render(){
         return(
             <div>
-                {this.renderStuff()}
+                {this.renderBar()}
             </div>
         );
     }
 
-    renderStuff(){
+    renderBar(){
+        if (this.props.location.pathname ==="/"){
+            return(
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                  <Toolbar>
+
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit">Project Collab</Button>
+                    </Typography>
+
+                  </Toolbar>
+                </AppBar>
+            )
+        }
         return(
             <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
               <Toolbar>
@@ -48,10 +61,8 @@ class Navigation extends React.Component{
     }
 
     navigate(page){
-        console.log(this.props)
         this.props.history.push(`${page}`)
     }
-
 }
 
 export default withRouter(Navigation);
