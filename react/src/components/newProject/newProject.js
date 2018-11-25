@@ -19,7 +19,21 @@ class NewProject extends React.Component{
     }
 
     submit(){
-      this.props.showSuccess("Working");
+      let url = "https://collab-project.herokuapp.com/api/project";
+      fetch(url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json; charset=utf-8"
+          },
+          body: JSON.stringify({...this.state, user_id:1})
+      })
+      .then(()=>{
+        this.props.showSuccess("Project Created Success")
+        this.props.history.push("projects")
+      })
+      .catch(err => {
+        this.props.showError(err.toString())
+      })
     }
 
     render(){

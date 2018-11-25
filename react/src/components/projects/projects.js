@@ -17,20 +17,20 @@ class Projects extends Component {
         }
     }
     render() {
-
+        let user = this.props.match.params.user
         return (
             <div>
                 <h1>Projects</h1>
 
                 <div className="buttonSurrounding">
-                    <button className="add" onClick={()=>{this.props.history.push("/newProject")}}>
+                    <button className="add" onClick={()=>{this.props.history.push(`/${user}/newProject`)}}>
                         Add project
                     </button>
                 </div>
 
                 <div>
                 {this.state.ids.map((id) => (
-                    <button className="project" onClick={()=>this.props.history.push(`/project/${id}`)} key={id}>
+                    <button className="project" onClick={()=>this.props.history.push(`/${user}/project/${id}`)} key={id}>
                         <MiniProjectComponent id={id}/>
                     </button>
                 ))}
@@ -45,13 +45,17 @@ class Projects extends Component {
     }
 
     async getData(){
-        let url="https://collab-project.herokuapp.com/api/user_associations/user/5"
+        let url="https://collab-project.herokuapp.com/api/user_associations/user/1"
         fetch(url)
-        .then(res => res.json())
-        .then(res =>
+        .then((res) => res.json())
+        .then((res) =>
           {
+            if(res.lengh === 0){
+              return
+            }
+            let projects = res
             let project_ids = []
-            res.map((element)=>project_ids.push(element.project_id))
+            projects.map((element)=>project_ids.push(element.project_id))
             this.setState({ids:project_ids})
           }
         ).catch(err => {
