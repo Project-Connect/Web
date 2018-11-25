@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import {showError} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class ProjectDetail extends Component {
 
@@ -30,33 +31,53 @@ class ProjectDetail extends Component {
     }
     render() {
         return (
-            <div className="project-details">
+            <div className="surrounding">
+                <div className="project-owner">
+                    <Typography variant="h6" gutterBottom className="members">
+                        Participating Members
+                    </Typography>
 
-                <Typography variant="h3" gutterBottom className="title">
-                    {this.state.projData.name}
-                </Typography>
+                    {this.renderUsers()}
+                    <Divider></Divider>
+                    <div>
+                        <Typography variant="h6" gutterBottom className="members">
+                            Location
+                        </Typography>
 
-                <Divider></Divider>
+                        <Map
+                        google={this.props.google}
+                        zoom={15}
+                        style={{width:"300px", height:"300px"}}
+                        initialCenter={{
+                            lat: 43.659735,
+                            lng: -79.397042
+                        }}>
+                        <Marker
+                        name={'Bahen Center'} />
+                        </Map>
+                    </div>
 
-                <Typography variant="body1" gutterBottom>
-                    {this.state.projData.description}
-                </Typography>
+                </div>
+                <div className="project-details">
 
-                <Typography variant="body1" gutterBottom>
-                    {this.state.projData.project_start_date}
-                </Typography>
+                    <Typography variant="h3" gutterBottom className="title">
+                        {this.state.projData.name}
+                    </Typography>
 
-                <Typography variant="body1" gutterBottom>
-                    {this.state.github}
-                </Typography>
+                    <Divider></Divider>
 
-                <Divider></Divider>
+                    <Typography variant="body1" gutterBottom>
+                        {this.state.projData.description}
+                    </Typography>
 
-                <Typography variant="h6" gutterBottom className="members">
-                    PARTICPATING MEMBERS
-                </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        {this.state.projData.project_start_date}
+                    </Typography>
 
-                {this.renderUsers()}
+                    <Typography variant="body1" gutterBottom>
+                        {this.state.github}
+                    </Typography>
+                </div>
             </div>
         );
     }
@@ -112,4 +133,7 @@ const mapDispatchToProps = {
   showError,
 }
 
-export default connect(null,mapDispatchToProps)(ProjectDetail);
+//export default connect(null,mapDispatchToProps)(ProjectDetail);
+export default GoogleApiWrapper({
+  apiKey: ("AIzaSyCcv1aP4thlAGBEBUtt44LU2Trki3VxfZo")
+})(connect(null,mapDispatchToProps)(ProjectDetail));
