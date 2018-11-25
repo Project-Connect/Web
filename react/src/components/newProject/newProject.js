@@ -39,7 +39,7 @@ class NewProject extends React.Component{
             })
             .then(()=>{
               this.props.showSuccess("Project Created Success")
-              this.props.history.push("projects")
+              this.navigate("projects")            
             })
             .catch(err => {
               this.props.showError(err.toString())
@@ -143,7 +143,6 @@ class NewProject extends React.Component{
     }
 
     navigate(page){
-        console.log(this.props)
         this.props.history.push(`${page}`)
     }
 }
