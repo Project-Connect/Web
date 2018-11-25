@@ -18,21 +18,39 @@ class LoginPageGitHub extends Component {
         document.body.appendChild(oauthScript);
     }
 
-    handleClick(e) {
+    handleClickStudent(e) {
         e.preventDefault();
         window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
         window.OAuth.popup('github').then((provider) => {
             provider.me().then((data) => {
                 console.log("data: ", data);
-                this.validateUser(data);
+                this.validateUser(data, "student");
             });
 
         });
     }
 
-    async validateUser(data){
+    handleClickCompany(e) {
+        e.preventDefault();
+        window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+        window.OAuth.popup('github').then((provider) => {
+            provider.me().then((data) => {
+                console.log("data: ", data);
+                this.validateUser(data, "company");
+            });
+
+        });
+    }
+
+    async validateUser(data, type){
+        let newUser=""
+        if (type==="student"){
+            newUser = "https://collab-project.herokuapp.com/api/users/student"
+        }else if (type==="company"){
+            newUser = "https://collab-project.herokuapp.com/api/users/company"
+        }
+
         let urlUsers = "https://collab-project.herokuapp.com/api/users/"
-        let newUser = "https://collab-project.herokuapp.com/api/users/company"
         let users = await fetch(urlUsers)
         let usersJSON = await users.json()
         let notPresent = true
@@ -81,10 +99,16 @@ class LoginPageGitHub extends Component {
                         Login with Github to get started
                     </Typography>
 
-                    <button onClick={this.handleClick.bind(this)}
+                    <button onClick={this.handleClickStudent.bind(this)}
                     className="login-button"
                     color="primary">
-                        Login with Github
+                        Login for Students
+                    </button>
+
+                    <button onClick={this.handleClickCompany.bind(this)}
+                    className="login-button"
+                    color="primary">
+                        Login for Companies
                     </button>
                 </div>
 
@@ -119,10 +143,16 @@ class LoginPageGitHub extends Component {
                             Start now
                         </Typography>
 
-                        <button onClick={this.handleClick.bind(this)}
+                        <button onClick={this.handleClickStudent.bind(this)}
                         className="login-button"
                         color="primary">
                             Login with Github
+                        </button>
+
+                        <button onClick={this.handleClickCompany.bind(this)}
+                        className="login-button"
+                        color="primary">
+                            Login for Companies
                         </button>
                     </div>
                 </div>
