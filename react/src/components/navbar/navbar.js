@@ -22,7 +22,6 @@ class Navigation extends React.Component{
     }
 
     renderBar(){
-        console.log(this.props);
         if (this.props.location.pathname ==="/"){
             return(
                 <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
@@ -62,7 +61,6 @@ class Navigation extends React.Component{
     }
 
     navigate(page){
-        console.log(this.props)
         this.props.history.push(`${page}`)
     }
 }
