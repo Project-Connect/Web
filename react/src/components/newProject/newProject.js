@@ -25,13 +25,7 @@ class NewProject extends React.Component{
     }
 
     submit(){
-        if (this.state.name === "" 
-            || this.state.githubUrl === "" 
-            || this.state.projectUrl === "" 
-            || this.state.description === ""
-            || this.state.techStack === ""
-            || this.state.groupSize === 0
-            ) {
+        if (this.state.name === "" || this.state.description === "") {
             this.props.showError("Please fill in input field(s)")
         } 
         else {
@@ -79,6 +73,7 @@ class NewProject extends React.Component{
                 </div>
 
                 <TextField
+                required
                 label="Project Title"
                 id="standard-required"
                 placeholder="Project Title"
@@ -101,6 +96,7 @@ class NewProject extends React.Component{
                 fullWidth/>
 
                 <TextField
+                required
                 label="Description"
                 placeholder="Description"
                 value={this.state.description}
