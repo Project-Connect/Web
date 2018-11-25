@@ -25,12 +25,12 @@ class NewProject extends React.Component{
     }
 
     submit(){
-        if (this.state.name == "" 
-            || this.state.githubUrl == "" 
-            || this.state.projectUrl == "" 
-            || this.state.description == ""
-            || this.state.techStack == ""
-            || this.state.groupSize == 0
+        if (this.state.name === "" 
+            || this.state.githubUrl === "" 
+            || this.state.projectUrl === "" 
+            || this.state.description === ""
+            || this.state.techStack === ""
+            || this.state.groupSize === 0
             ) {
             this.props.showError("Please fill in input field(s)")
         } 
