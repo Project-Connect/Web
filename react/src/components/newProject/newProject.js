@@ -24,21 +24,32 @@ class NewProject extends React.Component{
     }
 
     submit(){
-      let url = "https://collab-project.herokuapp.com/api/project";
-      fetch(url, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json; charset=utf-8"
-          },
-          body: JSON.stringify({...this.state, user_id:1})
-      })
-      .then(()=>{
-        this.props.showSuccess("Project Created Success")
-        this.props.history.push("projects")
-      })
-      .catch(err => {
-        this.props.showError(err.toString())
-      })
+        if (this.state.title !== undefined 
+            || this.state.githubUrl != undefined 
+            || this.state.projectUrl != undefined 
+            || this.techStack != undefined 
+            || this.groupSize != undefined) {
+            this.props.showError("Please fill in input field(s)")
+        } 
+        else {
+            let url = "https://collab-project.herokuapp.com/api/project";
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({...this.state, user_id:1})
+            })
+            .then(()=>{
+              this.props.showSuccess("Project Created Success")
+              this.props.history.push("projects")
+            })
+            .catch(err => {
+              this.props.showError(err.toString())
+      
+            })
+        }
+     
     }
 
     clear() {
@@ -52,6 +63,7 @@ class NewProject extends React.Component{
             additionalInfo: ""
           });
     }
+
 
     render(){
         return(
