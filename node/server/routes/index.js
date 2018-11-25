@@ -24,9 +24,9 @@ module.exports = (app) => {
   // remove a single user TODO
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
-  app.post('/api/user/createFind', usersController.createOrFind);
+  app.post('/api/user/createorfind/:type', usersController.createOrFind);
   // * login routes *
-
+  app.get('/api/user/token/:username', usersController.token);
 
   // * project routes *
   // creates and new project and

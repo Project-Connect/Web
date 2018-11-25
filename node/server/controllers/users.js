@@ -15,7 +15,7 @@ module.exports = {
         github: req.body.github,
         type: req.params.type
       })
-      .then(users => res.status(200).send("okay"))
+      .then(users =>  res.status(200).send("okay"))
       .catch(error => res.status(400).send(error));
   },
 
@@ -27,11 +27,35 @@ module.exports = {
           username: req.body.username
         },
         defaults: {
-          name: req.body.username,
-          password: "temp"
-        }
+          username: req.body.username,
+          name: req.body.name,
+          email: req.body.email,
+          bio: req.body.bio,
+          password: "Github",
+          type: req.params.type
+        },
+        attributes: ['id', 'name', 'username', 'email', 'bio']
       })
-      .then(users => res.status(200).send("okay"));
+      .then(users => {
+        res.status(200).send("okay")
+      })
+      .catch(error => res.status(400).send(error));
+  },
+
+  // list all users
+  token(req, res) {
+    return Users
+      .findAll({
+        where: {
+          username: req.params.username
+        },
+        attributes: ['id', 'username', 'name', 'bio', 'type'],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      })
+      .then((users) => res.status(200).send(users))
+      .catch((error) => res.status(400).send(error));
   },
 
   // list all users
