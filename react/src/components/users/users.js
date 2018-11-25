@@ -76,7 +76,7 @@ class Users extends Component {
         );
     }
     componentDidMount() {
-        fetch('http://localhost:8000/api/users/' + this.props.match.params.user_id)
+        fetch('https://collab-project.herokuapp.com/api/users/' + JSON.parse(window.sessionStorage.current_user).id)
         .then(res => res.json())
         .then((data) => this.parseData(data))
         .catch(err =>

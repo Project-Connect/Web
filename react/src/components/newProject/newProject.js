@@ -11,9 +11,10 @@ class NewProject extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            title:"",
-            githubUrl:"",
-            projectUrl:"",
+            user_id: JSON.parse(window.sessionStorage.current_user).id,
+            name:"",
+            github:"",
+            url:"",
             description:"",
             techStack:"",
             groupSize:0,
@@ -24,7 +25,7 @@ class NewProject extends React.Component{
     }
 
     submit(){
-        if (this.state.title == "" 
+        if (this.state.name == "" 
             || this.state.githubUrl == "" 
             || this.state.projectUrl == "" 
             || this.state.description == ""
@@ -40,7 +41,7 @@ class NewProject extends React.Component{
                 headers: {
                     "Content-Type": "application/json; charset=utf-8"
                 },
-                body: JSON.stringify({...this.state, user_id:1})
+                body: JSON.stringify({...this.state, user_id:this.state.user_id})
             })
             .then(()=>{
               this.props.showSuccess("Project Created Success")
@@ -48,7 +49,6 @@ class NewProject extends React.Component{
             })
             .catch(err => {
               this.props.showError(err.toString())
-      
             })
         }
      
@@ -56,7 +56,7 @@ class NewProject extends React.Component{
 
     clear() {
         this.setState({
-            title: "",
+            name: "",
             githubUrl: "",
             projectUrl: "",
             description: "",
@@ -82,23 +82,22 @@ class NewProject extends React.Component{
                 label="Project Title"
                 id="standard-required"
                 placeholder="Project Title"
-                value={this.state.title}
-                ref={el => this.inputTitle = el}
-                onChange={(event)=>{this.setState({title:event.target.value})}}
+                value={this.state.name}
+                onChange={(event)=>{this.setState({name:event.target.value})}}
                 fullWidth/>
 
                 <TextField
                 label="GitHub URL"
                 placeholder="GitHub URL"
-                value={this.state.githubUrl}
-                onChange={(event)=>{this.setState({githubUrl:event.target.value})}}
+                value={this.state.github}
+                onChange={(event)=>{this.setState({github:event.target.value})}}
                 fullWidth/>
 
                 <TextField
                 label="Project Website"
                 placeholder="Project Website"
-                value={this.state.projectUrl}
-                onChange={(event)=>{this.setState({projectUrl:event.target.value})}}
+                value={this.state.url}
+                onChange={(event)=>{this.setState({url:event.target.value})}}
                 fullWidth/>
 
                 <TextField
