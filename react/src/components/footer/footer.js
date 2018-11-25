@@ -4,11 +4,11 @@ var style = {
     backgroundColor: "#27DAAF",
     textAlign: "center",
     padding: "20px",
-    position: "fixed",
     left: "0",
     bottom: "0",
     height: "120px",
     width: "100%",
+    position:"relative",
 }
 
 var phantom = {

@@ -6,9 +6,10 @@
 }
 
 .add{
-    background-color: #4CAF50; /* Green */
+    background-color: #27DAAF; /* Green */
     border: none;
     color: white;
+    font-weight: bold;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
