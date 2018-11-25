@@ -45,7 +45,7 @@ class Projects extends Component {
     }
 
     async getData(){
-        let url="https://collab-project.herokuapp.com/api/user_associations/user/1"
+        let url="https://collab-project.herokuapp.com/api/user_associations/user/" + JSON.parse(window.sessionStorage.current_user).id
         fetch(url)
         .then((res) => res.json())
         .then((res) =>
