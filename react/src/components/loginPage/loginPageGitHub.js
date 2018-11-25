@@ -51,7 +51,7 @@ class LoginPageGitHub extends Component {
     } else if (type === "company") {
       newUser = "https://collab-project.herokuapp.com/api/user/createorfind/company"
     }
-    fetch(newUser, {
+    await fetch(newUser, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8"
