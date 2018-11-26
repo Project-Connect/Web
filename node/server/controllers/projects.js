@@ -21,7 +21,8 @@ module.exports = {
         return Associations.create({
           user_id: req.body.user_id,
           project_id: project.id,
-          is_admin: true
+          is_admin: true,
+          status: 'approved'
         })
         .then((association) => res.status(200).send(project))
         .catch((error) => res.status(400).send(error));
