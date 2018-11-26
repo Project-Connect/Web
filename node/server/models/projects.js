@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     github: DataTypes.STRING,
     url: DataTypes.STRING,
     project_start_date: DataTypes.DATE,
-    status: DataTypes.BOOLEAN
+    status: {
+      type: DataTypes.ENUM,
+      values: ['approved', 'unapproved', 'rejected']
+    },
   }, {});
   projects.associate = function(models) {
     projects.hasMany(models.user_associations, {
