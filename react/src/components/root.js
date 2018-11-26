@@ -22,6 +22,7 @@ import SuccessPopup from "./globalPopups/successPopup"
 import ProjectUpload from "./parse-csv/parse-csv";
 import Footer from "./footer/footer";
 import Navigation from "./navbar/navbar";
+import AdminLogin from "./adminLogin/adminLogin";
 
 // Just add your component onto a path below
 const Root = ({ store }) => (
@@ -40,6 +41,7 @@ const Root = ({ store }) => (
         <Route exact path="/:user/discover" component={Discover}/>
         <Route exact path="/:user/widgets" component={Widgets}/>
         <Route exact path="/projectUpload" component={ProjectUpload}/>
+        <Route exact path="/secretAdminLogin" component={AdminLogin}/>
         <Footer/>
       </div>
     </Router>

@@ -22,7 +22,7 @@ class Navigation extends React.Component{
     }
 
     renderBar(){
-        if (this.props.location.pathname ==="/"){
+        if ((this.props.location.pathname ==="/") || (this.props.location.pathname ==="/secretAdminLogin")){
             return(
                 <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
                   <Toolbar>
@@ -77,7 +77,7 @@ class Navigation extends React.Component{
                   </Toolbar>
                 </AppBar>
             )
-        }else if (type==="admin"){
+        }else if (type==="instructor"){
             return(
                 <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
                   <Toolbar>
@@ -87,11 +87,11 @@ class Navigation extends React.Component{
                     </Typography>
 
                     <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
+                      <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Proposals</Button>
                     </Typography>
 
                     <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Discover</Button>
+                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Approved Projects</Button>
                     </Typography>
 
                     <Typography variant="h6" color="inherit">
