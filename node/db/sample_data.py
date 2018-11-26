@@ -78,7 +78,8 @@ if __name__ == "__main__":
     for name in gen.project_name:
         description = gen.paragraph()
         date = gen.get_start_date()
-        q = "INSERT INTO projects (name, description, project_start_date, status) VALUES ('{}','{}','{}', 'true');".format(name, description, date)
+        status = 'approved' if random.randint(0,10) < 3 else 'unapproved'
+        q = "INSERT INTO projects (name, description, project_start_date, status) VALUES ('{}','{}','{}', '{}');".format(name, description, date, status)
         current_data_set['projects'][name] = {'name': name, 'id': id}
         id += 1
         out.append(q)

@@ -25,7 +25,8 @@ module.exports = {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.ENUM,
+        values: ['approved', 'unapproved', 'rejected']
       },
       createdAt: {
         type: Sequelize.DATE

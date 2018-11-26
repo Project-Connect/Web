@@ -42,8 +42,9 @@ module.exports = (app) => {
   app.get('/api/projects/:status', projectsController.listApprovedOrUnapproved)
   // get a single project
   app.get('/api/project/:project', projectsController.getProject);
-  // approve a project
-  app.post('/api/project/:project/approve', projectsController.approveProject);
+  // update the status of a project via instructor
+  app.post('/api/project/:project/:status', projectsController.updateStatus)
+
 
 
 
@@ -63,4 +64,6 @@ module.exports = (app) => {
 
   // update the status depending on admin give approved/rejected
   app.post('/api/user_associations/update/:status', userAssociationsController.updateStatus);
+  // update the status depending on instr give approved/rejected
+  app.post('/api/user_associations/instr/update/:status', userAssociationsController.instructorUpdateStatus);
 };

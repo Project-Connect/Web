@@ -82,7 +82,7 @@ module.exports = {
             id: {
               [Op.notIn]: my_projects
             },
-            status: true
+            status: 'approved'
           }
         })
         .then((porject) => res.status(200).send(porject))
@@ -123,6 +123,44 @@ module.exports = {
           .catch((error) => res.status(400).send(error));
         }
       }).catch((error) => res.status(400).send(error));
+  },
+
+  instructorUpdateStatus(req, res) {
+    return Users
+      .findById(req.body.instructor_id, {
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt']
+        },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      })
+      .then((users) => {
+        if (!users) {
+          return res.status(404).send({
+            message: 'Associations Not Found',
+          });
+        }
+        if(users.type != 'instructor'){
+          return res.status(400).send("you don't have permissions for this command");
+        }
+        return Associations
+        .findOne({
+          where: {
+            user_id: req.body.user_id,
+            project_id: req.body.project_id,
+          },
+        })
+        .then(association2 => {
+          return association2
+          .update({
+            status: req.params.status
+          })
+        })
+        .then((association_edit) => res.status(200).send(association_edit))
+        .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
   },
 
 
