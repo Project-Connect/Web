@@ -31,6 +31,10 @@ module.exports = {
       is_admin: {
         type: Sequelize.BOOLEAN
       },
+      status: {
+        type: Sequelize.ENUM,
+        values: ['approved', 'unapproved', 'rejected']
+      },
       createdAt: {
         type: Sequelize.DATE
       },
