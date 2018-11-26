@@ -61,6 +61,6 @@ module.exports = (app) => {
 
   // remove a users association user TODO
 
-
-
+  // update the status depending on admin give approved/rejected
+  app.post('/api/user_associations/update/:status', userAssociationsController.updateStatus);
 };

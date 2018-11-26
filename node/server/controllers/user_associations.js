@@ -13,6 +13,7 @@ module.exports = {
         user_id: req.body.user_id,
         project_id: req.body.project_id,
         is_admin: req.body.is_admin,
+        status: req.body.status,
       })
       .then(association => res.status(200).send(association))
       .catch((error) => res.status(400).send(error));
@@ -88,6 +89,40 @@ module.exports = {
         .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
+  },
+
+  updateStatus(req, res) {
+    return Associations
+      .findOne({
+        where: {
+          user_id: req.body.admin_id,
+          project_id: req.body.project_id,
+        },
+      })
+      .then(association => {
+        if (!association) {
+          return res.status(404).send({
+            message: 'Associations Not Found',
+          });
+        }
+        if (association.is_admin) {
+          return Associations
+          .findOne({
+            where: {
+              user_id: req.body.user_id,
+              project_id: req.body.project_id,
+            },
+          })
+          .then(association2 => {
+            return association2
+            .update({
+              status: req.params.status
+            })
+          })
+          .then((association_edit) => res.status(200).send(association_edit))
+          .catch((error) => res.status(400).send(error));
+        }
+      })
   },
 
 
