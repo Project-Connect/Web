@@ -10,7 +10,7 @@ module.exports = {
         description: req.body.description,
         github: req.body.github,
         url: req.body.url,
-        status: false
+        status: 'unapproved'
       })
       .then(project => {
         if (!project) {
@@ -94,7 +94,8 @@ module.exports = {
             name: req.body.name,
             description: req.body.description,
             github: req.body.github,
-            url: req.body.url
+            url: req.body.url,
+            status: req.body.status
           })
           .then((project) => res.status(200).send(project))
           .catch((error) => res.status(400).send(error));
@@ -102,7 +103,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
   // approve a project
-  approveProject(req, res) {
+  updateStatus(req, res) {
     return Projects
       .findById( req.params.project, {
         attributes: {exclude: ['createdAt', 'updatedAt'] }
@@ -115,7 +116,7 @@ module.exports = {
         }
         return project
           .update({
-            status: true,
+            status: req.params.status,
           })
           .then((project) => res.status(200).send(project))
           .catch((error) => res.status(400).send(error));
