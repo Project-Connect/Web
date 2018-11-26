@@ -89,7 +89,10 @@ if __name__ == "__main__":
         project_id = current_data_set['projects'][project_name]['id']
         user_id = current_data_set['users'][user]['id']
         admin_status = True if random.randint(0,10) < 3 else False
-        q = "INSERT INTO user_associations (user_id, project_id, is_admin) VALUES ({},{},{});".format(user_id, project_id, admin_status)
+        project_status = 'unapproved'
+        if admin_status:
+            project_status = 'approved'
+        q = "INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES ({},{},{},'{}');".format(user_id, project_id, admin_status, project_status)
         out.append(q)
 
     print("\n".join(out))
