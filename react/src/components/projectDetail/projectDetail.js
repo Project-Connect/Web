@@ -101,15 +101,7 @@ class ProjectDetail extends Component {
                     <Typography variant="body1" gutterBottom>
                         {this.state.projData.project_start_date}
                     </Typography>
-
-                    <Typography variant="body1" gutterBottom>
-                        {this.state.projData.github}
-                    </Typography>
-
-                    <Typography variant="body1" gutterBottom>
-                        {this.state.projData.url}
-                    </Typography>
-
+                    
                     <div className={"icon-button"}>
                         <a href={github_link} >
                             {github_icon}
