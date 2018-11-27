@@ -8,15 +8,19 @@ import { connect } from "react-redux";
 // these are the functions we will call to dispatch out functions
 import {showError} from "../../actions/globalPopupAction";
 import './projects.css';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 
 class Projects extends Component {
     constructor(props){
         super(props);
         this.state={
-            ids:[],
+            approvedIds:[],
+            unapprovedIds:[],
             user: JSON.parse(window.sessionStorage.getItem("current_user"))
         }
     }
+
     render() {
         let user = this.props.match.params.user
         return (
@@ -24,16 +28,26 @@ class Projects extends Component {
                 <h1>Projects</h1>
 
                 <div className="buttonSurrounding">
+                  <div className= "search">
+                      <div className="search-icon">
+                        <SearchIcon />
+                      </div>
+                      <InputBase
+                        placeholder="Search…"
+                        className="input"
+                      />
+                    </div>
                     <button className="add" onClick={()=>{this.props.history.push(`/${user}/newProject`)}}>
                         Add project
                     </button>
                 </div>
 
                 <div>
-                {this.state.ids.map((id) => (
-                    <button className="project" onClick={()=>this.props.history.push(`/${user}/project/${id}`)} key={id}>
-                        <MiniProjectComponent id={id}/>
-                    </button>
+                {this.state.unapprovedIds.map((id) => (
+                      <MiniProjectComponent key={id} id={id} user={this.state.user}/>
+                ))}
+                {this.state.approvedIds.map((id) => (
+                      <MiniProjectComponent key={id} id={id} user={this.state.user}/>
                 ))}
                 </div>
 
@@ -51,13 +65,22 @@ class Projects extends Component {
         .then((res) => res.json())
         .then((res) =>
           {
-            console.log(res);
             if(res.lengh === 0){
               return
             }
-            let project_ids = []
-            res.map((element)=>project_ids.push(element.project_id))
-            this.setState({ids:project_ids})
+
+            let unapprovedProjects = []
+            if(this.state.user.type === "instructor"){
+              res.filter((element)=> element.project.status === "unapproved").map(el =>
+                unapprovedProjects.push(el.project_id)
+              )
+            }
+            let approvedProjects = []
+            res.filter((element)=> element.project.status === "approved").map(el =>
+              approvedProjects.push(el.project_id)
+            )
+
+            this.setState({unapprovedIds:unapprovedProjects, approvedIds: approvedProjects})
           }
         ).catch(err => {
           this.props.showError(err.toString())

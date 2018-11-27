@@ -3,11 +3,9 @@ Component to summarize a project in its miniaturized format.
 It contains info of the project's title, description, and stacks.
 */
 import React, { Component } from "react";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import {showError} from "../../actions/globalPopupAction";
+import {showError,showSuccess} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
+import Button from '@material-ui/core/Button';
 
 import './miniProjectComponent.css';
 
@@ -18,51 +16,78 @@ class MiniProjectComponent extends Component {
         super()
         this.state = {
             results: {
-              id: '',
-              name: '',
-              description: '',
-              github: '',
-              url: '',
-              project_start_date: ''
+              id: null,
+              name: "",
+              description: "",
+              github: "",
+              url:"",
+              project_start_date: '',
+              user: JSON.parse(window.sessionStorage.getItem("current_user"))
             }}
+        this.navigate = this.navigate.bind(this);
     }
 
+    approve = () => {
+        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id + "/approved";
+        fetch(urlData, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }}
+        )
+        .then(res => res.json())
+        .then(res =>
+            this.props.showSuccess("Project Approved")
+        )
+        .catch(function (err) {
+            this.props.showError(err.toString())
+        })
+    }
+
+    reject = () => {
+        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.state.results.id + "/rejected";
+        fetch(urlData, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }}
+        )
+        .then(res => res.json())
+        .then(res =>
+            this.props.showSuccess("Project Rejected")
+        )
+        .catch(function (err) {
+            this.props.showError(err.toString())
+        })
+    }
+    render_approve = () => {
+      if(this.state.results.status === "unapproved"){
+        return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
+      }
+    }
+    render_reject = () => {
+      if(this.state.results.status === "unapproved"){
+        return <Button className="buttons" variant="contained" onClick = {() => {this.reject()}}>Reject</Button>
+      }
+    }
     render() {
 
-        const modalStyle = {
-            marginTop: '15px'
-        };
-
-        const typographyStyle = {
-            marginBottom: '10px'
-        };
-
         return (
-
-            <div style={modalStyle}>
-                <Card style={{ backgroundColor: '#F5F5F5'}}>
-                    <CardContent>
-                        <Typography variant="h5" component="h2" style ={typographyStyle}>
-                            {this.state.results.name}
-                        </Typography>
-                        <Typography color="textSecondary" style ={typographyStyle}>
-                            {this.state.results.description}
-                        </Typography>
-                        <Typography component="p" style ={typographyStyle}>
-                            {this.state.results.project_start_date}
-                        </Typography>
-                    </CardContent>
-                </Card>
+          <div className="wrapper">
+                <div className="miniaturized-content">
+                    <h2>{this.state.results.name}</h2>
+                    <p>{this.state.results.description}</p>
+                </div>
+                {this.render_approve()}
+                {this.render_reject()}
             </div>
 
 
         );
     }
 
-
     componentDidMount() {
         let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id;
-
         fetch(urlData)
         .then(res => res.json())
         .then(res =>
@@ -74,10 +99,15 @@ class MiniProjectComponent extends Component {
             this.props.showError(err.toString())
         })
     }
+
+    navigate(page, id){
+        this.props.history.push(`${id}`)
+    }
 }
 
 const mapDispatchToProps = {
   showError,
+  showSuccess
 }
 
 export default connect(null,mapDispatchToProps)(MiniProjectComponent);
