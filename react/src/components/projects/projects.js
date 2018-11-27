@@ -86,7 +86,7 @@ class Projects extends Component {
               )
             }
             if(this.state.user.type === "company"){
-              res.filter((element)=> element.project.status !== "rejected").map(el =>
+              res.filter((element)=> element.project.status !== "other").map(el =>
                 approvedProjects.push(el.id)
               )
             }
