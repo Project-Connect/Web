@@ -17,7 +17,6 @@ class Projects extends Component {
         this.state={
             approvedIds:[],
             unapprovedIds:[],
-            search:"",
             user: JSON.parse(window.sessionStorage.getItem("current_user"))
         }
     }
@@ -36,7 +35,6 @@ class Projects extends Component {
                       <InputBase
                         placeholder="Search…"
                         className="input"
-                        onChange={(e)=>{this.setState({search:e.target.value})}}
                       />
                     </div>
                     <button className="add" onClick={()=>{this.props.history.push(`/${user}/newProject`)}}>
@@ -45,12 +43,12 @@ class Projects extends Component {
                 </div>
 
                 <div>
-                {this.state.unapprovedIds.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) =>
-                    <MiniProjectComponent key={el.id} id={el.id} user={this.state.user} history={this.props.history}/>
-                )}
-                {this.state.approvedIds.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) =>
-                      <MiniProjectComponent key={el.id} id={el.id} user={this.state.user} history={this.props.history}/>
-                )}
+                {this.state.unapprovedIds.map((id) => (
+                      <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
+                ))}
+                {this.state.approvedIds.map((id) => (
+                      <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
+                ))}
                 </div>
 
             </div>
@@ -62,7 +60,7 @@ class Projects extends Component {
     }
 
     async getData(){
-      let url=""
+        let url=""
         if(this.state.user.type === "instructor"){
           url="https://collab-project.herokuapp.com/api/projects"
         }else{
@@ -78,22 +76,20 @@ class Projects extends Component {
             let unapprovedProjects = []
             if(this.state.user.type === "instructor"){
               res.filter((element)=> element.status === "unapproved").map(el =>
-                  unapprovedProjects.push(el)
+                unapprovedProjects.push(el.id)
               )
             }
             let approvedProjects = []
             if(this.state.user.type !== "instructor"){
-              res.filter((element)=> element.status === "approved").map(el =>
-                  approvedProjects.push(el)
+              res.filter((element)=> element.project.status === "approved").map(el =>
+                approvedProjects.push(el.id)
               )
             }
-
             this.setState({unapprovedIds:unapprovedProjects, approvedIds: approvedProjects})
           }
         ).catch(err => {
           this.props.showError(err.toString())
         })
-        console.log(this.state.approvedIds)
     }
 }
 const mapDispatchToProps = {
