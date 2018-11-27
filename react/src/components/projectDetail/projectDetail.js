@@ -103,10 +103,10 @@ class ProjectDetail extends Component {
                     </Typography>
                     
                     <div className={"icon-button"}>
-                        <a href={github_link} >
+                        <a href={github_link}  title={github_link}>
                             {github_icon}
                        </a>
-                       <a href={website_link}>
+                       <a href={website_link} title={website_link}>
                         {website_icon}
                        </a>
                     </div>
