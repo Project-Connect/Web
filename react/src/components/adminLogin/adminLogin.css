@@ -1,4 +1,4 @@
-.login-button{
+.login-button1{
     background-color: #27DAAF; /* Green */
     border: none;
     color: white;
@@ -15,7 +15,7 @@
     margin-right:10px;
 }
 
-.header{
+.header1{
     text-align:center;
     min-height: 800px;
     padding: 20px;
