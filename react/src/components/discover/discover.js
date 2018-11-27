@@ -22,7 +22,7 @@ class Discover extends Component {
                 <div className="project-section">
                 {this.state.ids.map((id) => (
                     <button className="project" onClick={()=>this.props.history.push(`/project/${id}`)} key={id}>
-                        <MiniProjectComponent id={id}/>
+                        <MiniProjectComponent key={id} id={id} history={this.props.history}/>
                     </button>
                 ))}
                 </div>
@@ -41,8 +41,9 @@ class Discover extends Component {
         .then(res => res.json())
         .then(res =>
           {
+            console.log(res);
             let project_ids = []
-            res.map((element)=>project_ids.push(element.project_id))
+            res.map((element)=>project_ids.push(element.id))
             this.setState({ids:project_ids})
           }
         ).catch(err => {

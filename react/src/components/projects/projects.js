@@ -44,10 +44,10 @@ class Projects extends Component {
 
                 <div>
                 {this.state.unapprovedIds.map((id) => (
-                      <MiniProjectComponent key={id} id={id} user={this.state.user}/>
+                      <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
                 ))}
                 {this.state.approvedIds.map((id) => (
-                      <MiniProjectComponent key={id} id={id} user={this.state.user}/>
+                      <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
                 ))}
                 </div>
 
@@ -60,7 +60,12 @@ class Projects extends Component {
     }
 
     async getData(){
-        let url="https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user.id
+      let url=""
+        if(this.state.user.type === "instructor"){
+          url="https://collab-project.herokuapp.com/api/projects"
+        }else{
+          url="https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user.id
+        }
         fetch(url)
         .then((res) => res.json())
         .then((res) =>
@@ -68,17 +73,19 @@ class Projects extends Component {
             if(res.lengh === 0){
               return
             }
-
+            console.log(res);
             let unapprovedProjects = []
             if(this.state.user.type === "instructor"){
-              res.filter((element)=> element.project.status === "unapproved").map(el =>
-                unapprovedProjects.push(el.project_id)
+              res.filter((element)=> element.status === "unapproved").map(el =>
+                unapprovedProjects.push(el.id)
               )
             }
             let approvedProjects = []
-            res.filter((element)=> element.project.status === "approved").map(el =>
-              approvedProjects.push(el.project_id)
-            )
+            if(this.state.user.type !== "instructor"){
+              res.filter((element)=> element.status === "approved").map(el =>
+                approvedProjects.push(el.id)
+              )
+            }
 
             this.setState({unapprovedIds:unapprovedProjects, approvedIds: approvedProjects})
           }
