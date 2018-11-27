@@ -1,14 +1,15 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 var style = {
+
     backgroundColor: "#27DAAF",
     textAlign: "center",
     padding: "20px",
     left: "0",
     bottom: "0",
-    height: "120px",
+    height: "5%",
     width: "100%",
-    position:"relative",
+    position:"fixed",
 }
 
 var phantom = {
