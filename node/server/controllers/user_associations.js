@@ -163,5 +163,27 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  // list all users in a project
+  listSpecificUsers(req, res) {
+    return Associations
+      .findAll({
+        where: {
+          project_id: req.params.project,
+          status: req.params.status,
+        },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+        include: [{
+          model: Users,
+          as: 'user',
+          attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
+        }],
+        attributes: {exclude: ['createdAt', 'updatedAt', 'project_id'] }
+      })
+      .then((associations) => res.status(200).send(associations))
+      .catch((error) => res.status(400).send(error));
+  },
+
 
 };
