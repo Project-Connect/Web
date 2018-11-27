@@ -12,8 +12,8 @@ import './miniProjectComponent.css';
 
 class MiniProjectComponent extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             results: {
               id: null,
@@ -45,7 +45,7 @@ class MiniProjectComponent extends Component {
     }
 
     reject = () => {
-        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.state.results.id + "/rejected";
+        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id + "/rejected";
         fetch(urlData, {
             method: "POST",
             headers: {
@@ -74,7 +74,7 @@ class MiniProjectComponent extends Component {
 
         return (
           <div className="wrapper">
-                <div className="miniaturized-content">
+                <div className="miniaturized-content" onClick={() => {this.navigate(this.props.id)}}>
                     <h2>{this.state.results.name}</h2>
                     <p>{this.state.results.description}</p>
                 </div>
@@ -100,8 +100,8 @@ class MiniProjectComponent extends Component {
         })
     }
 
-    navigate(page, id){
-        this.props.history.push(`${id}`)
+    navigate(id){
+        this.props.history.push(`project/${id}`)
     }
 }
 
