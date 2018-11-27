@@ -118,7 +118,7 @@ class Navigation extends React.Component{
     }
 
     navigate(page){
-        this.props.history.push(`${page}`)
+        this.props.history.push('/' + JSON.parse(window.sessionStorage.current_user).username + `/${page}`)
     }
 }
 
