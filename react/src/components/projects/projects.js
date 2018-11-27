@@ -72,7 +72,6 @@ class Projects extends Component {
         .then((res) => res.json())
         .then((res) =>
           {
-            console.log(res)
             if(res.lengh === 0){
               return
             }
@@ -80,14 +79,12 @@ class Projects extends Component {
             if(this.state.user.type === "instructor"){
               res.filter((element)=> element.status === "unapproved").map(el =>
                   unapprovedProjects.push(el)
-                //unapprovedProjects.push(el.id)
               )
             }
             let approvedProjects = []
             if(this.state.user.type !== "instructor"){
               res.filter((element)=> element.status === "approved").map(el =>
                   approvedProjects.push(el)
-                //approvedProjects.push(el.id)
               )
             }
 
