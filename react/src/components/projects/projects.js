@@ -46,6 +46,9 @@ class Projects extends Component {
                     {this.state.unapprovedIds.map((id) => (
                           <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
                     ))}
+                    {this.state.approvedIds.map((id) => (
+                          <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
+                    ))}
                 </div>
 
             </div>
