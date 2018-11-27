@@ -45,3 +45,18 @@ The functionalities of an instructor include:
 #### Usability Study Details
 You will be assigned a role and be asked to carry out a series of tasks. Please speak aloud and let 
 us know if something happens that you did not expect to occur. Also, any comments, good and bad is welcome.
+
+#### Questions
+1. What do you think about the appearance of the login page?
+2. Do you think if you logged into this page for the first time you would understand the point of the application?
+3. Please login with you specified role? 
+
+#### Company
+1. Please create a new project
+2. Please review all your projects
+3. Please review your rejected projects
+4. Please review your pending projects
+5. Please review your approved projects
+6. Please let me know where the project is to be located
+7. Do you have any comments about the appearance?
+
