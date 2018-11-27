@@ -22,7 +22,6 @@ class Discover extends Component {
         return (
             <div>
               <h1>Projects</h1>
-
               <div className="buttonSurrounding">
                 <div className= "search">
                     <div className="search-icon">
@@ -34,9 +33,11 @@ class Discover extends Component {
                     />
                   </div>
               </div>
+              <div className="project-list">
                 {this.state.ids.map((id) => (
                       <MiniProjectComponent key={id} id={id} history={this.props.history}/>
                 ))}
+              </div>
             </div>
         );
     }

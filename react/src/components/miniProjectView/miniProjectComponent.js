@@ -81,8 +81,6 @@ class MiniProjectComponent extends Component {
                 {this.render_approve()}
                 {this.render_reject()}
             </div>
-
-
         );
     }
 

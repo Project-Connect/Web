@@ -29,6 +29,7 @@ h1{
     grid-template-columns: 20vw 40vw 10vw;
     background-color: #fff;
     color: #444;
+    margin-bottom: 2vh;
 }
 
 .search {
