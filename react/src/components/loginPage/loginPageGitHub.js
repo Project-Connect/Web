@@ -46,10 +46,13 @@ class LoginPageGitHub extends Component {
 
   async validateUser(data, type) {
     let newUser = ""
+    let route = ""
     if (type === "student") {
       newUser = "https://collab-project.herokuapp.com/api/user/createorfind/student"
+      route = `${data.alias}/users`
     } else if (type === "company") {
       newUser = "https://collab-project.herokuapp.com/api/user/createorfind/company"
+      route = `${data.alias}/projects`
     }
     await fetch(newUser, {
       method: "POST",
@@ -71,7 +74,7 @@ class LoginPageGitHub extends Component {
     const userToken = await fetch(token)
     const userTokenJason = await userToken.json()
     window.sessionStorage.setItem('current_user', JSON.stringify(userTokenJason[0]))
-    this.props.history.push(`${data.alias}/projects`)
+    this.props.history.push(route)
   }
 
   render() {
