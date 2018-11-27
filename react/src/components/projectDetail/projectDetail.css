@@ -32,3 +32,10 @@
 .map{
     max-width: 200px;
 }
+
+.icon-button {
+    /* float:right;
+    margin-right: -90px; */
+    margin-top: 25px;
+    transform: scale(1.3);
+}
