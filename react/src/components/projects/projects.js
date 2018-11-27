@@ -73,7 +73,6 @@ class Projects extends Component {
             if(res.lengh === 0){
               return
             }
-            console.log(res);
             let unapprovedProjects = []
             if(this.state.user.type === "instructor"){
               res.filter((element)=> element.status === "unapproved").map(el =>

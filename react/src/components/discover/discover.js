@@ -7,6 +7,8 @@ import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import './discover.css';
 import {showError} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 
 class Discover extends Component {
     constructor(props){
@@ -19,14 +21,22 @@ class Discover extends Component {
 
         return (
             <div>
-                <div className="project-section">
-                {this.state.ids.map((id) => (
-                    <button className="project" onClick={()=>this.props.history.push(`/project/${id}`)} key={id}>
-                        <MiniProjectComponent key={id} id={id} history={this.props.history}/>
-                    </button>
-                ))}
-                </div>
+              <h1>Projects</h1>
 
+              <div className="buttonSurrounding">
+                <div className= "search">
+                    <div className="search-icon">
+                      <SearchIcon />
+                    </div>
+                    <InputBase
+                      placeholder="Search…"
+                      className="input"
+                    />
+                  </div>
+              </div>
+                {this.state.ids.map((id) => (
+                      <MiniProjectComponent key={id} id={id} history={this.props.history}/>
+                ))}
             </div>
         );
     }
