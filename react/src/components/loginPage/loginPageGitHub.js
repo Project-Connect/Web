@@ -78,7 +78,7 @@ class LoginPageGitHub extends Component {
     return ( <
       div >
       <
-      div className = "header" >
+      div className = "header2" >
       <
       img src = {
         brain

@@ -53,13 +53,13 @@ class AdminLogin extends Component {
     render() {
         return (
             <div>
-                <div className="header">
+                <div className="header1">
                     <Typography variant="h2" color="inherit">
                         Admin Login
                     </Typography>
 
                     <button onClick={this.handleClick.bind(this)}
-                    className="login-button"
+                    className="login-button1"
                     color="primary">
                         Login for Admin
                     </button>

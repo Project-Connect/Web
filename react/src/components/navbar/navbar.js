@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router';
+import "./navbar.css";
 
 class Navigation extends React.Component{
     constructor(props){
