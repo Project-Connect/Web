@@ -66,4 +66,6 @@ module.exports = (app) => {
   app.post('/api/user_associations/update/:status', userAssociationsController.updateStatus);
   // update the status depending on instr give approved/rejected
   app.post('/api/user_associations/instr/update/:status', userAssociationsController.instructorUpdateStatus);
+  // list users associations for a project with a specificed updateStatus
+  app.get('/api/user_associations/project/:project/:status', userAssociationsController.listSpecificUsers);
 };
