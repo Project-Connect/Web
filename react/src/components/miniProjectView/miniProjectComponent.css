@@ -7,7 +7,7 @@ body {
     color: #303030;
     margin: 20px;
   }
-  
+
 ol, ul {
     padding-left: 30px;
   }
@@ -19,3 +19,28 @@ ol, ul {
 .txtDesc {
       resize:none;
   }
+.wrapper {
+    outline-width: thin;
+    outline-color: black;
+    outline-offset: initial;
+    outline-style: dashed;
+    padding: 2vh;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 60vw 10vw 10vw;
+    background-color: #fff;
+    color: #444;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top:2vh;
+}
+
+.buttons{
+  max-width: 7vw;
+  max-height: 4vh;
+}
+
+.miniaturized-content {
+    grid-column: 1;
+    grid-row: 1;
+}
