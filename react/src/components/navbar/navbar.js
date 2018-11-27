@@ -25,7 +25,7 @@ class Navigation extends React.Component{
     renderBar(){
         if ((this.props.location.pathname ==="/") || (this.props.location.pathname ==="/secretAdminLogin")){
             return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
                   <Toolbar>
 
                     <Typography variant="h6" color="inherit">
@@ -40,7 +40,7 @@ class Navigation extends React.Component{
         console.log(type);
         if (type==="student"){
             return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
                   <Toolbar>
 
                     <Typography variant="h6" color="inherit">
@@ -60,7 +60,7 @@ class Navigation extends React.Component{
             )
         }else if (type==="company"){
             return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
                   <Toolbar>
 
                     <Typography variant="h6" color="inherit">
@@ -80,7 +80,7 @@ class Navigation extends React.Component{
             )
         }else if (type==="instructor"){
             return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
                   <Toolbar>
 
                     <Typography variant="h6" color="inherit">
@@ -104,7 +104,7 @@ class Navigation extends React.Component{
             );
         }else{
             return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#27DAAF' }}>
+                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
                   <Toolbar>
 
                     <Typography variant="h6" color="inherit">
