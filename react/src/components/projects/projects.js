@@ -71,14 +71,19 @@ class Projects extends Component {
               return
             }
             let unapprovedProjects = []
-            if(this.state.user.type === "instructor"){
+            if(this.state.user.type === "instructor" ){
               res.filter((element)=> element.status === "unapproved").map(el =>
                 unapprovedProjects.push(el.id)
               )
             }
             let approvedProjects = []
-            if(this.state.user.type !== "instructor"){
+            if(this.state.user.type === "student"){
               res.filter((element)=> element.project.status === "approved").map(el =>
+                approvedProjects.push(el.id)
+              )
+            }
+            if(this.state.user.type === "company"){
+              res.filter((element)=> element.project.status !== "other").map(el =>
                 approvedProjects.push(el.id)
               )
             }

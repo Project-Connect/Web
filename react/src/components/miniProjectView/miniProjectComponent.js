@@ -61,12 +61,14 @@ class MiniProjectComponent extends Component {
         })
     }
     render_approve = () => {
-      if(this.state.results.status === "unapproved"){
+      if(this.state.results.status === "unapproved" &&  this.props.user.type === "instructor"){
         return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
+      } else {
+        return <p className="buttons" variant="contained" color="primary"> Status: {this.state.results.status}</p>
       }
     }
     render_reject = () => {
-      if(this.state.results.status === "unapproved"){
+      if(this.state.results.status === "unapproved" &&  this.props.user.type === "instructor"){
         return <Button className="buttons" variant="contained" onClick = {() => {this.reject()}}>Reject</Button>
       }
     }
