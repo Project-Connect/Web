@@ -9,6 +9,7 @@ var brain = require("../../assets/brain.png");
 //https://pixabay.com/en/brain-anatomy-abstract-art-2146817/ credits for photo
 var merge = require("../../assets/merge.png");
 // https://commons.wikimedia.org/wiki/File:Octicons-git-pull-request.svg
+var logo = require("../../assets/logo.jpg");
 
 class LoginPageGitHub extends Component {
 
@@ -82,11 +83,9 @@ class LoginPageGitHub extends Component {
       div >
       <
       div className = "header2" >
-      <
-      img src = {
-        brain
-      }
-      alt = "" / >
+
+
+        <img src={logo} alt=""/>
 
       <
       Typography variant = "h2"
@@ -159,7 +158,11 @@ class LoginPageGitHub extends Component {
       div className = "description" >
       <
       div className = "description-2" >
-
+          <
+              img src = {
+              brain
+          }
+                  alt = "" / >
       <
       Typography variant = "h4"
       color = "inherit"
