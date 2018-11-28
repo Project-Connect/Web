@@ -30,7 +30,7 @@ class ProjectDetail extends Component {
 
     }
     apply = () => {
-      let url = "https://collab-project.herokuapp.com//api/user_associations/add";
+      let url = "https://collab-project.herokuapp.com/api/user_associations/add";
       let data = {
           user_id: this.state.user_id,
           project_id: this.state.projData.id,
@@ -179,7 +179,7 @@ class ProjectDetail extends Component {
 
     approve = (user_id) => {
         let user = this.state.type === "instructor" ? "instr/" : "";
-        let urlData = `https://collab-project.herokuapp.com//api/user_associations/${user}update/approved`;
+        let urlData = `https://collab-project.herokuapp.com/api/user_associations/${user}update/approved`;
         let body = {
           instructor_id: this.state.user_id,
           user_id: user_id,
@@ -206,7 +206,7 @@ class ProjectDetail extends Component {
     reject = (user_id) => {
         console.log("clicked");
         let user = this.state.type === "instructor" ? "instr/" : "";
-        let urlData = `https://collab-project.herokuapp.com//api/user_associations/${user}update/rejected`;
+        let urlData = `https://collab-project.herokuapp.com/api/user_associations/${user}update/rejected`;
         let body = {
           instructor_id: this.state.user_id,
           user_id: user_id,
