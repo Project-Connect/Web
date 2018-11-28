@@ -1,8 +1,5 @@
 .project-details{
     text-align: center;
-    margin:auto;
-    width:600px;
-    float: right;
     border-left:1px solid black;
 }
 
@@ -17,14 +14,12 @@
 
 .project-owner{
     text-align: center;
-    margin:auto;
-    width:300px;
-    float:left;
 }
 
 .surrounding{
-    width: 1000px;
-    margin: 0 auto;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 60vw 40vw;
     margin-top: 100px;
     min-height:400px;
 }
