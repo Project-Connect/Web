@@ -231,9 +231,9 @@ class ProjectDetail extends Component {
     }
 
     componentDidMount(){
-        let urlProjectData = "https://collab-project.herokuapp.com//api/project/"  + this.props.match.params.project_id;
+        let urlProjectData = "https://collab-project.herokuapp.com/api/project/"  + this.props.match.params.project_id;
         let role = JSON.parse(window.sessionStorage.current_user).type === "instructor" ? "" : "/approved"
-        let urlUsersData = "https://collab-project.herokuapp.com//api/user_associations/project/" + this.props.match.params.project_id + role;
+        let urlUsersData = "https://collab-project.herokuapp.com/api/user_associations/project/" + this.props.match.params.project_id + role;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>
@@ -251,7 +251,8 @@ class ProjectDetail extends Component {
         .then(res =>
             this.setState({
                 usersData: res
-        }))
+            })
+      )
         .catch(err => {
           this.props.showError(err.toString())
         })
