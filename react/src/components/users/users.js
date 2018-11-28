@@ -30,6 +30,7 @@ class Users extends Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     render() {
+        let user = this.props.match.params.user
 
         return (
             <div>
@@ -43,8 +44,10 @@ class Users extends Component {
 
                 <h1> User Information. </h1>
 
+
                 <div className="buttonSurrounding">
-                    <button className="add" onClick={this.handleOpenModal}>
+
+                     <button className="add" onClick={()=>{this.props.history.push(`/${user}/userEdit`)}}>
                         Edit
                     </button>
                 </div>

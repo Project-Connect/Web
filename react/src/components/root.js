@@ -24,6 +24,8 @@ import Footer from "./footer/footer";
 import Navigation from "./navbar/navbar";
 import AdminLogin from "./adminLogin/adminLogin";
 
+import UserEditView from "./userEditView/userEditView";
+
 // Just add your component onto a path below
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -35,6 +37,7 @@ const Root = ({ store }) => (
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
         <Route exact path={"/:user/users/"} component={Users}/>
         <Route exact path="/:user/newProject" component={NewProject}/>
+        <Route exact path="/:user/userEdit" component={UserEditView}/>
         <Route exact path="/" component={loginPageGitHub}/>
         <Route exact path="/:user/projects" component={Projects}/>
         <Route path={"/:user/project/:project_id"} component={ProjectDetail}/>
