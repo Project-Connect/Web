@@ -16,8 +16,9 @@ class Projects extends Component {
     constructor(props){
         super(props);
         this.state={
-            projectIDs:[],
-            user: JSON.parse(window.sessionStorage.getItem("current_user"))
+            projects:[],
+            user: JSON.parse(window.sessionStorage.getItem("current_user")),
+            search:""
         }
         this.renderProjects = this.renderProjects.bind(this)
     }
@@ -36,6 +37,7 @@ class Projects extends Component {
                       <InputBase
                         placeholder="Search…"
                         className="input"
+                        onChange={(e)=>{this.setState({search:e.target.value}, ()=>console.log(this.state.search))}}
                       />
                     </div>
                     <button className="add" onClick={()=>{this.props.history.push(`/${user}/newProject`)}}>
@@ -58,11 +60,11 @@ class Projects extends Component {
     renderProjects = () => {
         let projects;
         let default_description = "You don't have any projects right now"
-        if (this.state.projectIDs.length === 0){
+        if (this.state.projects.length === 0){
             projects = <Filler description={default_description}/>
         }else{
-            projects = this.state.projectIDs.map((id) => (
-              <MiniProjectComponent key={id} id={id} history={this.props.history}/>
+            projects = this.state.projects.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
+              <MiniProjectComponent key={el.id} id={el.id} history={this.props.history}/>
             ))
         }
         return projects
@@ -87,14 +89,14 @@ class Projects extends Component {
             //TODO: this page should be refactored for the instructor view
             if(this.state.user.type === "instructor" ){
               res.filter((element)=> element.status === "unapproved").map(el =>
-                projects.push(el.id)
+                projects.push(el)
               )
             } else {
               res.map(el =>
-                  projects.push(el.project.id)
+                  projects.push(el.project)
               )
             }
-            this.setState({projectIDs: projects})
+            this.setState({projects: projects})
           }
         ).catch(err => {
           this.props.showError(err.toString())

@@ -15,7 +15,8 @@ class Discover extends Component {
     constructor(props){
         super(props);
         this.state={
-            ids:[]
+            projects:[],
+            search:""
         }
         this.renderProjects = this.renderProjects.bind(this)
     }
@@ -31,6 +32,7 @@ class Discover extends Component {
                     <InputBase
                       placeholder="Search…"
                       className="input"
+                      onChange={(e)=>{this.setState({search:e.target.value})}}
                     />
                   </div>
               </div>
@@ -48,11 +50,11 @@ class Discover extends Component {
     renderProjects = () => {
         let projects;
         let default_description = "No Projects available"
-        if (this.state.ids.length === 0){
+        if (this.state.projects.length === 0){
             projects = <Filler description={default_description}/>
         }else{
-            projects = this.state.ids.map((id) => (
-              <MiniProjectComponent key={id} id={id} history={this.props.history}/>
+            projects = this.state.projects.filter((element)=>element.name.toLowerCase().includes(this.state.search.toLowerCase())).map((element) => (
+              <MiniProjectComponent key={element.id} id={element.id} history={this.props.history}/>
             ))
         }
         return projects
@@ -64,9 +66,9 @@ class Discover extends Component {
         .then(res => res.json())
         .then(res =>
           {
-            let project_ids = []
-            res.map((element)=>project_ids.push(element.id))
-            this.setState({ids:project_ids})
+            let projects = []
+            res.map((element)=>projects.push(element))
+            this.setState({projects:projects})
           }
         ).catch(err => {
           this.props.showError(err.toString())
