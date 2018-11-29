@@ -57,14 +57,19 @@ class ProjectDetail extends Component {
       let projectAssociation = this.state.usersData.find(function(element) {
         return element.user.id === that.state.user_id;
       });
-
+      console.log(projectAssociation);
       if(projectAssociation){
           if (projectAssociation.is_admin) {
               return "Admin"
           }
           return projectAssociation.status
       }else{
-          return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
+            console.log(this.state.type);
+            if (this.state.type==="student"){
+                return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
+            }else{
+                return this.state.type
+            }
       }
     }
 
