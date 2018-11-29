@@ -38,18 +38,39 @@ describe('Testing GET requests', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('Should return single user info', async () => {
-        const response = await request(app).get('/api/users/1');
+    test('Should return all user associations for a project', async () => {
+        const response = await request(app).get('/api/user_associations/project/3')
         expect(response.body.length).toBeGreaterThan(1);
         expect(response.body[0]).toMatchObject(
             {
-                name: expect.any(String),
-                bio: expect.any(String),
-                email: expect.any(String),
-                photo: expect.any(String),
-                linked_in: expect.any(String),
-                type: expect.any(String),
-                github: expect.any(String),
+                id: expect.any(Number),
+                status: expect.any(String),
+                user_id: expect.any(Number)
+            }
+        )
+        expect(response.statusCode).toBe(200);
+    });
+
+    test('Should return all user associations for a project based on status', async () => {
+        const response = await request(app).get('/api/user_associations/project/3/approved')
+        expect(response.body.length).toBeGreaterThan(1);
+        expect(response.body[0]).toMatchObject(
+            {
+                id: expect.any(Number),
+                status: expect.any(String),
+                user_id: expect.any(Number)
+            }
+        )
+        expect(response.statusCode).toBe(200);
+    });
+
+    test('Should return all user associations for a user', async () => {
+        const response = await request(app).get('/api/user_associations/user/8')
+        expect(response.body.length).toBeGreaterThan(0);
+        expect(response.body[0]).toMatchObject(
+            {
+                id: expect.any(Number),
+                status: expect.any(String),
             }
         )
         expect(response.statusCode).toBe(200);
@@ -71,48 +92,5 @@ describe('Testing POST requests', () => {
                                                     github: 'req.body.github' })
         expect(response.statusCode).toBe(200);
     });
-
-    test('Should create or find new user', async () => {
-        const response = await request(app).post('/api/user/createorfind/student')
-                                            .send({ name: 'req.body.name',
-                                                    username: 'req.body.username',
-                                                    bio: 'req.body.bio',
-                                                    password: 'req.body.password',
-                                                    email: 'req.body.email',
-                                                    photo: 'req.body.photo',
-                                                    linked_in: 'req.body.linked_in',
-                                                    github: 'req.body.github' })
-        expect(response.statusCode).toBe(200);
-    });
-
-    test('Should update a single user', async () => {
-        const response = await request(app).post('/api/user/update')
-                                            .send({ id: 'req.body.id',
-                                                    name: 'req.body.name',
-                                                    bio: 'req.body.bio',
-                                                    email: 'req.body.email',
-                                                    photo: 'req.body.photo',
-                                                    linked_in: 'req.body.linked_in',
-                                                    type: 'req.body.type'
-                                                    github: 'req.body.github' })
-        expect(response.body.length).toBeGreaterThan(1);
-        expect(response.body[0]).toMatchObject(
-            {
-                name: expect.any(String),
-                bio: expect.any(String),
-                email: expect.any(String),
-                photo: expect.any(String),
-                linked_in: expect.any(String),
-                type: expect.any(String),
-                github: expect.any(String),
-            }
-        )
-        expect(response.statusCode).toBe(200);
-    });
-    
-    }
-
-
-
 
 })
