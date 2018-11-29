@@ -9,6 +9,7 @@ import {showError} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import Filler from '../filler/filler'
 
 class Discover extends Component {
     constructor(props){
@@ -16,9 +17,9 @@ class Discover extends Component {
         this.state={
             ids:[]
         }
+        this.renderProjects = this.renderProjects.bind(this)
     }
     render() {
-
         return (
             <div>
               <h1>Projects</h1>
@@ -34,9 +35,7 @@ class Discover extends Component {
                   </div>
               </div>
               <div className="project-list">
-                {this.state.ids.map((id) => (
-                      <MiniProjectComponent key={id} id={id} history={this.props.history}/>
-                ))}
+                  {this.renderProjects()}
               </div>
             </div>
         );
@@ -46,13 +45,25 @@ class Discover extends Component {
         this.getData();
     }
 
+    renderProjects = () => {
+        let projects;
+        let default_description = "No Projects available"
+        if (this.state.ids.length === 0){
+            projects = <Filler description={default_description}/>
+        }else{
+            projects = this.state.ids.map((id) => (
+              <MiniProjectComponent key={id} id={id} history={this.props.history}/>
+            ))
+        }
+        return projects
+    }
+
     async getData(){
         let url="https://collab-project.herokuapp.com/api/user_associations/user/"+ JSON.parse(window.sessionStorage.current_user).id + "/not"
         fetch(url)
         .then(res => res.json())
         .then(res =>
           {
-            console.log(res);
             let project_ids = []
             res.map((element)=>project_ids.push(element.id))
             this.setState({ids:project_ids})

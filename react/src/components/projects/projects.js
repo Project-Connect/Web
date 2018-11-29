@@ -10,15 +10,16 @@ import {showError} from "../../actions/globalPopupAction";
 import './projects.css';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import Filler from '../filler/filler'
 
 class Projects extends Component {
     constructor(props){
         super(props);
         this.state={
-            approvedIds:[],
-            unapprovedIds:[],
+            projectIDs:[],
             user: JSON.parse(window.sessionStorage.getItem("current_user"))
         }
+        this.renderProjects = this.renderProjects.bind(this)
     }
 
     render() {
@@ -43,12 +44,7 @@ class Projects extends Component {
                 </div>
 
                 <div className="project-list">
-                    {this.state.unapprovedIds.map((id) => (
-                          <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
-                    ))}
-                    {this.state.approvedIds.map((id) => (
-                          <MiniProjectComponent key={id} id={id} user={this.state.user} history={this.props.history}/>
-                    ))}
+                    {this.renderProjects()}
                 </div>
 
             </div>
@@ -59,6 +55,18 @@ class Projects extends Component {
         this.getData();
     }
 
+    renderProjects = () => {
+        let projects;
+        let default_description = "You don't have any projects right now"
+        if (this.state.projectIDs.length === 0){
+            projects = <Filler description={default_description}/>
+        }else{
+            projects = this.state.projectIDs.map((id) => (
+              <MiniProjectComponent key={id} id={id} history={this.props.history}/>
+            ))
+        }
+        return projects
+    }
     async getData(){
         let url=""
         if(this.state.user.type === "instructor"){
@@ -73,24 +81,20 @@ class Projects extends Component {
             if(res.lengh === 0){
               return
             }
-            let unapprovedProjects = []
+            let projects = []
+            //This page for instructor is to approve unapproved Projects
+            //While for student or company, it is for them to see their projects status
+            //TODO: this page should be refactored for the instructor view
             if(this.state.user.type === "instructor" ){
               res.filter((element)=> element.status === "unapproved").map(el =>
-                unapprovedProjects.push(el.id)
+                projects.push(el.id)
+              )
+            } else {
+              res.map(el =>
+                  projects.push(el.project.id)
               )
             }
-            let approvedProjects = []
-            if(this.state.user.type === "student"){
-              res.filter((element)=> element.project.status === "approved").map(el =>
-                approvedProjects.push(el.id)
-              )
-            }
-            if(this.state.user.type === "company"){
-              res.filter((element)=> element.project.status !== "other").map(el =>
-                approvedProjects.push(el.id)
-              )
-            }
-            this.setState({unapprovedIds:unapprovedProjects, approvedIds: approvedProjects})
+            this.setState({projectIDs: projects})
           }
         ).catch(err => {
           this.props.showError(err.toString())
