@@ -94,8 +94,24 @@ For example, "we use pull-requests" is not a precise statement since it leaves t
  * Order the items from most to least important.
  * Feel free (but not obligated) to specify some/all tasks as user stories.
  
- * After discussing with David, we are changing our plan for this deliverable and purely focusing on making our project to be used by him for next semester's CSC301 class
- 
+ * Our goal for D3 has changed quite a bit from before, after discussing with David, we are changing our plan for this deliverable and purely focusing on making our project to be used by him for next semester's CSC301 class. Although it will be more work we figure it is worth building something that actually could be useful and that building for something like this forces us to make more realistic and scalable design choices.
+    * This is quite a major shift for us, as of now we see the differences being: 
+        * we now need three different logins (for students, organizations and instructors) as apposed the singular one from before
+        * previously projects had no state, when a project was added it was just present in the database, now projects have additional states, they are either pending approval, approved or unapproved
+        * we must create an instructor view which is able to:
+            * view all projects, pending, approved and unapproved 
+            * approve or disapprove the pending projects
+            * view student applications to projects 
+            * search projects and students
+            * view which students have enrolled with the service
+        * the new organizational view will feature:
+            * a sign up link which David could send to organizations so they can easily enroll and build their projects and profile
+            * companies should be able to view existing projects and their approval status
+            * 
+        * finally, the student view will: 
+            * allow students to see and search approved projects    
+            * edit their profile
+        
   - General
      1) Set up hosting
  
@@ -123,11 +139,10 @@ List/describe the artifacts you will produce in order to present your project id
 
   - Code:
     - All of our code will be on GitHub in our team repository, instructions to run it will be in the README files
-  - Website: 
-    - We will host our product on AWS so it can be used
+  - Usable program:
+    - Our site can easily be run and the database is hosted to access our program all that is needed it to clone the repository and npm start in the react folder, you can then login with your github account to see everything 
   - Interactive mock-ups:
-    - We have created a new mock-ups for this deliverable to accomdate the new changes, it is available here. 
-    ### TODO INSERT IT HERE
+    - We have created a new mock-ups for this deliverable to accommodate the new changes 
     (This is includes numerous changes from our original: https://xd.adobe.com/view/32527a67-5e67-4048-6f9a-01cbefa7bc59-4463/?fullscreen)
   - Video:
     - We will give a demonstration of what we have accomplished in a short video at the end of D3
