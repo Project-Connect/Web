@@ -16,7 +16,8 @@ class UserEditView extends React.Component{
             user_email: "",
             user_photo: "",
             linked_in: "",
-            github: ""
+            github: "",
+            username: ""
         }
         this.navigate = this.navigate.bind(this);
     }
@@ -35,20 +36,20 @@ class UserEditView extends React.Component{
     parseData(data){
         this.setState({
             user_id:data.id,
-            user_name:data.name,
+            username:data.username,
             user_bio:data.bio,
             user_email:data.email,
             user_photo:data.photo,
             linked_in:data.linked_in,
-            github:data.github
+            github:data.github,
+            user_name:data.name
         })
     }
 
 
     submit(){
 
-        if (this.state.user_name === "" || this.state.user_name === "" || 
-        this.state.github === null || this.state.github === "") {
+        if (this.state.user_name === "" || this.state.user_name === "") {
             this.props.showError("Please fill in input field(s)")
         } 
         else {
@@ -62,6 +63,7 @@ class UserEditView extends React.Component{
                                 "photo": this.state.user_photo,
                                 "linked_in": this.state.linked_in,
                     "github": this.state.github,
+                    "username": this.state.username
                 })
             }).then(res => res.json())
                 .then(
@@ -138,7 +140,6 @@ class UserEditView extends React.Component{
                 fullWidth/>
 
                 <TextField
-                required
                 label="GitHub account"
                 value={this.state.github}
                 onChange={(event)=>{this.setState({github:event.target.value})}}
