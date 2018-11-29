@@ -47,9 +47,11 @@ class UserEditView extends React.Component{
 
     submit(){
 
-        if (this.state.user_id === "" || this.state.user_name === "" || this.state.github === "") {
+        if (this.state.user_name === "" || this.state.user_name === "" || 
+        this.state.github === null || this.state.github === "") {
             this.props.showError("Please fill in input field(s)")
-        } else {
+        } 
+        else {
             fetch('https://localhost:8000/api/user/update', {
                 method: "POST",
                 body: JSON.stringify({
@@ -98,14 +100,6 @@ class UserEditView extends React.Component{
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg>
                     </IconButton>
                 </div>
-
-                <TextField
-                required
-                label="User ID"
-                placeholder="User ID"
-                value={this.state.user_id}
-                onChange={(event)=>{this.setState({user_id:event.target.value})}}
-                fullWidth/>
 
                 <TextField
                 required
