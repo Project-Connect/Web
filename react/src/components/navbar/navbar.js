@@ -52,6 +52,10 @@ class Navigation extends React.Component{
                     </Typography>
 
                     <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
+                    </Typography>
+
+                    <Typography variant="h6" color="inherit">
                       <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
                     </Typography>
 
