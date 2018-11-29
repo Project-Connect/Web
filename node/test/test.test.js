@@ -10,7 +10,7 @@ describe('Testing GET requests', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('It should return list of all users', async () => {
+    test('Should return list of all users', async () => {
         const response = await request(app).get('/api/users');
         expect(response.body.length).toBeGreaterThan(1);
         expect(response.body[0]).toMatchObject(
@@ -24,7 +24,7 @@ describe('Testing GET requests', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('It should return list of all projects', async () => {
+    test('Should return list of all projects', async () => {
         const response = await request(app).get('/api/projects');
         expect(response.body.length).toBeGreaterThan(1);
         expect(response.body[0]).toMatchObject(
@@ -41,7 +41,21 @@ describe('Testing GET requests', () => {
 
 describe('Testing POST requests', () => {
     beforeAll(() => { models.sequelize.sync().then(()=>{ models.sequelize.close(); }) });
-    test('should add user to database', async () => {
+
+    test('Should add user to database', async () => {
+        const response = await request(app).post('/api/users/student')
+                                            .send({ name: 'req.body.name',
+                                                    username: 'req.body.username',
+                                                    bio: 'req.body.bio',
+                                                    password: 'req.body.password',
+                                                    email: 'req.body.email',
+                                                    photo: 'req.body.photo',
+                                                    linked_in: 'req.body.linked_in',
+                                                    github: 'req.body.github' })
+        expect(response.statusCode).toBe(200);
+    });
+
+    test('should create or find new user', async () => {
         const response = await request(app).post('/api/users/student')
                                             .send({ name: 'req.body.name',
                                                     username: 'req.body.username',
