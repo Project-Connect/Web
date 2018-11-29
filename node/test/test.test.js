@@ -56,7 +56,7 @@ describe('Testing POST requests', () => {
     });
 
     test('should create or find new user', async () => {
-        const response = await request(app).post('/api/users/student')
+        const response = await request(app).post('/api/user/createorfind/student')
                                             .send({ name: 'req.body.name',
                                                     username: 'req.body.username',
                                                     bio: 'req.body.bio',
