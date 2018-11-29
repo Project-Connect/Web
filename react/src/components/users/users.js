@@ -13,6 +13,7 @@ import "./users.css";
 import {showError} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
 
+var profile = require("../../assets/profile_1.png");
 class Users extends Component {
     constructor(props){
         super(props);
@@ -50,6 +51,10 @@ class Users extends Component {
                      <button className="add" onClick={()=>{this.props.history.push(`/${user}/userEdit`)}}>
                         Edit
                     </button>
+                </div>
+
+                <div className = "description-2">
+                    <img width={200} src = {profile} alt = "" />
                 </div>
 
                 <div className="user-data">
