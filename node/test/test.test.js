@@ -37,6 +37,23 @@ describe('Testing GET requests', () => {
         )
         expect(response.statusCode).toBe(200);
     });
+
+    test('Should return single user info', async () => {
+        const response = await request(app).get('/api/users/1');
+        expect(response.body.length).toBeGreaterThan(1);
+        expect(response.body[0]).toMatchObject(
+            {
+                name: expect.any(String),
+                bio: expect.any(String),
+                email: expect.any(String),
+                photo: expect.any(String),
+                linked_in: expect.any(String),
+                type: expect.any(String),
+                github: expect.any(String),
+            }
+        )
+        expect(response.statusCode).toBe(200);
+    });
 })
 
 describe('Testing POST requests', () => {
@@ -78,6 +95,18 @@ describe('Testing POST requests', () => {
                                                     linked_in: 'req.body.linked_in',
                                                     type: 'req.body.type'
                                                     github: 'req.body.github' })
+        expect(response.body.length).toBeGreaterThan(1);
+        expect(response.body[0]).toMatchObject(
+            {
+                name: expect.any(String),
+                bio: expect.any(String),
+                email: expect.any(String),
+                photo: expect.any(String),
+                linked_in: expect.any(String),
+                type: expect.any(String),
+                github: expect.any(String),
+            }
+        )
         expect(response.statusCode).toBe(200);
     });
     
