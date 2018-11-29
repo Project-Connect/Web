@@ -10,7 +10,7 @@ describe('Testing GET requests', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('It should return list of all users', async () => {
+    test('Should return list of all users', async () => {
         const response = await request(app).get('/api/users');
         expect(response.body.length).toBeGreaterThan(1);
         expect(response.body[0]).toMatchObject(
@@ -24,7 +24,7 @@ describe('Testing GET requests', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('It should return list of all projects', async () => {
+    test('Should return list of all projects', async () => {
         const response = await request(app).get('/api/projects');
         expect(response.body.length).toBeGreaterThan(1);
         expect(response.body[0]).toMatchObject(
@@ -37,20 +37,30 @@ describe('Testing GET requests', () => {
         )
         expect(response.statusCode).toBe(200);
     });
-})
 
-describe('Testing POST requests', () => {
-    beforeAll(() => { models.sequelize.sync().then(()=>{ models.sequelize.close(); }) });
-    test('should add user to database', async () => {
-        const response = await request(app).post('/api/users/student')
-                                            .send({ name: 'req.body.name',
-                                                    username: 'req.body.username',
-                                                    bio: 'req.body.bio',
-                                                    password: 'req.body.password',
-                                                    email: 'req.body.email',
-                                                    photo: 'req.body.photo',
-                                                    linked_in: 'req.body.linked_in',
-                                                    github: 'req.body.github' })
+    test('Should return all user associations for a project', async () => {
+        const response = await request(app).get('/api/user_associations/project/3')
+        expect(response.body.length).toBeGreaterThan(1);
+        expect(response.body[0]).toMatchObject(
+            {
+                id: expect.any(Number),
+                status: expect.any(String),
+                user_id: expect.any(Number)
+            }
+        )
+        expect(response.statusCode).toBe(200);
+    });
+
+    test('Should return all user associations for a project based on status', async () => {
+        const response = await request(app).get('/api/user_associations/project/3/approved')
+        expect(response.body.length).toBeGreaterThan(1);
+        expect(response.body[0]).toMatchObject(
+            {
+                id: expect.any(Number),
+                status: expect.any(String),
+                user_id: expect.any(Number)
+            }
+        )
         expect(response.statusCode).toBe(200);
     });
 })
