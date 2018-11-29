@@ -5,9 +5,33 @@ It contains info of the project's title, description, and stacks.
 import React, { Component } from "react";
 import {showError,showSuccess} from "../../actions/globalPopupAction";
 import { connect } from "react-redux";
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 import './miniProjectComponent.css';
+
+const styles = {
+  card: {
+    minWidth: 275,
+    background: '#2196f3',
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+
+  title: {
+    fontSize: 30,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  cardAction:{
+  }
+};
 
 
 class MiniProjectComponent extends Component {
@@ -64,25 +88,39 @@ class MiniProjectComponent extends Component {
       if(this.state.results.status === "unapproved" &&  this.props.user.type === "instructor"){
         return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
       } else {
-        return <p className="buttons" variant="contained" color="primary"> Status: {this.state.results.status}</p>
+        return <Typography component="p"> Status: {this.state.results.status}</Typography>
       }
     }
     render_reject = () => {
       if(this.state.results.status === "unapproved" &&  this.props.user.type === "instructor"){
-        return <Button className="buttons" variant="contained" onClick = {() => {this.reject()}}>Reject</Button>
+        return <Button className="buttons" variant="contained" color="secondary" onClick = {() => {this.reject()}}>Reject</Button>
       }
     }
     render() {
-
+        const{classes} = this.props
         return (
-          <div className="wrapper">
-                <div className="miniaturized-content" onClick={() => {this.navigate(this.props.id)}}>
-                    <h2>{this.state.results.name}</h2>
-                    <p>{this.state.results.description}</p>
-                </div>
-                {this.render_approve()}
-                {this.render_reject()}
-            </div>
+          <Card className={classes.card} >
+           <Grid container spacing={16}>
+           <Grid item xs={6}>
+            <CardContent>
+              <Typography className={classes.title}  gutterBottom>
+                {this.state.results.name}
+              </Typography>
+              <Typography component="p">
+                {this.state.results.description}
+              </Typography>
+            </CardContent>
+            </Grid>
+            <Grid item xs={6} container justify="flex-end" alignContent="flex-end">
+            <CardActions className={classes.cardAction} >
+            {this.render_approve()}
+            {this.render_reject()}
+              <Button variant="contained" onClick={() => {this.navigate(this.props.id)}}>Learn More</Button>
+            </CardActions>
+            </Grid>
+            </Grid>
+          </Card>
+
         );
     }
 
@@ -110,4 +148,4 @@ const mapDispatchToProps = {
   showSuccess
 }
 
-export default connect(null,mapDispatchToProps)(MiniProjectComponent);
+export default connect(null,mapDispatchToProps)(withStyles(styles)(MiniProjectComponent));
