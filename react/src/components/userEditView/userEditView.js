@@ -50,17 +50,6 @@ class UserEditView extends React.Component{
 
 
     submit(){
-        console.log("Zz" + JSON.stringify({
-            "id": this.state.user_id,
-"name": this.state.user_name,
-"bio": this.state.user_bio,
-"email": this.state.user_email,
-"photo": this.state.user_photo,
-"linked_in": this.state.linked_in,
-"github": this.state.github,
-"username": this.state.username,
-"type": this.state.type
-}))
         if (this.state.user_name === "" || this.state.user_name === null) {
             this.props.showError("Please fill in input field(s)")
         } 
@@ -97,7 +86,6 @@ class UserEditView extends React.Component{
 
     clear() {
         this.setState({
-            user_id: "",
             user_name: "",
             user_bio: "",
             user_email: "",
