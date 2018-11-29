@@ -36,23 +36,23 @@ class UserEditView extends React.Component{
 
     parseData(data){
         this.setState({
-            user_id:data.id,
-            username:data.username,
-            user_bio:data.bio,
-            user_email:data.email,
-            user_photo:data.photo,
-            linked_in:data.linked_in,
-            github:data.github,
-            user_name:data.name, 
-            type:data.type
+            user_id:data.id || "",
+            username:data.username || "",
+            user_bio:data.bio || "" ,
+            user_email:data.email || "",
+            user_photo:data.photo || "",
+            linked_in:data.linked_in || "",
+            github:data.github || "",
+            user_name:data.name || "",
+            type:data.type || ""
         })
     }
 
 
     submit(){
-        if (this.state.user_name === "" || this.state.user_name === null) {
+        if (this.state.user_name === "") {
             this.props.showError("Please fill in input field(s)")
-        } 
+        }
         else {
             let url = "https://collab-project.herokuapp.com/api/user/update";
             fetch(url, {
@@ -72,7 +72,7 @@ class UserEditView extends React.Component{
             })
             .then(res => res.json())
                 .then(
-                this.props.showSuccess("User Edit Success"), 
+                this.props.showSuccess("User Edit Success"),
                 this.navigate("users")
                 )
                 .catch(err => {
@@ -80,7 +80,7 @@ class UserEditView extends React.Component{
                   })
         }
 
-      
+
 
     }
 

@@ -46,8 +46,9 @@ class MiniProjectComponent extends Component {
               github: "",
               url:"",
               project_start_date: '',
-              user: JSON.parse(window.sessionStorage.getItem("current_user"))
-            }}
+            },
+            user: JSON.parse(window.sessionStorage.getItem("current_user"))
+          }
         this.navigate = this.navigate.bind(this);
     }
 
@@ -85,14 +86,14 @@ class MiniProjectComponent extends Component {
         })
     }
     render_approve = () => {
-      if(this.state.results.status === "unapproved" &&  this.props.user.type === "instructor"){
+      if(this.state.results.status === "unapproved" &&  this.state.user.type === "instructor"){
         return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
       } else {
         return <Typography component="p"> Status: {this.state.results.status}</Typography>
       }
     }
     render_reject = () => {
-      if(this.state.results.status === "unapproved" &&  this.props.user.type === "instructor"){
+      if(this.state.results.status === "unapproved" &&  this.state.user.type === "instructor"){
         return <Button className="buttons" variant="contained" color="secondary" onClick = {() => {this.reject()}}>Reject</Button>
       }
     }
