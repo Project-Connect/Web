@@ -55,7 +55,7 @@ describe('Testing POST requests', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('should create or find new user', async () => {
+    test('Should create or find new user', async () => {
         const response = await request(app).post('/api/user/createorfind/student')
                                             .send({ name: 'req.body.name',
                                                     username: 'req.body.username',
@@ -67,4 +67,23 @@ describe('Testing POST requests', () => {
                                                     github: 'req.body.github' })
         expect(response.statusCode).toBe(200);
     });
+
+    test('Should update a single user', async () => {
+        const response = await request(app).post('/api/user/update')
+                                            .send({ id: 'req.body.id',
+                                                    name: 'req.body.name',
+                                                    bio: 'req.body.bio',
+                                                    email: 'req.body.email',
+                                                    photo: 'req.body.photo',
+                                                    linked_in: 'req.body.linked_in',
+                                                    type: 'req.body.type'
+                                                    github: 'req.body.github' })
+        expect(response.statusCode).toBe(200);
+    });
+    
+    }
+
+
+
+
 })
