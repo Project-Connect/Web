@@ -17,7 +17,8 @@ class UserEditView extends React.Component{
             user_photo: "",
             linked_in: "",
             github: "",
-            username: ""
+            username: "",
+            type: ""
         }
         this.navigate = this.navigate.bind(this);
     }
@@ -42,30 +43,34 @@ class UserEditView extends React.Component{
             user_photo:data.photo,
             linked_in:data.linked_in,
             github:data.github,
-            user_name:data.name
+            user_name:data.name, 
+            type:data.type
         })
     }
 
 
     submit(){
-
-        if (this.state.user_name === "" || this.state.user_name === "") {
+        if (this.state.user_name === "" || this.state.user_name === null) {
             this.props.showError("Please fill in input field(s)")
         } 
         else {
-            fetch('https://localhost:8000/api/user/update', {
+            let url = "https://collab-project.herokuapp.com/api/user/update";
+            fetch(url, {
                 method: "POST",
-                body: JSON.stringify({
-                                "id": this.state.user_id,
-                    "name": this.state.user_name,
-                    "bio": this.state.user_bio,
-                                "email": this.state.user_email,
-                                "photo": this.state.user_photo,
-                                "linked_in": this.state.linked_in,
-                    "github": this.state.github,
-                    "username": this.state.username
-                })
-            }).then(res => res.json())
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({ "id": this.state.user_id,
+                "name": this.state.user_name,
+                "bio": this.state.user_bio,
+                "email": this.state.user_email,
+                "photo": this.state.user_photo,
+                "linked_in": this.state.linked_in,
+                "github": this.state.github,
+                "username": this.state.username,
+                "type": this.state.type})
+            })
+            .then(res => res.json())
                 .then(
                 this.props.showSuccess("User Edit Success"), 
                 this.navigate("users")
@@ -81,7 +86,6 @@ class UserEditView extends React.Component{
 
     clear() {
         this.setState({
-            user_id: "",
             user_name: "",
             user_bio: "",
             user_email: "",
@@ -105,8 +109,8 @@ class UserEditView extends React.Component{
 
                 <TextField
                 required
-                label="User name"
-                placeholder="User name"
+                label="Name"
+                placeholder="Name"
                 value={this.state.user_name}
                 onChange={(event)=>{this.setState({user_name:event.target.value})}}
                 fullWidth/>
