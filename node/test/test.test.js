@@ -63,34 +63,4 @@ describe('Testing GET requests', () => {
         )
         expect(response.statusCode).toBe(200);
     });
-
-    test('Should return all user associations for a user', async () => {
-        const response = await request(app).get('/api/user_associations/user/8')
-        expect(response.body.length).toBeGreaterThan(0);
-        expect(response.body[0]).toMatchObject(
-            {
-                id: expect.any(Number),
-                status: expect.any(String),
-            }
-        )
-        expect(response.statusCode).toBe(200);
-    });
-})
-
-describe('Testing POST requests', () => {
-    beforeAll(() => { models.sequelize.sync().then(()=>{ models.sequelize.close(); }) });
-
-    test('Should add user to database', async () => {
-        const response = await request(app).post('/api/users/student')
-                                            .send({ name: 'req.body.name',
-                                                    username: 'req.body.username',
-                                                    bio: 'req.body.bio',
-                                                    password: 'req.body.password',
-                                                    email: 'req.body.email',
-                                                    photo: 'req.body.photo',
-                                                    linked_in: 'req.body.linked_in',
-                                                    github: 'req.body.github' })
-        expect(response.statusCode).toBe(200);
-    });
-
 })
