@@ -57,14 +57,12 @@ class ProjectDetail extends Component {
       let projectAssociation = this.state.usersData.find(function(element) {
         return element.user.id === that.state.user_id;
       });
-      console.log(projectAssociation);
       if(projectAssociation){
           if (projectAssociation.is_admin) {
               return "Admin"
           }
           return projectAssociation.status
       }else{
-            console.log(this.state.type);
             if (this.state.type==="student"){
                 return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
             }else{
@@ -135,7 +133,6 @@ class ProjectDetail extends Component {
                         Participating Members
                     </Typography>
                     {this.renderUsers()}
-
                 </div>
             </div>
         );
@@ -170,7 +167,6 @@ class ProjectDetail extends Component {
     }
 
     renderStatus = (association) => {
-        console.log(association);
         if(association.is_admin){
           return "admin"
         }
@@ -200,16 +196,22 @@ class ProjectDetail extends Component {
           }
         )
         .then(res => res.json())
-        .then(res =>
+        .then(res => {
             this.props.showSuccess("User Approved")
-        )
+            let newusersData = this.state.usersData.map(el => {
+              if(el.user.id === user_id){
+                el.status = "approved"
+              }
+              return el
+            })
+            this.setState({usersData:newusersData})
+        })
         .catch(function (err) {
             this.props.showError(err.toString())
         })
     }
 
     reject = (user_id) => {
-        console.log("clicked");
         let user = this.state.type === "instructor" ? "instr/" : "";
         let urlData = `https://collab-project.herokuapp.com/api/user_associations/${user}update/rejected`;
         let body = {
@@ -228,8 +230,16 @@ class ProjectDetail extends Component {
         )
         .then(res => res.json())
         .then(res =>
+          {
             this.props.showSuccess("User Rejected")
-        )
+            let newusersData = this.state.usersData.map(el => {
+              if(el.user.id === user_id){
+                el.status = "rejected"
+              }
+              return el
+            })
+            this.setState({usersData:newusersData})
+        })
         .catch(function (err) {
             this.props.showError(err.toString())
         })
@@ -237,6 +247,8 @@ class ProjectDetail extends Component {
 
     componentDidMount(){
         let urlProjectData = "https://collab-project.herokuapp.com/api/project/"  + this.props.match.params.project_id;
+        //Students shouldn't see all the unapproved applicaitons except their own
+        //TODO: User should see all their own data
         let role = JSON.parse(window.sessionStorage.current_user).type === "instructor" ? "" : "/approved"
         let urlUsersData = "https://collab-project.herokuapp.com/api/user_associations/project/" + this.props.match.params.project_id + role;
         fetch(urlProjectData)
