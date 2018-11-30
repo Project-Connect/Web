@@ -63,8 +63,8 @@ class Projects extends Component {
         if (this.state.projects.length === 0){
             projects = <Filler description={default_description}/>
         }else{
-            projects = this.state.projects.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
-              <MiniProjectComponent key={el.id} id={el.id} history={this.props.history}/>
+            projects = this.state.projects.filter((el)=>el.project.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
+              <MiniProjectComponent key={el.project.id} id={el.project.id} status={el.status} history={this.props.history}/>
             ))
         }
         return projects
@@ -93,7 +93,7 @@ class Projects extends Component {
               )
             } else {
               res.map(el =>
-                  projects.push(el.project)
+                  projects.push(el)
               )
             }
             this.setState({projects: projects})

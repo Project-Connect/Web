@@ -88,6 +88,12 @@ class MiniProjectComponent extends Component {
     render_approve = () => {
       if(this.state.results.status === "unapproved" &&  this.state.user.type === "instructor"){
         return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
+      } else if (this.state.user.type === "student"){
+        //for students, status is only rendered if the student has applied to the project
+        if(this.props.status){
+            let status = this.props.status === "unapproved" ? "pending" : this.props.status
+            return <Typography component="p"> Status: {status}</Typography>
+        }
       } else {
         return <Typography component="p"> Status: {this.state.results.status}</Typography>
       }
@@ -104,7 +110,7 @@ class MiniProjectComponent extends Component {
            <Grid container spacing={16}>
            <Grid item xs={6}>
             <CardContent>
-              <Typography className={classes.title}  gutterBottom>
+              <Typography className={classes.title} gutterBottom>
                 {this.state.results.name}
               </Typography>
               <Typography component="p">
@@ -149,4 +155,7 @@ const mapDispatchToProps = {
   showSuccess
 }
 
+MiniProjectComponent.defaultProps = {
+  status:false
+}
 export default connect(null,mapDispatchToProps)(withStyles(styles)(MiniProjectComponent));
