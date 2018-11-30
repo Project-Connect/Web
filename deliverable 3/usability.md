@@ -1,4 +1,12 @@
-### Usability Study
+# Usability Study
+
+### Goal of Study
+
+Allow first set of test users to use the appplication under monitored conditions to gather data to suggest new features and improvements. These users do not need to have a technical background. However, if they do, it is an added benefit.
+
+### Link to usability study videos
+https://www.youtube.com/playlist?list=PLPgw2qIWanHv4Ce05jEmXclAGuRrvtJHx
+Note: we conducted 3 usability studies but one of the videos became corrupted. However, the results from that study are still recorded.
 
 ### Goal of Project
 
@@ -60,3 +68,21 @@ us know if something happens that you did not expect to occur. Also, any comment
 6. Please let me know where the project is to be located
 7. Do you have any comments about the appearance?
 
+## Resulting Feedback
+
+#### Positive Comments About Current User Interface
+* Login page is pretty
+* Login page provides all the necessary content for the user to understand the usage of the application
+* Users are able to identify the uses of each page. For example, testers understood that the projects page is the section where all projects that belong to the user are displayed. 
+* Creating a new project is easy
+* Viewing the status of project proposals as an instructor and company is clear
+* Approving or rejecting project proposals is easy
+
+#### Negative Comments About Current User Interface
+* Footer needs to be changed
+* Project proposals page need to be refreshed after an instructor approves or rejects a proposal. The user is required to manually refresh it which leads to bad user feedback and could result in errors.
+* Projects page is simple and a little boring
+* The blue used for the mini project view is harsh and makes it hard to look at
+
+#### Conclusion
+Overall, users have expressed good user feedback regarding the state of the current user interface. The comments regarding the improvements requested will be considered for feature tickets.
