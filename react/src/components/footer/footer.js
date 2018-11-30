@@ -36,7 +36,7 @@ class Footer extends React.Component{
                 <div style={phantom} />
                 <div style={style}>
                     <Typography variant="h5" color="primary">Project Collab</Typography>
-                    <Typography variant="h5" color="primary">Let's Work Together</Typography>
+                    <Typography variant="h5" color="primary">Build Code Together</Typography>
                 </div>
                 </MuiThemeProvider>
             </div>
