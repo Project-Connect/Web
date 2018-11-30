@@ -4,6 +4,10 @@
 
 Allow first set of test users to use the appplication under monitored conditions to gather data to suggest new features and improvements. These users do not need to have a technical background. However, if they do, it is an added benefit.
 
+### Link to usability study videos
+https://www.youtube.com/playlist?list=PLPgw2qIWanHv4Ce05jEmXclAGuRrvtJHx
+Note: we conducted 3 usability studies but one of the videos became corrupted. However, the results from that study are still recorded.
+
 ### Goal of Project
 
 The goal of the project is for companies to post project ideas and students can volunteer for the posted projects.
