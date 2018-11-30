@@ -58,7 +58,9 @@ class Navigation extends React.Component{
                     <Typography variant="h6" color="inherit">
                       <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
                     </Typography>
-
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.props.history.push('/')}>Log Out</Button>
+                    </Typography>
                   </Toolbar>
                 </AppBar>
             )
@@ -78,7 +80,9 @@ class Navigation extends React.Component{
                     <Typography variant="h6" color="inherit">
                       <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
                     </Typography>
-
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.props.history.push('/')}>Log Out</Button>
+                    </Typography>
                   </Toolbar>
                 </AppBar>
             )
@@ -102,7 +106,9 @@ class Navigation extends React.Component{
                     <Typography variant="h6" color="inherit">
                       <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
                     </Typography>
-
+                    <Typography variant="h6" color="inherit">
+                      <Button color="inherit" onClick={()=>this.props.history.push('/')}>Log Out</Button>
+                    </Typography>
                   </Toolbar>
                 </AppBar>
             );
