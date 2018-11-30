@@ -47,7 +47,8 @@ class MiniProjectComponent extends Component {
               url:"",
               project_start_date: '',
             },
-            user: JSON.parse(window.sessionStorage.getItem("current_user"))
+            user: JSON.parse(window.sessionStorage.getItem("current_user")),
+            currUsersData: {}
           }
         this.navigate = this.navigate.bind(this);
     }
@@ -90,8 +91,8 @@ class MiniProjectComponent extends Component {
         return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
       } else if (this.state.user.type === "student"){
         //for students, status is only rendered if the student has applied to the project
-        if(this.props.status){
-            let status = this.props.status === "unapproved" ? "pending" : this.props.status
+        if(this.state.currUsersData){
+            let status = this.state.currUsersData.status === "unapproved" ? "pending" : this.state.currUsersData.status
             return <Typography component="p"> Status: {status}</Typography>
         }
       } else {
@@ -142,6 +143,18 @@ class MiniProjectComponent extends Component {
         )
         .catch(function (err) {
             this.props.showError(err.toString())
+        })
+
+        let currUsersData = "https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user.id + "/project/"+  this.props.id;
+        fetch(currUsersData)
+        .then(res => res.json())
+        .then(res =>
+            this.setState({
+                currUsersData: res[0]
+            })
+          )
+        .catch(err => {
+          this.props.showError(err.toString())
         })
     }
 

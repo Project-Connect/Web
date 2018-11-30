@@ -18,7 +18,8 @@ class ProjectDetail extends Component {
             type: JSON.parse(window.sessionStorage.current_user).type,
             projData: {
               },
-            usersData: []
+            usersData: [],
+            currUsersData: {}
         }
         this.apply = this.apply.bind(this);
         this.renderApplication = this.renderApplication.bind(this);
@@ -46,6 +47,11 @@ class ProjectDetail extends Component {
       })
       .then(()=>{
         this.props.showSuccess("Applicaiton Success")
+        let updatedData = {
+          is_admin: false,
+          status: "unapproved"
+        }
+        this.setState({currUsersData:updatedData})
       })
       .catch(err => {
         this.props.showError(err.toString())
@@ -53,21 +59,20 @@ class ProjectDetail extends Component {
     }
 
     renderApplication = () => {
-      let that = this;
-      let projectAssociation = this.state.usersData.find(function(element) {
-        return element.user.id === that.state.user_id;
-      });
-      if(projectAssociation){
-          if (projectAssociation.is_admin) {
+      if(this.state.currUsersData){
+          if (this.state.currUsersData.is_admin) {
               return "Admin"
           }
-          return projectAssociation.status
+          if(this.state.currUsersData.status === "unapproved"){
+              return "pending"
+          }
+          return this.state.currUsersData.status
       }else{
-            if (this.state.type==="student"){
-                return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
-            }else{
-                return this.state.type
-            }
+          if (this.state.type === "student"){
+              return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
+          }else{
+              return this.state.type
+          }
       }
     }
 
@@ -251,6 +256,7 @@ class ProjectDetail extends Component {
         //TODO: User should see all their own data
         let role = JSON.parse(window.sessionStorage.current_user).type === "instructor" ? "" : "/approved"
         let urlUsersData = "https://collab-project.herokuapp.com/api/user_associations/project/" + this.props.match.params.project_id + role;
+        let currUsersData = "https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user_id + "/project/"+  this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>
@@ -269,7 +275,18 @@ class ProjectDetail extends Component {
             this.setState({
                 usersData: res
             })
-      )
+          )
+        .catch(err => {
+          this.props.showError(err.toString())
+        })
+      
+        fetch(currUsersData)
+        .then(res => res.json())
+        .then(res =>
+            this.setState({
+                currUsersData: res[0]
+            })
+          )
         .catch(err => {
           this.props.showError(err.toString())
         })
