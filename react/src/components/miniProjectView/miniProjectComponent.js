@@ -72,7 +72,7 @@ class MiniProjectComponent extends Component {
 
     render_student_view = () => {
       let status = this.props.status === "unapproved" ? "pending" : this.props.status
-      return <Typography component="p"> Status: {status}</Typography>
+      return status && <Typography component="p"> Status: {status}</Typography>
     }
 
     render_instructor_view = () => {
