@@ -63,8 +63,8 @@ class Projects extends Component {
         if (this.state.projects.length === 0){
             projects = <Filler description={default_description}/>
         }else{
-            projects = this.state.projects.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
-              <MiniProjectComponent key={el.id} id={el.id} history={this.props.history}/>
+            projects = this.state.projects.filter((el)=>el.project.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
+              <MiniProjectComponent project={el.project} id={el.id} status={el.status} history={this.props.history}/>
             ))
         }
         return projects
@@ -80,23 +80,7 @@ class Projects extends Component {
         .then((res) => res.json())
         .then((res) =>
           {
-            if(res.lengh === 0){
-              return
-            }
-            let projects = []
-            //This page for instructor is to approve unapproved Projects
-            //While for student or company, it is for them to see their projects status
-            //TODO: this page should be refactored for the instructor view
-            if(this.state.user.type === "instructor" ){
-              res.filter((element)=> element.status === "unapproved").map(el =>
-                projects.push(el)
-              )
-            } else {
-              res.map(el =>
-                  projects.push(el.project)
-              )
-            }
-            this.setState({projects: projects})
+            this.setState({projects: res})
           }
         ).catch(err => {
           this.props.showError(err.toString())

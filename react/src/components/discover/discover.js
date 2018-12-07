@@ -54,7 +54,7 @@ class Discover extends Component {
             projects = <Filler description={default_description}/>
         }else{
             projects = this.state.projects.filter((element)=>element.name.toLowerCase().includes(this.state.search.toLowerCase())).map((element) => (
-              <MiniProjectComponent key={element.id} id={element.id} history={this.props.history}/>
+              <MiniProjectComponent project={element} id={element.id} history={this.props.history}/>
             ))
         }
         return projects
@@ -66,9 +66,7 @@ class Discover extends Component {
         .then(res => res.json())
         .then(res =>
           {
-            let projects = []
-            res.map((element)=>projects.push(element))
-            this.setState({projects:projects})
+            this.setState({projects:res})
           }
         ).catch(err => {
           this.props.showError(err.toString())

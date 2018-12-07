@@ -39,22 +39,14 @@ class MiniProjectComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            results: {
-              id: null,
-              name: "",
-              description: "",
-              github: "",
-              url:"",
-              project_start_date: '',
-            },
             user: JSON.parse(window.sessionStorage.getItem("current_user")),
             currUsersData: {}
           }
-        this.navigate = this.navigate.bind(this);
+        this.navigate_to_project_details = this.navigate_to_project_details.bind(this);
     }
 
-    approve = () => {
-        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id + "/approved";
+    send_project_request = (status) => {
+        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id + "/" + status;
         fetch(urlData, {
             method: "POST",
             headers: {
@@ -63,47 +55,30 @@ class MiniProjectComponent extends Component {
         )
         .then(res => res.json())
         .then(res =>
-            this.props.showSuccess("Project Approved")
+            this.props.showSuccess("Project" + status)
         )
         .catch(function (err) {
             this.props.showError(err.toString())
         })
     }
 
-    reject = () => {
-        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id + "/rejected";
-        fetch(urlData, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            }}
-        )
-        .then(res => res.json())
-        .then(res =>
-            this.props.showSuccess("Project Rejected")
-        )
-        .catch(function (err) {
-            this.props.showError(err.toString())
-        })
-    }
     render_approve = () => {
-      if(this.state.results.status === "unapproved" &&  this.state.user.type === "instructor"){
-        return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.approve()}}>Approve</Button>
-      } else if (this.state.user.type === "student"){
-        //for students, status is only rendered if the student has applied to the project
-        if(this.state.currUsersData){
-            let status = this.state.currUsersData.status === "unapproved" ? "pending" : this.state.currUsersData.status
-            return <Typography component="p"> Status: {status}</Typography>
-        }
-      } else {
-        return <Typography component="p"> Status: {this.state.results.status}</Typography>
-      }
+        return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.send_project_request("rejected")}}>Approve</Button>
     }
+
     render_reject = () => {
-      if(this.state.results.status === "unapproved" &&  this.state.user.type === "instructor"){
-        return <Button className="buttons" variant="contained" color="secondary" onClick = {() => {this.reject()}}>Reject</Button>
-      }
+        return <Button className="buttons" variant="contained" color="secondary" onClick = {() => {this.send_project_request("approved")}}>Reject</Button>
     }
+
+    render_student_view = () => {
+      let status = this.props.status === "unapproved" ? "pending" : this.props.status
+      return <Typography component="p"> Status: {status}</Typography>
+    }
+
+    render_instructor_view = () => {
+      return [this.render_approve(), this.render_reject()]
+    }
+
     render() {
         const{classes} = this.props
         return (
@@ -112,18 +87,18 @@ class MiniProjectComponent extends Component {
            <Grid item xs={6}>
             <CardContent>
               <Typography className={classes.title} gutterBottom>
-                {this.state.results.name}
+                {this.props.project.name}
               </Typography>
               <Typography component="p">
-                {this.state.results.description}
+                {this.props.project.description}
               </Typography>
             </CardContent>
             </Grid>
             <Grid item xs={6} container justify="flex-end" alignContent="flex-end">
             <CardActions className={classes.cardAction} >
-            {this.render_approve()}
-            {this.render_reject()}
-              <Button variant="contained" onClick={() => {this.navigate(this.props.id)}}>Learn More</Button>
+              {this.state.user.type === "student" && this.render_student_view()}
+              {this.state.user.type === "instructor" && this.render_instructor_view()}
+              <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
             </CardActions>
             </Grid>
             </Grid>
@@ -132,33 +107,7 @@ class MiniProjectComponent extends Component {
         );
     }
 
-    componentDidMount() {
-        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id;
-        fetch(urlData)
-        .then(res => res.json())
-        .then(res =>
-            this.setState({
-                results: res
-            })
-        )
-        .catch(function (err) {
-            this.props.showError(err.toString())
-        })
-
-        let currUsersData = "https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user.id + "/project/"+  this.props.id;
-        fetch(currUsersData)
-        .then(res => res.json())
-        .then(res =>
-            this.setState({
-                currUsersData: res[0]
-            })
-          )
-        .catch(err => {
-          this.props.showError(err.toString())
-        })
-    }
-
-    navigate(id){
+    navigate_to_project_details(id){
         this.props.history.push(`project/${id}`)
     }
 }
