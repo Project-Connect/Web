@@ -22,6 +22,7 @@ import SuccessPopup from "./globalPopups/successPopup"
 import ProjectUpload from "./parse-csv/parse-csv";
 import Footer from "./footer/footer";
 import Navigation from "./navbar/navbar";
+import Login from "./login/login";
 
 import UserEditView from "./userEditView/userEditView";
 
@@ -43,6 +44,8 @@ const Root = ({ store }) => (
         <Route exact path="/:user/discover" component={Discover}/>
         <Route exact path="/:user/widgets" component={Widgets}/>
         <Route exact path="/projectUpload" component={ProjectUpload}/>
+        <Route exact path="/login" component={Login}/>
+
         <Footer/>
       </div>
     </Router>

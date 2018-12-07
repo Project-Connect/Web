@@ -15,34 +15,37 @@ class LoginPageGitHub extends Component {
 
   // Stole this from an example - not sure why importing oauthio-web package wouldn't work but kept not
   // sending request so I
-  componentDidMount() {
-    const oauthScript = document.createElement("script");
-    oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
-    document.body.appendChild(oauthScript);
-  }
+  // componentDidMount() {
+  //   const oauthScript = document.createElement("script");
+  //   oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+  //   document.body.appendChild(oauthScript);
+  // }
 
-  handleClickStudent(e) {
-    e.preventDefault();
-    window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
-    window.OAuth.popup('github').then((provider) => {
-      provider.me().then((data) => {
-        console.log("data: ", data);
-        this.validateUser(data, "student");
-      });
-
-    });
-  }
-
-  handleClickCompany(e) {
-    e.preventDefault();
-    window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
-    window.OAuth.popup('github').then((provider) => {
-      provider.me().then((data) => {
-        console.log("data: ", data);
-        this.validateUser(data, "company");
-      });
-
-    });
+  // handleClickStudent(e) {
+  //   e.preventDefault();
+  //   window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+  //   window.OAuth.popup('github').then((provider) => {
+  //     provider.me().then((data) => {
+  //       console.log("data: ", data);
+  //       this.validateUser(data, "student");
+  //     });
+  //
+  //   });
+  // }
+  //
+  // handleClickCompany(e) {
+  //   e.preventDefault();
+  //   window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+  //   window.OAuth.popup('github').then((provider) => {
+  //     provider.me().then((data) => {
+  //       console.log("data: ", data);
+  //       this.validateUser(data, "company");
+  //     });
+  //
+  //   });
+  // }
+  handle_login(e){
+   this.props.history.push('/login')
   }
 
   async validateUser(data, type) {
