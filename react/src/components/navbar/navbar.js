@@ -10,129 +10,69 @@ class Navigation extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            id:""
+            id:"",
+            user: JSON.parse(window.sessionStorage.getItem("current_user")) || {}
         }
         this.navigate = this.navigate.bind(this);
     }
     render(){
         return(
-            <div>
-                {this.renderBar()}
-            </div>
+          <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
+            <Toolbar>
+                {this.renderBar(this.state.user)}
+            </Toolbar>
+          </AppBar>
         );
     }
 
-    renderBar(){
-        if ((this.props.location.pathname ==="/") || (this.props.location.pathname ==="/secretAdminLogin")){
-            return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
-                  <Toolbar>
+    get_student_app_button(){
+      return [this.generate_home_button(),this.generate_discover_button(),this.generate_project_button(),this.generate_profile_button()]
+    }
 
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit">Project Collab</Button>
-                    </Typography>
+    get_company_app_button(){
+      return [this.generate_home_button(),this.generate_discover_button(),this.generate_project_button(),this.generate_profile_button()]
+    }
+    get_instructor_nav_button(){
+      return [this.generate_home_button(),this.generate_discover_button("Project Approval"),this.generate_project_button(),this.generate_profile_button()]
+    }
+    get_default_nav_button(){
+      return [this.generate_home_button(),this.generate_login_button()]
+    }
+    generate_home_button(){
+      return <Button color="inherit" onClick={()=>this.navigate("")}>Project Collab</Button>
+    }
 
-                  </Toolbar>
-                </AppBar>
-            )
-        }
-        let type = "student"
-        if (JSON.parse(window.sessionStorage.getItem("current_user")) != null){
-            type = JSON.parse(window.sessionStorage.getItem("current_user")).type
-        }
+    generate_discover_button(heading){
+        return <Button color="inherit" onClick={()=>this.navigate("discover")}>{heading || "Discover"}</Button>
+    }
 
-        console.log(type);
-        if (type==="student"){
-            return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
-                  <Toolbar>
+    generate_profile_button(){
+        return <Button color="inherit" onClick={()=>this.navigate("users")}>profile</Button>
+    }
 
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Project Collab</Button>
-                    </Typography>
+    generate_project_button(){
+        return <Button color="inherit" onClick={()=>this.navigate("projects")}>projects</Button>
+    }
+    generate_login_button(){
+        return <Button color="inherit" onClick={()=>this.navigate("login")}>login</Button>
+    }
 
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Discover</Button>
-                    </Typography>
 
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
-                    </Typography>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
-                    </Typography>
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.props.history.push('/')}>Log Out</Button>
-                    </Typography>
-                  </Toolbar>
-                </AppBar>
-            )
-        }else if (type==="company"){
-            return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
-                  <Toolbar>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Collab</Button>
-                    </Typography>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("projects")}>My Projects</Button>
-                    </Typography>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
-                    </Typography>
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.props.history.push('/')}>Log Out</Button>
-                    </Typography>
-                  </Toolbar>
-                </AppBar>
-            )
-        }else if (type==="instructor"){
-            return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
-                  <Toolbar>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Collab</Button>
-                    </Typography>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("projects")}>Project Proposals</Button>
-                    </Typography>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("discover")}>Approved Projects</Button>
-                    </Typography>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.navigate("users")}>Profile</Button>
-                    </Typography>
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit" onClick={()=>this.props.history.push('/')}>Log Out</Button>
-                    </Typography>
-                  </Toolbar>
-                </AppBar>
-            );
-        }else{
-            return(
-                <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
-                  <Toolbar>
-
-                    <Typography variant="h6" color="inherit">
-                      <Button color="inherit">Project Collab</Button>
-                    </Typography>
-
-                  </Toolbar>
-                </AppBar>
-            );
+    renderBar(user){
+        switch(user.type){
+          case "student":
+            return this.get_student_app_button()
+          case "company":
+            return this.get_company_app_button()
+          case "instructor":
+            return this.get_instructor_nav_button()
+          default:
+            return this.get_default_nav_button()
         }
     }
 
     navigate(page){
-        this.props.history.push('/' + JSON.parse(window.sessionStorage.current_user).username + `/${page}`)
+        this.props.history.push( `/${page}`)
     }
 }
 

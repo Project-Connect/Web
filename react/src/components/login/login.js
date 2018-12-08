@@ -46,6 +46,71 @@ const styles = theme => ({
   },
 });
 
+function validate(){
+  const oauthScript = document.createElement("script");
+  oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+  document.body.appendChild(oauthScript);
+}
+
+let handleClickStudent = (e) =>{
+  e.preventDefault();
+  window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+  window.OAuth.popup('github').then((provider) => {
+    provider.me().then((data) => {
+      validateUser(data, "student");
+    });
+
+  });
+}
+//
+let handleClickCompany = (e) => {
+  e.preventDefault();
+  window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+  window.OAuth.popup('github').then((provider) => {
+    provider.me().then((data) => {
+      validateUser(data, "company");
+    });
+
+  });
+}
+let validateUser = (data, type) => {
+//   let newUser = "";
+//   let route = "";
+//   if (type === "student") {
+//     newUser =
+//       "https://collab-project.herokuapp.com/api/user/createorfind/student";
+//     route = `${data.alias}/users`;
+//   } else if (type === "company") {
+//     newUser =
+//       "https://collab-project.herokuapp.com/api/user/createorfind/company";
+//     route = `${data.alias}/projects`;
+//   }
+//   await fetch(newUser, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json; charset=utf-8"
+//     },
+//     body: JSON.stringify({
+//       name: data.name,
+//       username: data.alias,
+//       bio: data.bio,
+//       password: "",
+//       email: data.email,
+//       photo: "",
+//       linked_in: "",
+//       github: ""
+//     })
+//   });
+//   const token = `https://collab-project.herokuapp.com/api/user/token/${
+//     data.alias
+//   }`;
+//   const userToken = await fetch(token);
+//   const userTokenJason = await userToken.json();
+//   window.sessionStorage.setItem(
+//     "current_user",
+//     JSON.stringify(userTokenJason[0])
+//   );
+}
 function SignIn(props) {
   const { classes } = props;
 
@@ -73,15 +138,22 @@ function SignIn(props) {
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => {console.log("clicked");}}
           >
             Sign in
           </Button>
         </form>
+        <button
+          onClick={() => {console.log("clicked");}}
+          className="login-button"
+          color="primary"
+        >
+          Login with Github{" "}
+        </button>
       </Paper>
     </main>
   );
