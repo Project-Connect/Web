@@ -46,34 +46,33 @@ const styles = theme => ({
   },
 });
 
-function validate(){
-  const oauthScript = document.createElement("script");
-  oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
-  document.body.appendChild(oauthScript);
-}
+// function oath_window_init(){
+//   const oauthScript = document.createElement("script");
+//   oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+//   document.body.appendChild(oauthScript);
+// }
 
 let handleClickStudent = (e) =>{
-  e.preventDefault();
-  window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
-  window.OAuth.popup('github').then((provider) => {
-    provider.me().then((data) => {
-      validateUser(data, "student");
-    });
-
-  });
+  // e.preventDefault();
+  // window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+  // window.OAuth.popup('github').then((provider) => {
+  //   provider.me().then((data) => {
+  //     validateUser(data, "student");
+  //   });
+  // });
 }
 //
-let handleClickCompany = (e) => {
-  e.preventDefault();
-  window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
-  window.OAuth.popup('github').then((provider) => {
-    provider.me().then((data) => {
-      validateUser(data, "company");
-    });
-
-  });
-}
-let validateUser = (data, type) => {
+// let handleClickCompany = (e) => {
+//   e.preventDefault();
+//   window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
+//   window.OAuth.popup('github').then((provider) => {
+//     provider.me().then((data) => {
+//       validateUser(data, "company");
+//     });
+//
+//   });
+// }
+let validateUser = () => {
 //   let newUser = "";
 //   let route = "";
 //   if (type === "student") {
@@ -142,13 +141,13 @@ function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => {console.log("clicked");}}
+            onClick={() => {validateUser()}}
           >
             Sign in
           </Button>
         </form>
         <button
-          onClick={() => {console.log("clicked");}}
+          onClick={() => {handleClickStudent()}}
           className="login-button"
           color="primary"
         >
