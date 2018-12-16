@@ -46,70 +46,63 @@ const styles = theme => ({
   },
 });
 
-// function oath_window_init(){
-//   const oauthScript = document.createElement("script");
-//   oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
-//   document.body.appendChild(oauthScript);
-// }
+
+function oath_window_init(){
+  const oauthScript = document.createElement("script");
+  oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+  document.body.appendChild(oauthScript);
+}
+oath_window_init();
 
 let handleClickStudent = (e) =>{
-  // e.preventDefault();
-  // window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
-  // window.OAuth.popup('github').then((provider) => {
-  //   provider.me().then((data) => {
-  //     validateUser(data, "student");
-  //   });
-  // });
+  e.preventDefault();
+  window.OAuth.initialize('s4PMMItRaKOS228Ccz6uoW5nXMQ');
+  window.OAuth.popup('github').then((provider) => {
+    provider.me().then((data) => {
+      validateUser(data, "student");
+    });
+  });
 }
-//
-// let handleClickCompany = (e) => {
-//   e.preventDefault();
-//   window.OAuth.initialize('3W-CZOoDWCoNxvU8640HxpITvHM');
-//   window.OAuth.popup('github').then((provider) => {
-//     provider.me().then((data) => {
-//       validateUser(data, "company");
-//     });
-//
-//   });
-// }
-let validateUser = () => {
-//   let newUser = "";
-//   let route = "";
-//   if (type === "student") {
-//     newUser =
-//       "https://collab-project.herokuapp.com/api/user/createorfind/student";
-//     route = `${data.alias}/users`;
-//   } else if (type === "company") {
-//     newUser =
-//       "https://collab-project.herokuapp.com/api/user/createorfind/company";
-//     route = `${data.alias}/projects`;
-//   }
-//   await fetch(newUser, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json; charset=utf-8"
-//     },
-//     body: JSON.stringify({
-//       name: data.name,
-//       username: data.alias,
-//       bio: data.bio,
-//       password: "",
-//       email: data.email,
-//       photo: "",
-//       linked_in: "",
-//       github: ""
-//     })
-//   });
-//   const token = `https://collab-project.herokuapp.com/api/user/token/${
-//     data.alias
-//   }`;
-//   const userToken = await fetch(token);
-//   const userTokenJason = await userToken.json();
-//   window.sessionStorage.setItem(
-//     "current_user",
-//     JSON.stringify(userTokenJason[0])
-//   );
+
+async function validateUser(data,type){
+  let newUser = "";
+  let route = "";
+  if (type === "student") {
+    newUser =
+      "https://collab-project.herokuapp.com/api/user/createorfind/student";
+    route = `${data.alias}/users`;
+  } else if (type === "company") {
+    newUser =
+      "https://collab-project.herokuapp.com/api/user/createorfind/company";
+    route = `${data.alias}/projects`;
+  }
+  await fetch(newUser, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    body: JSON.stringify({
+      name: data.name,
+      username: data.alias,
+      bio: data.bio,
+      password: "",
+      email: data.email,
+      photo: "",
+      linked_in: "",
+      github: ""
+    })
+  });
+  const token = `https://collab-project.herokuapp.com/api/user/token/${
+    data.alias
+  }`;
+  const userToken = await fetch(token);
+  const userTokenJason = await userToken.json();
+  window.sessionStorage.setItem(
+    "current_user",
+    JSON.stringify(userTokenJason[0])
+  );
 }
+
 function SignIn(props) {
   const { classes } = props;
 
@@ -145,9 +138,18 @@ function SignIn(props) {
           >
             Sign in
           </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => {navigate("/register")}}
+          >
+            Sign up
+          </Button>
         </form>
         <button
-          onClick={() => {handleClickStudent()}}
+          onClick={(e) => {handleClickStudent(e)}}
           className="login-button"
           color="primary"
         >
@@ -156,6 +158,10 @@ function SignIn(props) {
       </Paper>
     </main>
   );
+}
+
+function navigate(page){
+    window.history.push(`${page}`)
 }
 
 SignIn.propTypes = {

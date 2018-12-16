@@ -3,7 +3,7 @@ Component to summarize a project in its miniaturized format.
 It contains info of the project's title, description, and stacks.
 */
 import React, { Component } from "react";
-import {showError,showSuccess} from "../../actions/globalPopupAction";
+import {showError,showSuccess} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';

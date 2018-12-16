@@ -5,7 +5,7 @@
 import React, { Component } from "react";
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import './discover.css';
-import {showError} from "../../actions/globalPopupAction";
+import {showError} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';

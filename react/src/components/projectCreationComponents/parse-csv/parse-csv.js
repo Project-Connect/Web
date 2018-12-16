@@ -1,7 +1,7 @@
 import CsvParse from '@vtex/react-csv-parse';
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import {showError,showSuccess} from "../../actions/globalPopupAction";
+import {showError,showSuccess} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import "./parse-csv.css";
 import reactElementToJSXString from 'react-element-to-jsx-string';

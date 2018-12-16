@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import MiniProjectComponent from "../miniProjectView/miniProjectComponent";
 import { connect } from "react-redux";
 // these are the functions we will call to dispatch out functions
-import {showError} from "../../actions/globalPopupAction";
+import {showError} from "../../../actions/globalPopupAction";
 import './projects.css';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';

@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import "./newProject.css"
-import {showError,showSuccess} from "../../actions/globalPopupAction";
+import {showError,showSuccess} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
 

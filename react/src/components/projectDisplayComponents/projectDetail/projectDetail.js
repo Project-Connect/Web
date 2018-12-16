@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import "./projectDetail.css";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {showError, showSuccess} from "../../actions/globalPopupAction";
+import {showError, showSuccess} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
 
@@ -279,7 +279,7 @@ class ProjectDetail extends Component {
         .catch(err => {
           this.props.showError(err.toString())
         })
-      
+
         fetch(currUsersData)
         .then(res => res.json())
         .then(res =>

@@ -10,10 +10,10 @@ import Modal from "react-modal";
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import "./users.css";
-import {showError} from "../../actions/globalPopupAction";
+import {showError} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 
-var profile = require("../../assets/profile_1.png");
+var profile = require("../../../assets/profile_1.png");
 class Users extends Component {
     constructor(props){
         super(props);

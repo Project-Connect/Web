@@ -3,11 +3,11 @@ import Typography from "@material-ui/core/Typography";
 import "typeface-roboto";
 import "./loginPageGithub.css";
 
-var brain = require("../../assets/brain.png");
+var brain = require("../../../assets/brain.png");
 //https://pixabay.com/en/brain-anatomy-abstract-art-2146817/ credits for photo
-var merge = require("../../assets/merge.png");
+var merge = require("../../../assets/merge.png");
 // https://commons.wikimedia.org/wiki/File:Octicons-git-pull-request.svg
-var logo = require("../../assets/logo.jpg");
+var logo = require("../../../assets/logo.jpg");
 
 class LoginPageGitHub extends Component {
   // Stole this from an example - not sure why importing oauthio-web package wouldn't work but kept not
