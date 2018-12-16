@@ -101,6 +101,7 @@ async function validateUser(data,type){
     "current_user",
     JSON.stringify(userTokenJason[0])
   );
+  navigate(route)
 }
 
 function SignIn(props) {
