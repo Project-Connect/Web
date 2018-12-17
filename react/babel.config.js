@@ -1,10 +1,11 @@
-{
-  "presets": [
+// var env = process.env.NODE_ENV;
+module.exports = {
+  presets: [
     "@babel/preset-env",
     "@babel/preset-react"
   ],
-  "plugins": [
+  plugins: [
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-runtime"
   ]
-}
+};

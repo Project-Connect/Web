@@ -54,7 +54,7 @@ class LoginPageGitHub extends Component {
               color="inherit"
               className="description-text"
             >
-              Post and Find Projects Within the UofT Community.{" "}
+              Post and Find Projects Within the UofT Community.
             </Typography>
             <Typography
               variant="h6"
@@ -64,9 +64,9 @@ class LoginPageGitHub extends Component {
               Find the perfect project or group members at Uoft with a click of
               a button.Submit new project ideas and applications to participate
               on existing projects in seconds, giving you more time to work on
-              what matters to you.{" "}
-            </Typography>{" "}
-          </div>{" "}
+              what matters to you.
+            </Typography>
+          </div>
         </div>
         <div className="description">
           <div className="description-2">
@@ -76,7 +76,7 @@ class LoginPageGitHub extends Component {
               color="inherit"
               className="description-text"
             >
-              Find Projects Hosted by Companies{" "}
+              Find Projects Hosted by Companies
             </Typography>
             <Typography
               variant="h6"
@@ -84,28 +84,28 @@ class LoginPageGitHub extends Component {
               className="description-text"
             >
               Companies host projects for students to work on.It is the perfect
-              time to get connected.{" "}
+              time to get connected.
             </Typography>
             <Typography
               variant="h6"
               color="inherit"
               className="description-text"
             >
-              Start now{" "}
+              Start now
             </Typography>
             <button
               onClick={() => this.handle_login()}
               className="login-button"
               color="primary"
             >
-              Login with Github{" "}
+              Login with Github
             </button>
             <button
               onClick={() => this.handle_login()}
               className="login-button"
               color="primary"
             >
-              Login for Companies{" "}
+              Login for Companies
             </button>
           </div>
         </div>
