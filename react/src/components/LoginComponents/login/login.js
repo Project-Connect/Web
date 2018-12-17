@@ -9,7 +9,6 @@ import {showError,showSuccess} from "../../../actions/globalPopupAction";
 import {login} from "../../../actions/globalStateAction";
 import { connect } from "react-redux";
 
-
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -63,7 +62,7 @@ class SignIn extends React.Component{
             this.props.showError("Please fill in input field(s)")
         }
         else {
-            let url = "https://collab-project.herokuapp.com/api/project";
+            let url = process.env.API_URL + "/api/project";
             fetch(url, {
                 method: "POST",
                 headers: {
@@ -83,7 +82,7 @@ class SignIn extends React.Component{
     }
 
     async validateUser(username){
-      const token = `https://collab-project.herokuapp.com/api/user/token/${
+      const token = process.env.API_URL + `/api/user/token/${
         username
       }`;
       const userToken = await fetch(token);

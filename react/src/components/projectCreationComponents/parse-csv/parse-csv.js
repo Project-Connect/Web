@@ -32,7 +32,7 @@ class ProjectUpload extends React.Component{
       for(let i in projectArray){
           //parse all jsx elements of project into string
           let project = reactElementToJSXString(projectArray[i]);
-          let url = "https://collab-project.herokuapp.com/api/project";
+          let url = process.env.API_URL + "/api/project";
           fetch(url, {
               method: "POST",
               headers: {

@@ -23,20 +23,20 @@ class LoginPageGitHub extends Component {
         <div className="header2">
           <img src={logo} alt="" />
           <Typography variant="h2" color="inherit">
-            Find the Perfect Project{" "}
+            Find the Perfect Project
           </Typography>
           <Typography component="h5" variant="display2" gutterBottom>
-            Get all the projects served to you{" "}
+            Get all the projects served to you
           </Typography>
           <Typography component="h5" variant="display1" gutterBottom>
-            Login with Github to get started{" "}
+            Login with Github to get started
           </Typography>
           <button
             onClick={() => this.handle_login()}
             className="login-button"
             color="primary"
           >
-            Login for Students{" "}
+            Login for Students
           </button>
           <button
             onClick={() => this.handle_login()}
@@ -106,9 +106,9 @@ class LoginPageGitHub extends Component {
               color="primary"
             >
               Login for Companies{" "}
-            </button>{" "}
-          </div>{" "}
-        </div>{" "}
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

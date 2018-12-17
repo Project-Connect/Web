@@ -54,7 +54,7 @@ class UserEditView extends React.Component{
             this.props.showError("Please fill in input field(s)")
         }
         else {
-            let url = "https://collab-project.herokuapp.com/api/user/update";
+            let url = process.env.API_URL + "/api/user/update";
             fetch(url, {
                 method: "POST",
                 headers: {

@@ -31,7 +31,7 @@ class ProjectDetail extends Component {
 
     }
     apply = () => {
-      let url = "https://collab-project.herokuapp.com/api/user_associations/add";
+      let url = process.env.API_URL + "/api/user_associations/add";
       let data = {
           user_id: this.state.user_id,
           project_id: this.state.projData.id,
@@ -251,12 +251,12 @@ class ProjectDetail extends Component {
     }
 
     componentDidMount(){
-        let urlProjectData = "https://collab-project.herokuapp.com/api/project/"  + this.props.match.params.project_id;
+        let urlProjectData = process.env.API_URL + "/api/project/"  + this.props.match.params.project_id;
         //Students shouldn't see all the unapproved applicaitons except their own
         //TODO: User should see all their own data
         let role = JSON.parse(window.sessionStorage.current_user).type === "instructor" ? "" : "/approved"
-        let urlUsersData = "https://collab-project.herokuapp.com/api/user_associations/project/" + this.props.match.params.project_id + role;
-        let currUsersData = "https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user_id + "/project/"+  this.props.match.params.project_id;
+        let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id + role;
+        let currUsersData = process.env.API_URL + "/api/user_associations/user/" + this.state.user_id + "/project/"+  this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>

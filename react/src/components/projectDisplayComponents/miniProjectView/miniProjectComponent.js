@@ -46,7 +46,7 @@ class MiniProjectComponent extends Component {
     }
 
     send_project_request = (status) => {
-        let urlData = "https://collab-project.herokuapp.com/api/project/"  + this.props.id + "/" + status;
+        let urlData = process.env.API_URL + "/api/project/"  + this.props.id + "/" + status;
         fetch(urlData, {
             method: "POST",
             headers: {

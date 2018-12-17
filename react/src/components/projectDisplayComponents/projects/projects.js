@@ -72,9 +72,9 @@ class Projects extends Component {
     async getData(){
         let url=""
         if(this.state.user.type === "instructor"){
-          url="https://collab-project.herokuapp.com/api/projects"
+          url=process.env.API_URL + "/api/projects"
         }else{
-          url="https://collab-project.herokuapp.com/api/user_associations/user/" + this.state.user.id
+          url=process.env.API_URL + "/api/user_associations/user/" + this.state.user.id
         }
         fetch(url)
         .then((res) => res.json())

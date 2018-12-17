@@ -61,7 +61,7 @@ class Discover extends Component {
     }
 
     async getData(){
-        let url="https://collab-project.herokuapp.com/api/user_associations/user/"+ JSON.parse(window.sessionStorage.current_user).id + "/not"
+        let url=process.env.API_URL + "/api/user_associations/user/"+ JSON.parse(window.sessionStorage.current_user).id + "/not"
         fetch(url)
         .then(res => res.json())
         .then(res =>
