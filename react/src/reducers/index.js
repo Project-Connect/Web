@@ -7,6 +7,7 @@ import {combineReducers} from "redux"
 import exampleReducer from "./exampleReducer"
 import exampleReducer2 from "./exampleReducer2"
 import globalPopupReducer from "./globalPopupReducer"
+import globalStateReducer from "./globalStateReducer"
 import { reducer as reduxFormReducer } from 'redux-form';
 
 const reducer = combineReducers({
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   example1: exampleReducer,
   example2: exampleReducer2,
   form: reduxFormReducer, // mounted under "form"
-  globalPopupReducer: globalPopupReducer
+  globalPopupReducer: globalPopupReducer,
+  globalStateReducer: globalStateReducer
 })
 
 export default reducer

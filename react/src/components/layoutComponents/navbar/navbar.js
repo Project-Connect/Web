@@ -2,23 +2,21 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
 import "./navbar.css";
 
 class Navigation extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            id:"",
-            user: JSON.parse(window.sessionStorage.getItem("current_user")) || {}
-        }
         this.navigate = this.navigate.bind(this);
     }
+
     render(){
         return(
           <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
             <Toolbar>
-                {this.renderBar(this.state.user)}
+                {this.renderBar(this.props.current_user || {})}
             </Toolbar>
           </AppBar>
         );
@@ -86,5 +84,8 @@ class Navigation extends React.Component{
         this.props.history.push( `/${page}`)
     }
 }
+const mapStateToProps = (state) => ({
+  current_user: state.globalStateReducer.current_user
+})
 
-export default withRouter(Navigation);
+export default withRouter(connect(mapStateToProps)(Navigation));

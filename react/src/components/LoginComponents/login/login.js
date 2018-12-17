@@ -1,18 +1,14 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+import TextField from '@material-ui/core/TextField';
+import {showError,showSuccess} from "../../../actions/globalPopupAction";
+import {login} from "../../../actions/globalStateAction";
+import { connect } from "react-redux";
+
 
 const styles = theme => ({
   main: {
@@ -33,140 +29,131 @@ const styles = theme => ({
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
   },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
-  },
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
 });
 
+class SignIn extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+          username: "",
+          password: ""
+        }
+    }
 
-function oath_window_init(){
-  const oauthScript = document.createElement("script");
-  oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
-  document.body.appendChild(oauthScript);
-}
-oath_window_init();
+    handleClickStudent = (e) =>{
+      e.preventDefault();
+      window.OAuth.initialize('s4PMMItRaKOS228Ccz6uoW5nXMQ');
+      window.OAuth.popup('github').then((provider) => {
+        provider.me().then((data) => {
+          this.validateUser(data, "student");
+        });
+      });
+    }
+    componentDidMount(){
+        const oauthScript = document.createElement("script");
+        oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+        document.body.appendChild(oauthScript);
+    }
 
-let handleClickStudent = (e) =>{
-  e.preventDefault();
-  window.OAuth.initialize('s4PMMItRaKOS228Ccz6uoW5nXMQ');
-  window.OAuth.popup('github').then((provider) => {
-    provider.me().then((data) => {
-      validateUser(data, "student");
-    });
-  });
-}
+    submit(){
+        if (this.state.name === "" || this.state.description === "") {
+            this.props.showError("Please fill in input field(s)")
+        }
+        else {
+            let url = "https://collab-project.herokuapp.com/api/project";
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({...this.state, user_id:this.state.user_id})
+            })
+            .then(()=>{
+              this.props.showSuccess("Project Created Success")
+              this.navigate("projects")
+            })
+            .catch(err => {
+              this.props.showError(err.toString())
+            })
+        }
 
-async function validateUser(data,type){
-  let newUser = "";
-  let route = "";
-  if (type === "student") {
-    newUser =
-      "https://collab-project.herokuapp.com/api/user/createorfind/student";
-    route = `${data.alias}/users`;
-  } else if (type === "company") {
-    newUser =
-      "https://collab-project.herokuapp.com/api/user/createorfind/company";
-    route = `${data.alias}/projects`;
-  }
-  await fetch(newUser, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8"
-    },
-    body: JSON.stringify({
-      name: data.name,
-      username: data.alias,
-      bio: data.bio,
-      password: "",
-      email: data.email,
-      photo: "",
-      linked_in: "",
-      github: ""
-    })
-  });
-  const token = `https://collab-project.herokuapp.com/api/user/token/${
-    data.alias
-  }`;
-  const userToken = await fetch(token);
-  const userTokenJason = await userToken.json();
-  window.sessionStorage.setItem(
-    "current_user",
-    JSON.stringify(userTokenJason[0])
-  );
-  navigate(route)
-}
+    }
 
-function SignIn(props) {
-  const { classes } = props;
+    async validateUser(username){
+      const token = `https://collab-project.herokuapp.com/api/user/token/${
+        username
+      }`;
+      const userToken = await fetch(token);
+      const userTokenJason = await userToken.json();
+      window.sessionStorage.setItem(
+        "current_user",
+        JSON.stringify(userTokenJason[0])
+      );
+      this.props.login(userTokenJason[0])
+      this.props.history.push('users')
+    }
 
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={() => {validateUser()}}
-          >
-            Sign in
-          </Button>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={() => {navigate("/register")}}
-          >
-            Sign up
-          </Button>
-        </form>
-        <button
-          onClick={(e) => {handleClickStudent(e)}}
-          className="login-button"
-          color="primary"
-        >
-          Login with Github{" "}
-        </button>
-      </Paper>
-    </main>
-  );
-}
+    render(){
+        const { classes } = this.props;
+        return(
 
-function navigate(page){
-    window.history.push(`${page}`)
+            <div className={classes.main}>
+              <Paper className={classes.paper}>
+                <TextField
+                required
+                label="username"
+                id="standard-required"
+                value={this.state.username}
+                onChange={(event)=>{this.setState({username:event.target.value})}}
+                fullWidth/>
+
+                <TextField
+                label="password"
+                id="standard-required"
+                value={this.state.password}
+                onChange={(event)=>{this.setState({password:event.target.value})}}
+                fullWidth/>
+
+                <div>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={() => {this.validateUser(this.state.username)}}
+                  >
+                    Sign in
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={() => {this.navigate("/register")}}
+                  >
+                    Sign up
+                  </Button>
+                  <button
+                    onClick={(e) => {this.handleClickStudent(e)}}
+                    className="login-button"
+                    color="primary"
+                  >
+                    Login with Github{" "}
+                  </button>
+                </div>
+              </Paper>
+            </div>
+        )
+    }
 }
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+const mapDispatchToProps = {
+  showError,
+  showSuccess,
+  login
+}
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(connect(null,mapDispatchToProps)(SignIn));
