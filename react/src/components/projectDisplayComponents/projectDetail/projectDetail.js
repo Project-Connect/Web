@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import {showError, showSuccess} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
+import JsxParser from 'react-jsx-parser'
 
 class ProjectDetail extends Component {
 
@@ -58,6 +59,11 @@ class ProjectDetail extends Component {
       })
     }
 
+    renderDescription(jsx_in_string){
+      return <JsxParser
+        jsx={jsx_in_string}
+      />
+    }
     renderApplication = () => {
       if(this.state.currUsersData){
           if (this.state.currUsersData.is_admin) {
@@ -113,7 +119,7 @@ class ProjectDetail extends Component {
                     </Typography>
 
                     <Typography variant="body1" gutterBottom>
-                        {this.state.projData.description}
+                        {this.renderDescription(this.state.projData.description)}
                     </Typography>
 
                     <Typography variant="body1" gutterBottom>

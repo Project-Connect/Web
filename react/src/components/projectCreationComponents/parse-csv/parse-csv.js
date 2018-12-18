@@ -38,7 +38,7 @@ class ProjectUpload extends React.Component{
               headers: {
                   "Content-Type": "application/json; charset=utf-8"
               },
-              body: JSON.stringify({description: project, user_id:1})
+              body: JSON.stringify({description: project, name: i ,user_id:1})
           })
           .then(()=>{
             this.props.showSuccess("Upload Success")

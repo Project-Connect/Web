@@ -3,7 +3,7 @@ This file is intended for grouping all the component into the application,
 and provide routing for the application
 */
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route , Redirect} from "react-router-dom";
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types';
 
@@ -41,6 +41,9 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <div>
+        {
+          !(window.sessionStorage.getItem("current_user")) && <Redirect to='/login' />
+        }
         <Navigation/>
         <SuccessPopup />
         <ErrorPopup />

@@ -63,7 +63,7 @@ class Navigation extends React.Component{
         return <Button color="inherit" onClick={()=>this.navigate("login")}>login</Button>
     }
     generate_project_upload_button(){
-        return <Button color="inherit" onClick={()=>this.navigate("projectUpload")}>login</Button>
+        return <Button color="inherit" onClick={()=>this.navigate("projectUpload")}>Upload Projects</Button>
     }
 
 

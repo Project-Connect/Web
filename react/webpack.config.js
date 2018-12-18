@@ -32,6 +32,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
        mode: 'development',
        devtool: 'inline-source-map',
        devServer: {
+         historyApiFallback: true,
          contentBase: './build',
          port: 3000
        }
@@ -78,7 +79,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
         inject: 'body'
       })
 
-     ]
+    ]
    }
    return {...common_config, ...environment_config};
  }

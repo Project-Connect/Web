@@ -87,10 +87,10 @@ class MiniProjectComponent extends Component {
            <Grid item xs={6}>
             <CardContent>
               <Typography className={classes.title} gutterBottom>
-                {this.props.project.name}
+                {this.props.name}
               </Typography>
               <Typography component="p">
-                {this.props.project.description}
+                {this.props.description}
               </Typography>
             </CardContent>
             </Grid>
