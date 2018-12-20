@@ -38,13 +38,10 @@ class MiniProjectComponent extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            user: JSON.parse(window.sessionStorage.getItem("current_user")),
-            currUsersData: {}
-          }
         this.navigate_to_project_details = this.navigate_to_project_details.bind(this);
     }
 
+    // approve/reject project status if instructor
     send_project_request = (status) => {
         let urlData = process.env.API_URL + "/api/project/"  + this.props.id + "/" + status;
         fetch(urlData, {
@@ -86,18 +83,15 @@ class MiniProjectComponent extends Component {
            <Grid container spacing={16}>
            <Grid item xs={6}>
             <CardContent>
-              <Typography className={classes.title} gutterBottom>
-                {this.props.name}
-              </Typography>
               <Typography component="p">
-                {this.props.description}
+                {this.props.data}
               </Typography>
             </CardContent>
             </Grid>
             <Grid item xs={6} container justify="flex-end" alignContent="flex-end">
             <CardActions className={classes.cardAction} >
-              {this.state.user.type === "student" && this.render_student_view()}
-              {this.state.user.type === "instructor" && this.render_instructor_view()}
+              {this.props.user.type === "student" && this.render_student_view()}
+              {this.props.user.type === "instructor" && this.render_instructor_view()}
               <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
             </CardActions>
             </Grid>
@@ -116,8 +110,11 @@ const mapDispatchToProps = {
   showError,
   showSuccess
 }
-
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
 MiniProjectComponent.defaultProps = {
-  status:false
+  status:false,
+  data: "NO INFO AVAILABLE"
 }
-export default connect(null,mapDispatchToProps)(withStyles(styles)(MiniProjectComponent));
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(MiniProjectComponent));

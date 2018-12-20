@@ -17,7 +17,6 @@ class Projects extends Component {
         super(props);
         this.state={
             projects:[],
-            user: JSON.parse(window.sessionStorage.getItem("current_user")),
             search:""
         }
         this.renderProjects = this.renderProjects.bind(this)
@@ -63,19 +62,25 @@ class Projects extends Component {
         if (this.state.projects.length === 0){
             projects = <Filler description={default_description}/>
         }else{
-            projects = this.state.projects.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
-              <MiniProjectComponent id={el.id} status={el.status} history={this.props.history}/>
-            ))
+            if (this.props.user.type  === "instructor") {
+              projects = this.state.projects.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
+                <MiniProjectComponent id={el.id} data={el.description} status={el.status} history={this.props.history}/>
+              ))
+            }else{
+              projects = this.state.projects.filter((el)=>el.project.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
+                <MiniProjectComponent id={el.project.id} data={el.description} status={el.status} history={this.props.history}/>
+              ))
+            }
         }
         return projects
     }
 
     async getData(){
         let url=""
-        if(this.state.user.type === "instructor"){
+        if(this.props.user.type === "instructor"){
           url=process.env.API_URL + "/api/projects"
         }else{
-          url=process.env.API_URL + "/api/user_associations/user/" + this.state.user.id
+          url=process.env.API_URL + "/api/user_associations/user/" + this.props.user.id
         }
         fetch(url)
         .then((res) => res.json())
@@ -91,5 +96,7 @@ class Projects extends Component {
 const mapDispatchToProps = {
   showError,
 }
-
-export default connect(null,mapDispatchToProps)(Projects);
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Projects);
