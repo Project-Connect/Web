@@ -66,6 +66,9 @@ const Root = ({ store }) => (
 )
 function isLoggedIn(store){
     if(!window.sessionStorage.getItem("current_user")){
+      if (window.location.path === "/" || window.location.path === "/login"){
+        return true
+      }
       return false;
     }
     store.dispatch({
