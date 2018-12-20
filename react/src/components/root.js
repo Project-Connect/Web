@@ -66,7 +66,7 @@ const Root = ({ store }) => (
 )
 function isLoggedIn(store){
     if(!window.sessionStorage.getItem("current_user")){
-      if (window.location.path === "/" || window.location.path === "/login"){
+      if (window.location.path === "/" || window.location.path === "/login" || window.location.path === "/register"){
         return true
       }
       return false;
