@@ -19,7 +19,6 @@ class Register extends React.Component{
     }
 
     submit(){
-      console.log("submitting");
         if (this.state.name === "" || this.state.description === "") {
             this.props.showError("Please fill in input field(s)")
         }else {
