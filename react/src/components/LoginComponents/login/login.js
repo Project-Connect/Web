@@ -131,7 +131,7 @@ class SignIn extends React.Component{
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    onClick={() => {this.navigate("/register")}}
+                    onClick={() => {this.props.history.push('/register')}}
                   >
                     Sign up
                   </Button>
@@ -140,7 +140,7 @@ class SignIn extends React.Component{
                     className="login-button"
                     color="primary"
                   >
-                    Login with Github{" "}
+                  Sign in with Github
                   </button>
                 </div>
               </Paper>
