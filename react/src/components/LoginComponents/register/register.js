@@ -12,7 +12,8 @@ class Register extends React.Component{
         this.state = {
             username: "",
             passworsd: "",
-            email: ""
+            email: "",
+            type: "student"
         }
         this.navigate = this.navigate.bind(this);
     }
@@ -22,7 +23,7 @@ class Register extends React.Component{
             this.props.showError("Please fill in input field(s)")
         }
         else {
-            let url = process.env.API_URL + "/api/users/student" + this.state.type;
+            let url = process.env.API_URL + "/api/users/" + this.state.type;
             fetch(url, {
                 method: "POST",
                 headers: {
