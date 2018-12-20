@@ -42,7 +42,7 @@ const Root = ({ store }) => (
     <Router>
       <div>
         {
-          !(window.sessionStorage.getItem("current_user")) && <Redirect to='/login' />
+          !isLoggedIn(store) && <Redirect to='/login' />
         }
         <Navigation/>
         <SuccessPopup />
@@ -64,6 +64,16 @@ const Root = ({ store }) => (
     </Router>
   </Provider>
 )
+function isLoggedIn(store){
+    if(!window.sessionStorage.getItem("current_user")){
+      return false;
+    }
+    store.dispatch({
+      type: 'SET_USER',
+      payload: JSON.parse(window.sessionStorage.getItem("current_user"))
+    })
+    return true;
+}
 
 Root.propTypes = {
   store: PropTypes.object.isRequired

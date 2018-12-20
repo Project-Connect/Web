@@ -86,12 +86,12 @@ class SignIn extends React.Component{
         username
       }`;
       const userToken = await fetch(token);
-      const userTokenJason = await userToken.json();
+      const userTokenJson = await userToken.json();
       window.sessionStorage.setItem(
         "current_user",
-        JSON.stringify(userTokenJason[0])
+        JSON.stringify(userTokenJson[0])
       );
-      this.props.login(userTokenJason[0])
+      this.props.login(userTokenJson[0])
       this.props.history.push('users')
     }
 

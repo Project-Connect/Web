@@ -18,21 +18,12 @@ class Users extends Component {
     constructor(props){
         super(props);
         this.state={
-            id:"",
-            name:"",
-            bio:"",
-            email:"",
-            photo:"",
-            linked_in:"",
-            github:"",
             displayModal:false
         }
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     render() {
-        let user = this.props.match.params.user
-
         return (
             <div>
 
@@ -59,51 +50,29 @@ class Users extends Component {
 
                 <div className="user-data">
                     <Typography variant="h4" gutterBottom className="title">
-                        {this.state.name}
+                        {this.props.user.name}
                     </Typography>
 
                     <Typography variant="h5" gutterBottom className="title">
-                        {this.state.username}
+                        {this.props.user.username}
                     </Typography>
 
                     <Divider></Divider>
 
                     <Typography variant="body1" gutterBottom className="title">
-                        {this.state.bio}
+                        {this.props.user.bio}
                     </Typography>
 
                     <Typography variant="body1" gutterBottom className="title">
-                        {this.state.linked_in}
+                        {this.props.user.linked_in}
                     </Typography>
 
                     <Typography variant="body1" gutterBottom className="title">
-                        {this.state.github}
+                        {this.props.user.github}
                     </Typography>
                 </div>
             </div>
         );
-    }
-    componentDidMount() {
-        fetch( process.env.API_URL + "/api/users/" + JSON.parse(window.sessionStorage.current_user).id)
-        .then(res => res.json())
-        .then((data) => this.parseData(data))
-        .catch(err =>
-          {
-            this.props.showError(err.toString())
-          }
-        );
-    }
-
-    parseData(data){
-        this.setState({
-            id:data.id,
-            name:data.name,
-            bio:data.bio,
-            email:data.email,
-            photo:data.photo,
-            linked_in:data.linked_in,
-            github:data.github
-        })
     }
 
     handleOpenModal () {
@@ -119,5 +88,8 @@ class Users extends Component {
 const mapDispatchToProps = {
   showError,
 }
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
 
-export default connect(null,mapDispatchToProps)(Users);
+export default connect(mapStateToProps,mapDispatchToProps)(Users);
