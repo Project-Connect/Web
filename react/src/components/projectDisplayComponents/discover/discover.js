@@ -54,7 +54,7 @@ class Discover extends Component {
             projects = <Filler description={default_description}/>
         }else{
             projects = this.state.projects.filter((element)=>element.name.toLowerCase().includes(this.state.search.toLowerCase())).map((element) => (
-              <MiniProjectComponent project={element} id={element.id} history={this.props.history}/>
+              <MiniProjectComponent key={element.id} data={element.description} id={element.id} history={this.props.history}/>
             ))
         }
         return projects

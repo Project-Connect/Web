@@ -11,7 +11,6 @@ class NewProject extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            user_id: JSON.parse(window.sessionStorage.current_user).id,
             name:"",
             github:"",
             url:"",
@@ -34,7 +33,7 @@ class NewProject extends React.Component{
                 headers: {
                     "Content-Type": "application/json; charset=utf-8"
                 },
-                body: JSON.stringify({...this.state, user_id:this.state.user_id})
+                body: JSON.stringify({...this.state, user_id:this.props.user.id})
             })
             .then(()=>{
               this.props.showSuccess("Project Created Success")
@@ -150,5 +149,7 @@ const mapDispatchToProps = {
   showError,
   showSuccess
 }
-
-export default connect(null,mapDispatchToProps)(NewProject);
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
+export default connect(mapStateToProps,mapDispatchToProps)(NewProject);

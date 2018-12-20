@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import JsxParser from 'react-jsx-parser'
 
 import './miniProjectComponent.css';
 
@@ -52,7 +53,7 @@ class MiniProjectComponent extends Component {
         )
         .then(res => res.json())
         .then(res =>
-            this.props.showSuccess("Project" + status)
+            this.props.showSuccess("Project " + status)
         )
         .catch(function (err) {
             this.props.showError(err.toString())
@@ -60,11 +61,11 @@ class MiniProjectComponent extends Component {
     }
 
     render_approve = () => {
-        return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.send_project_request("rejected")}}>Approve</Button>
+        return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.send_project_request("approved")}}>Approve</Button>
     }
 
     render_reject = () => {
-        return <Button className="buttons" variant="contained" color="secondary" onClick = {() => {this.send_project_request("approved")}}>Reject</Button>
+        return <Button className="buttons" variant="contained" color="secondary" onClick = {() => {this.send_project_request("rejected")}}>Reject</Button>
     }
 
     render_student_view = () => {
@@ -84,7 +85,9 @@ class MiniProjectComponent extends Component {
            <Grid item xs={6}>
             <CardContent>
               <Typography component="p">
-                {this.props.data}
+                <JsxParser
+                  jsx={this.props.data}
+                />
               </Typography>
             </CardContent>
             </Grid>

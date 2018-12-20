@@ -15,8 +15,6 @@ class ProjectDetail extends Component {
     constructor(props){
         super(props);
         this.state={
-            user_id: JSON.parse(window.sessionStorage.current_user).id,
-            type: JSON.parse(window.sessionStorage.current_user).type,
             projData: {
               },
             usersData: [],
@@ -34,7 +32,7 @@ class ProjectDetail extends Component {
     apply = () => {
       let url = process.env.API_URL + "/api/user_associations/add";
       let data = {
-          user_id: this.state.user_id,
+          user_id: this.props.user.id,
           project_id: this.state.projData.id,
           status: "unapproved",
           is_admin: false
@@ -74,10 +72,10 @@ class ProjectDetail extends Component {
           }
           return this.state.currUsersData.status
       }else{
-          if (this.state.type === "student"){
+          if (this.props.user.type === "student"){
               return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
           }else{
-              return this.state.type
+              return this.props.user.type
           }
       }
     }
@@ -155,7 +153,7 @@ class ProjectDetail extends Component {
     renderUsers(){
         return(
             <div>
-            { this.state.usersData.filter(el => el.user.id !== this.state.user_id).map(data => (
+            { this.state.usersData.filter(el => el.user.id !== this.props.user.id).map(data => (
               <div key={data.id}>
                 <Button
                 color="primary"
@@ -190,13 +188,13 @@ class ProjectDetail extends Component {
     }
 
     approve = (user_id) => {
-        let user = this.state.type === "instructor" ? "instr/" : "";
-        let urlData = `https://collab-project.herokuapp.com/api/user_associations/${user}update/approved`;
+        let user = this.props.user.type === "instructor" ? "instr/" : "";
+        let urlData = process.env.API_URL + `/api/user_associations/${user}update/approved`;
         let body = {
-          instructor_id: this.state.user_id,
+          instructor_id: this.props.user.id,
           user_id: user_id,
           project_id: this.state.projData.id,
-          admin_id: this.state.user_id
+          admin_id: this.props.user.id
         }
         fetch(urlData, {
             method: "POST",
@@ -223,13 +221,13 @@ class ProjectDetail extends Component {
     }
 
     reject = (user_id) => {
-        let user = this.state.type === "instructor" ? "instr/" : "";
-        let urlData = `https://collab-project.herokuapp.com/api/user_associations/${user}update/rejected`;
+        let user = this.props.user.type === "instructor" ? "instr/" : "";
+        let urlData = process.env.API_URL + `/api/user_associations/${user}update/rejected`;
         let body = {
-          instructor_id: this.state.user_id,
+          instructor_id: this.props.user.id,
           user_id: user_id,
           project_id: this.state.projData.id,
-          admin_id: this.state.user_id
+          admin_id: this.props.user.id
         }
         fetch(urlData, {
             method: "POST",
@@ -262,7 +260,7 @@ class ProjectDetail extends Component {
         //TODO: User should see all their own data
         let role = JSON.parse(window.sessionStorage.current_user).type === "instructor" ? "" : "/approved"
         let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id + role;
-        let currUsersData = process.env.API_URL + "/api/user_associations/user/" + this.state.user_id + "/project/"+  this.props.match.params.project_id;
+        let currUsersData = process.env.API_URL + "/api/user_associations/user/" + this.props.user.id + "/project/"+  this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>
@@ -303,6 +301,9 @@ const mapDispatchToProps = {
   showError,
   showSuccess
 }
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
 
 //export default connect(null,mapDispatchToProps)(ProjectDetail);
-export default connect(null,mapDispatchToProps)(ProjectDetail);
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectDetail);

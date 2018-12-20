@@ -38,7 +38,7 @@ class ProjectUpload extends React.Component{
               headers: {
                   "Content-Type": "application/json; charset=utf-8"
               },
-              body: JSON.stringify({description: project, name: i ,user_id:1})
+              body: JSON.stringify({description: project, name: i ,user_id:this.props.user.id})
           })
           .then(()=>{
             this.props.showSuccess("Upload Success")
@@ -130,11 +130,13 @@ class ProjectUpload extends React.Component{
     )
   }
 }
-
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
 
 const mapDispatchToProps = {
   showError,
   showSuccess
 }
 
-export default connect(null,mapDispatchToProps)(ProjectUpload);
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectUpload);
