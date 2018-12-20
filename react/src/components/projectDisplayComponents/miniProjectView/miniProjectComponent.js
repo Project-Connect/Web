@@ -10,7 +10,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import JsxParser from 'react-jsx-parser'
 import Badge from '@material-ui/core/Badge';
@@ -40,6 +39,9 @@ class MiniProjectComponent extends Component {
 
     constructor(props) {
         super(props)
+        this.state ={
+          invisible: false
+        }
         this.navigate_to_project_details = this.navigate_to_project_details.bind(this);
     }
 
@@ -71,7 +73,7 @@ class MiniProjectComponent extends Component {
 
     render_student_view = () => {
       let status = this.props.status === "unapproved" ? "pending" : this.props.status
-      return status && <Typography component="p"> Status: {status}</Typography>
+      return status && <p> Status: {status} </p>
     }
 
     render_instructor_view = () => {
@@ -85,18 +87,16 @@ class MiniProjectComponent extends Component {
            <Grid container spacing={16}>
            <Grid item xs={6}>
             <CardContent>
-              <Typography component="p">
                 <JsxParser
                   jsx={this.props.data}
                 />
-              </Typography>
             </CardContent>
             </Grid>
             <Grid item xs={6} container justify="flex-end" alignContent="flex-end">
             <CardActions className={classes.cardAction} >
               {this.props.user.type === "student" && this.render_student_view()}
-              {this.props.user.type === "instructor" && this.render_instructor_view()}
-              <Badge color="secondary" badgeContent={4} invisible={false}>
+              {this.props.user.type === "instructor" && this.props.status === "unapproved" && this.render_instructor_view()}
+              <Badge color="secondary" badgeContent={4} invisible={this.state.invisible}>
                 <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
               </Badge>
             </CardActions>
