@@ -10,3 +10,12 @@ export function login(content) {
     })
   }
 }
+
+export function logout() {
+  return function (dispatch) {
+    dispatch({
+      type: "CLEAR_USER"
+    })
+    window.sessionStorage.clear()
+  }
+}

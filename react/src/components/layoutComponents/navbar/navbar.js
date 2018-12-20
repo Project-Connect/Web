@@ -1,9 +1,11 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Exit from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
+import {logout} from "../../../actions/globalStateAction";
 import "./navbar.css";
 
 class Navigation extends React.Component{
@@ -26,21 +28,24 @@ class Navigation extends React.Component{
       return [this.generate_home_button(),
         this.generate_discover_button(),
         this.generate_project_button(),
-        this.generate_profile_button()]
+        this.generate_profile_button(),
+        this.generate_logout_button()]
     }
 
     get_company_app_button(){
       return [this.generate_home_button(),
         this.generate_discover_button(),
         this.generate_project_button(),
-        this.generate_profile_button()]
+        this.generate_profile_button(),
+        this.generate_logout_button()]
     }
     get_instructor_nav_button(){
       return [this.generate_home_button(),
         this.generate_discover_button("Project Approval"),
         this.generate_project_button(),
         this.generate_profile_button(),
-        this.generate_project_upload_button()]
+        this.generate_project_upload_button(),
+        this.generate_logout_button()]
     }
     get_default_nav_button(){
       return [this.generate_home_button(),this.generate_login_button()]
@@ -65,7 +70,14 @@ class Navigation extends React.Component{
     generate_project_upload_button(){
         return <Button color="inherit" onClick={()=>this.navigate("projectUpload")}>Upload Projects</Button>
     }
+    generate_logout_button(){
+        return <Button color="inherit" onClick={()=>this.logout()}>Log out<Exit/></Button>
+    }
 
+    logout(){
+      this.props.logout()
+      this.navigate("login")
+    }
 
     renderBar(user){
         switch(user.type){
@@ -87,5 +99,8 @@ class Navigation extends React.Component{
 const mapStateToProps = (state) => ({
   current_user: state.globalStateReducer.current_user
 })
+const mapDispatchToProps = {
+  logout,
+}
 
-export default withRouter(connect(mapStateToProps)(Navigation));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Navigation));

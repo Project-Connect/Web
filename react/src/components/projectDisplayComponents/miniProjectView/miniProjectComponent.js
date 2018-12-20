@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import JsxParser from 'react-jsx-parser'
+import Badge from '@material-ui/core/Badge';
 
 import './miniProjectComponent.css';
 
@@ -95,7 +96,9 @@ class MiniProjectComponent extends Component {
             <CardActions className={classes.cardAction} >
               {this.props.user.type === "student" && this.render_student_view()}
               {this.props.user.type === "instructor" && this.render_instructor_view()}
-              <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
+              <Badge color="secondary" badgeContent={4} invisible={false}>
+                <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
+              </Badge>
             </CardActions>
             </Grid>
             </Grid>

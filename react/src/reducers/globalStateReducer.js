@@ -15,6 +15,9 @@ const globalStateReducer = (state = initialState, action) => {
     case "SET_USER":
       //checkout ES6 Spread syntax if you're not sure what {...Object} is doing
       return { ...state, current_user: action.payload}
+    case "CLEAR_USER":
+      //checkout ES6 Spread syntax if you're not sure what {...Object} is doing
+      return { ...initialState}
     default: return state;
   }
 }
