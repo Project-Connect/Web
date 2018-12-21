@@ -1,5 +1,5 @@
-var fs = require('fs');
-let path = require('path');
+const fs = require('fs');
+const path = require('path');
 module.exports = {
     handleFileUpload(req, res) {
       //save audiofile onto server
@@ -25,7 +25,12 @@ module.exports = {
       let username = req.body.username;
       let resumePath = path.join(__dirname, '../../public/', username, '/resume.pdf')
       let base64EncodedResume = base64_encode(resumePath);
-      res.send(base64EncodedResume);
+      res.writeHead(200, {
+         'Content-Type': 'application/pdf',
+         'Content-Length': base64EncodedResume.length
+      });
+
+      res.end(base64EncodedResume);
     }
 }
 
