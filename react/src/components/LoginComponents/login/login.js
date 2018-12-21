@@ -92,7 +92,7 @@ class SignIn extends React.Component{
         JSON.stringify(userTokenJson[0])
       );
       this.props.login(userTokenJson[0])
-      this.props.history.push('users')
+      this.props.history.push('user/'+ userTokenJson[0].username)
     }
 
     render(){

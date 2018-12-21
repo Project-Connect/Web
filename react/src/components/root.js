@@ -47,8 +47,8 @@ const Root = ({ store }) => (
         <Navigation/>
         <SuccessPopup />
         <ErrorPopup />
+        <Route path={"/user/:username"} component={Users}/>
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
-        <Route exact path={"/users/"} component={Users}/>
         <Route exact path="/newProject" component={NewProject}/>
         <Route exact path="/userEdit" component={UserEditView}/>
         <Route exact path="/" component={LoginPageGitHub}/>

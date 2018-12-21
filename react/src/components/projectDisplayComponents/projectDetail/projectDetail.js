@@ -157,7 +157,7 @@ class ProjectDetail extends Component {
               <div key={data.id}>
                 <Button
                 color="primary"
-                onClick={()=>this.props.history.push(`/users/${data.user.username}`)}
+                onClick={()=>this.props.history.push(`/user/${data.user.username}`)}
                 key={data.user.username}>
                     {data.user.username}
                 </Button>
