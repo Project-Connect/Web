@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import "./users.css";
 import {showError} from "../../../actions/globalPopupAction";
 import { connect } from "react-redux";
+import { Document } from 'react-pdf';
 
 var profile = require("../../../assets/profile_1.png");
 class Users extends Component {
@@ -58,7 +59,11 @@ class Users extends Component {
                     </Typography>
 
                     <Divider></Divider>
-
+                      <Document
+                        file={`public/${this.props.user.username}/resume.pdf`}
+                        onLoadSuccess={this.onDocumentLoadSuccess}
+                      >
+                      </Document>
                     <Typography variant="body1" gutterBottom className="title">
                         {this.props.user.bio}
                     </Typography>
