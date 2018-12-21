@@ -1,6 +1,7 @@
 const usersController = require('../controllers').users;
 const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
+const upload = require('../controllers').upload;
 
 module.exports = (app) => {
   app.use((req, res, next)=>{
@@ -70,4 +71,9 @@ module.exports = (app) => {
   app.post('/api/user_associations/instr/update/:status', userAssociationsController.instructorUpdateStatus);
   // list users associations for a project with a specificed updateStatus
   app.get('/api/user_associations/project/:project/:status', userAssociationsController.listSpecificUsers);
+
+  // handling resume upload
+  //Borrowed from https://github.com/richardgirges/express-fileupload/tree/master/example
+  app.post('/upload', upload.handleFileUpload);
+
 };
