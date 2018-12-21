@@ -39,7 +39,7 @@ class Users extends Component {
 
                 <div className="buttonSurrounding">
 
-                     <button className="add" onClick={()=>{this.props.history.push(`/${user}/userEdit`)}}>
+                     <button className="add" onClick={()=>{this.props.history.push(`/userEdit`)}}>
                         Edit
                     </button>
                 </div>

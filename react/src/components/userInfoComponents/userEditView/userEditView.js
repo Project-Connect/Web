@@ -4,50 +4,25 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import {showError,showSuccess} from "../../../actions/globalPopupAction";
+import Dropzone from 'react-dropzone'
 import './userEditView.css';
 
 class UserEditView extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            user_id: "",
-            user_name: "",
-            user_bio: "",
-            user_email: "",
-            user_photo: "",
-            linked_in: "",
-            github: "",
-            username: "",
-            type: ""
+            name:this.props.user.id || "",
+            username:this.props.user.username || "",
+            bio:this.props.user.bio || "" ,
+            email:this.props.user.email || "",
+            photo:this.props.user.photo || "",
+            linked_in:this.props.user.linked_in || "",
+            github:this.props.user.github || "",
+            user_name:this.props.user.name || "",
+            type:this.props.user.type || ""
         }
         this.navigate = this.navigate.bind(this);
     }
-
-    componentDidMount() {
-        fetch('https://collab-project.herokuapp.com/api/users/' + JSON.parse(window.sessionStorage.current_user).id)
-        .then(res => res.json())
-        .then((data) => this.parseData(data))
-        .catch(err =>
-          {
-            this.props.showError(err.toString())
-          }
-        );
-    }
-
-    parseData(data){
-        this.setState({
-            user_id:data.id || "",
-            username:data.username || "",
-            user_bio:data.bio || "" ,
-            user_email:data.email || "",
-            user_photo:data.photo || "",
-            linked_in:data.linked_in || "",
-            github:data.github || "",
-            user_name:data.name || "",
-            type:data.type || ""
-        })
-    }
-
 
     submit(){
         if (this.state.user_name === "") {
@@ -79,9 +54,6 @@ class UserEditView extends React.Component{
                     this.props.showError(err.toString())
                   })
         }
-
-
-
     }
 
     clear() {
@@ -93,6 +65,9 @@ class UserEditView extends React.Component{
             linked_in: "",
             github: ""
           });
+    }
+    onDrop = (acceptedFiles, rejectedFiles) => {
+      // Do something with files
     }
 
 
@@ -110,28 +85,24 @@ class UserEditView extends React.Component{
                 <TextField
                 required
                 label="Name"
-                placeholder="Name"
                 value={this.state.user_name}
                 onChange={(event)=>{this.setState({user_name:event.target.value})}}
                 fullWidth/>
 
                 <TextField
-                label="User biography"
-                placeholder="User biography"
+                label="biography"
                 value={this.state.user_bio}
                 onChange={(event)=>{this.setState({user_bio:event.target.value})}}
                 fullWidth/>
 
                 <TextField
-                label="User e-mail"
-                placeholder="User e-mail"
+                label="e-mail"
                 value={this.state.user_email}
                 onChange={(event)=>{this.setState({user_email:event.target.value})}}
                 fullWidth/>
 
                 <TextField
-                label="User photo"
-                placeholder="User photo"
+                label="photo"
                 value={this.state.user_photo}
                 onChange={(event)=>{this.setState({user_photo:event.target.value})}}
                 fullWidth/>
@@ -148,7 +119,23 @@ class UserEditView extends React.Component{
                 value={this.state.github}
                 onChange={(event)=>{this.setState({github:event.target.value})}}
                 fullWidth/>
-
+                <Dropzone onDrop={this.onDrop}>
+                  {({getRootProps, getInputProps, isDragActive}) => {
+                    return (
+                      <div
+                        {...getRootProps()}
+                        className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
+                      >
+                        <input {...getInputProps()} />
+                        {
+                          isDragActive ?
+                            <p>Drop files here...</p> :
+                            <p>Try dropping some files here, or click to select files to upload.</p>
+                        }
+                      </div>
+                    )
+                  }}
+                </Dropzone>
                 <div className={"required-buttons"}>
                     <Button color="primary" onClick={() => {this.submit()}}>
                         Submit
@@ -167,10 +154,13 @@ class UserEditView extends React.Component{
         this.props.history.push(`${page}`)
     }
 }
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
 
 const mapDispatchToProps = {
   showError,
   showSuccess
 }
 
-export default connect(null,mapDispatchToProps)(UserEditView);
+export default connect(mapStateToProps,mapDispatchToProps)(UserEditView);
