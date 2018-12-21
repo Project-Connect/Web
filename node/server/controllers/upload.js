@@ -1,4 +1,4 @@
-//you can use error handling to see if there are any errors
+var fs = require('fs');
 let path = require('path');
 module.exports = {
     handleFileUpload(req, res) {
@@ -23,6 +23,17 @@ module.exports = {
       //save audiofile onto server
       // The name of the input field (i.e. "audioFile") is used to retrieve the uploaded file
       let username = req.body.username;
-      res.sendFile(path.join(__dirname, '../../public/', username, '/resume.pdf'));
+      let resumePath = path.join(__dirname, '../../public/', username, '/resume.pdf')
+      let base64EncodedResume = base64_encode(resumePath);
+      res.send(base64EncodedResume);
     }
+}
+
+
+// function to encode file data to base64 encoded string
+function base64_encode(file) {
+    // read binary data
+    let bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap).toString('base64');
 }
