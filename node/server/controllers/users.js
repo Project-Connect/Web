@@ -70,7 +70,7 @@ module.exports = {
   // list all users
   getUser(req, res) {
     return Users
-      .findAll({
+      .findOne({
         where: {
           username: req.params.username
         },
