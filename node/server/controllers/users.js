@@ -70,7 +70,10 @@ module.exports = {
   // list all users
   getUser(req, res) {
     return Users
-      .findById(req.params.user, {
+      .findAll({
+        where: {
+          username: req.params.username
+        },
         attributes: {
           exclude: ['password', 'createdAt', 'updatedAt']
         },
