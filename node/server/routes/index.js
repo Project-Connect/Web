@@ -76,4 +76,6 @@ module.exports = (app) => {
   //Borrowed from https://github.com/richardgirges/express-fileupload/tree/master/example
   app.post('/upload', upload.handleFileUpload);
 
+  app.post('/api/resume', upload.handleFileRequest);
+
 };

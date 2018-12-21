@@ -1,4 +1,5 @@
 //you can use error handling to see if there are any errors
+let path = require('path');
 module.exports = {
     handleFileUpload(req, res) {
       //save audiofile onto server
@@ -16,5 +17,12 @@ module.exports = {
           return res.status(500).send(err);
         res.send('File uploaded!');
       });
+    },
+
+    handleFileRequest(req, res) {
+      //save audiofile onto server
+      // The name of the input field (i.e. "audioFile") is used to retrieve the uploaded file
+      let username = req.body.username;
+      res.sendFile(path.join(__dirname, '../../public/', username, '/resume.pdf'));
     }
 }
