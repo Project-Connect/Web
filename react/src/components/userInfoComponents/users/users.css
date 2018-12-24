@@ -11,3 +11,10 @@
     margin:auto;
     text-align: center;
 }
+
+.close-button {
+    float:right;
+    margin-right: -90px;
+    margin-top: -25px;
+    transform: scale(1.3);
+}

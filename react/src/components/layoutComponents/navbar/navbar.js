@@ -18,7 +18,7 @@ class Navigation extends React.Component{
         return(
           <AppBar position="fixed" color="primary" style={{ backgroundColor: '#2196f3' }}>
             <Toolbar>
-                {this.renderBar(this.props.current_user || {})}
+                {this.renderBar(this.props.user || {})}
             </Toolbar>
           </AppBar>
         );
@@ -59,7 +59,7 @@ class Navigation extends React.Component{
         return <Button color="inherit" onClick={()=>this.navigate("discover")}>{heading || "Discover"}</Button>
     }
     generate_profile_button(){
-        return <Button color="inherit" onClick={()=>this.navigate("users")}>profile</Button>
+        return <Button color="inherit" onClick={()=>this.navigate("user/"+this.props.user.username)}>profile</Button>
     }
     generate_project_button(){
         return <Button color="inherit" onClick={()=>this.navigate("projects")}>projects</Button>
@@ -97,7 +97,7 @@ class Navigation extends React.Component{
     }
 }
 const mapStateToProps = (state) => ({
-  current_user: state.globalStateReducer.current_user
+  user: state.globalStateReducer.current_user
 })
 const mapDispatchToProps = {
   logout,

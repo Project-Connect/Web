@@ -11,7 +11,7 @@ class Register extends React.Component{
         super(props);
         this.state = {
             username: "",
-            passworsd: "",
+            password: "",
             email: "",
             type: "student"
         }
@@ -21,8 +21,7 @@ class Register extends React.Component{
     submit(){
         if (this.state.name === "" || this.state.description === "") {
             this.props.showError("Please fill in input field(s)")
-        }
-        else {
+        }else {
             let url = process.env.API_URL + "/api/users/" + this.state.type;
             fetch(url, {
                 method: "POST",
