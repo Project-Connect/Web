@@ -81,9 +81,9 @@ class Projects extends Component {
         if(this.props.user.type === "instructor"){
           url=process.env.API_URL + "/api/projects"
         }else{
-          url=process.env.API_URL + "/api/user_associations/user/" + this.props.user.id
+          url=process.env.API_URL + "/api/user_associations/user/"
         }
-        fetch(url)
+        fetch(url, {credentials: 'include'})
         .then((res) => res.json())
         .then((res) =>
           {

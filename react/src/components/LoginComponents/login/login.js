@@ -82,6 +82,17 @@ class SignIn extends React.Component{
     }
 
     async validateUser(username){
+      let url = process.env.API_URL + "/api/user/login";
+      fetch(url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json; charset=utf-8"
+          },
+          credentials: 'include',
+          body: JSON.stringify({...this.state})
+      })
+      .then((res)=>{console.log(res)});
+
       const token = process.env.API_URL + `/api/user/token/${
         username
       }`;

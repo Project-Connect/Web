@@ -2,12 +2,25 @@ const usersController = require('../controllers').users;
 const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
 const upload = require('../controllers').upload;
+const Users = require('../models').users;
+
+// Authentication for user resource routes
+const authenticate = (req, res, next) => {
+  console.log(req.session)
+	if (req.session.user) {
+    req.body.user = req.session.user
+    next()
+	} else {
+		res.status(401).send()
+	}
+}
 
 
 module.exports = (app) => {
   app.use((req, res, next)=>{
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept");
+    res.header('Access-Control-Allow-Credentials',' true');
     next();
   });
   app.get('/api', (req, res) => res.status(200).send({
@@ -27,6 +40,8 @@ module.exports = (app) => {
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
   app.post('/api/user/createorfind/:type', usersController.createOrFind);
+  // * login routes *
+  app.post('/api/user/login', usersController.login);
   // * login routes *
   app.get('/api/user/token/:username', usersController.token);
 
@@ -58,7 +73,7 @@ module.exports = (app) => {
   // get all users associations for a project (equal to getting all users for a project)
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
   //get all users associations for a User (equal to getting all porjects for a User)
-  app.get('/api/user_associations/user/:user', userAssociationsController.listProjects);
+  app.get('/api/user_associations/user', authenticate, userAssociationsController.listProjects);
   // get your status on a project
   app.get('/api/user_associations/user/:user/project/:project', userAssociationsController.yourProjectStatus);
   // get all users associations a user is not aprt (equal to getting all porjects a user is not apart of)

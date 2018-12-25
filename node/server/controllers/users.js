@@ -55,6 +55,30 @@ module.exports = {
   },
 
   // list all users
+  login(req, res) {
+    return Users
+      .findOne({
+        where: {
+          username: req.body.username,
+          password: req.body.password
+        },
+        attributes: ['id', 'username', 'name', 'bio', 'type'],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      })
+      .then((users) => {
+
+        console.log(users.dataValues)
+        req.session.user = users.dataValues.id
+        req.session.type = users.dataValues.type
+        console.log(req.session.user, req.session)
+        res.status(200).send(users);
+      })
+      .catch((error) => res.status(400).send(error));
+  },
+
+  // list all users
   list(req, res) {
     return Users
       .findAll({
