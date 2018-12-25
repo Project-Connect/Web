@@ -3,14 +3,6 @@ const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
 const upload = require('../controllers').upload;
 
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    return done(null, user);
-  }
-));
 
 module.exports = (app) => {
   app.use((req, res, next)=>{
