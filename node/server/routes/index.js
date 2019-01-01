@@ -1,6 +1,8 @@
 const usersController = require('../controllers').users;
 const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
+const upload = require('../controllers').upload;
+
 
 module.exports = (app) => {
   app.use((req, res, next)=>{
@@ -20,7 +22,7 @@ module.exports = (app) => {
   // get all users
   app.get('/api/users', usersController.list);
   // get a single user info TODO
-  app.get('/api/users/:user', usersController.getUser);
+  app.get('/api/users/:username', usersController.getUser);
   // remove a single user TODO
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
@@ -57,6 +59,8 @@ module.exports = (app) => {
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
   //get all users associations for a User (equal to getting all porjects for a User)
   app.get('/api/user_associations/user/:user', userAssociationsController.listProjects);
+  // get your status on a project
+  app.get('/api/user_associations/user/:user/project/:project', userAssociationsController.yourProjectStatus);
   // get all users associations a user is not aprt (equal to getting all porjects a user is not apart of)
   app.get('/api/user_associations/user/:user/not', userAssociationsController.listNotInProjects);
 
@@ -68,4 +72,11 @@ module.exports = (app) => {
   app.post('/api/user_associations/instr/update/:status', userAssociationsController.instructorUpdateStatus);
   // list users associations for a project with a specificed updateStatus
   app.get('/api/user_associations/project/:project/:status', userAssociationsController.listSpecificUsers);
+
+  // handling resume upload
+  //Borrowed from https://github.com/richardgirges/express-fileupload/tree/master/example
+  app.post('/upload', upload.handleFileUpload);
+
+  app.post('/api/resume', upload.handleFileRequest);
+
 };

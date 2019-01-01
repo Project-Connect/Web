@@ -2,7 +2,7 @@
 This page will contain examples of all the widgets being displayed
 */
 import React, { Component } from "react";
-import PopupFactory from '../globalPopups/popupFactory';
+import PopupFactory from '../popupComponents/popupFactory';
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
