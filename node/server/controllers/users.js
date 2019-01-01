@@ -5,14 +5,10 @@ module.exports = {
   create(req, res) {
     return Users
       .create({
-        name: req.body.name,
+        name: req.body.username,
         username: req.body.username,
-        bio: req.body.bio,
         password: req.body.password,
         email: req.body.email,
-        photo: req.body.photo,
-        linked_in: req.body.linked_in,
-        github: req.body.github,
         type: req.params.type
       })
       .then(users =>  res.status(200).send("okay"))
@@ -74,7 +70,10 @@ module.exports = {
   // list all users
   getUser(req, res) {
     return Users
-      .findById(req.params.user, {
+      .findOne({
+        where: {
+          username: req.params.username
+        },
         attributes: {
           exclude: ['password', 'createdAt', 'updatedAt']
         },

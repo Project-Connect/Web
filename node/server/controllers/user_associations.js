@@ -61,6 +61,28 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  // get your status on a project
+  yourProjectStatus(req, res) {
+    return Associations
+      .findAll({
+        where: {
+          user_id: req.params.user,
+          project_id: req.params.project
+        },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+        include: [{
+          model: Projects,
+          as: 'project',
+          attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
+        }],
+        attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] }
+      })
+      .then((associations) => res.status(200).send(associations))
+      .catch((error) => res.status(400).send(error));
+  },
+
   listNotInProjects(req, res) {
     return Associations
       .findAll({
