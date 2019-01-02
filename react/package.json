@@ -17,7 +17,8 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "webpack-dev-server --env.ENVIRONMENT=development --open --config webpack.config.js",
-    "build": "webpack --env.ENVIRONMENT=production --config webpack.config.js",
+    "build": "webpack --env.ENVIRONMENT=development --config webpack.config.js",
+    "production": "webpack --env.ENVIRONMENT=production --config webpack.config.js",
     "setup_test": "npm run build",
     "pre-commit": "lint-staged"
   },
