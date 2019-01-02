@@ -68,14 +68,23 @@ module.exports = {
         ],
       })
       .then((users) => {
-
-        console.log(users.dataValues)
         req.session.user = users.dataValues.id
         req.session.type = users.dataValues.type
-        console.log(req.session.user, req.session)
+        console.log(req.session.user, req.session.type)
         res.status(200).send(users);
       })
       .catch((error) => res.status(400).send(error));
+  },
+
+  // list all users
+  logout(req, res) {
+    req.session.destroy((error) => {
+    		if (error) {
+    			res.status(500).send(error)
+    		} else {
+    			res.send("success")
+    		}
+    })
   },
 
   // list all users

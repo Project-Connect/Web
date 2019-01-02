@@ -6,8 +6,17 @@ const Users = require('../models').users;
 
 // Authentication for user resource routes
 const authenticate = (req, res, next) => {
-  console.log(req.session)
 	if (req.session.user) {
+    req.body.user = req.session.user
+    next()
+	} else {
+		res.status(401).send()
+	}
+}
+
+// Authentication for user resource routes
+const adminAuthenticate = (req, res, next) => {
+	if (req.session.user && req.session.type == "admin") {
     req.body.user = req.session.user
     next()
 	} else {
@@ -44,6 +53,8 @@ module.exports = (app) => {
   app.post('/api/user/login', usersController.login);
   // * login routes *
   app.get('/api/user/token/:username', usersController.token);
+  // logout routes
+  app.get('/api/user/logout', usersController.logout);
 
   // * project routes *
   // creates and new project and
