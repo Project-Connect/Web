@@ -86,9 +86,9 @@ module.exports = (app) => {
   //get all users associations for a User (equal to getting all porjects for a User)
   app.get('/api/user_associations/user', authenticate, userAssociationsController.listProjects);
   // get your status on a project
-  app.get('/api/user_associations/user/:user/project/:project', userAssociationsController.yourProjectStatus);
+  app.get('/api/user_associations/user/project/:project', authenticate, userAssociationsController.yourProjectStatus);
   // get all users associations a user is not aprt (equal to getting all porjects a user is not apart of)
-  app.get('/api/user_associations/user/:user/not', userAssociationsController.listNotInProjects);
+  app.get('/api/user_associations/user/not', authenticate, userAssociationsController.listNotInProjects);
 
   // remove a users association user TODO
 

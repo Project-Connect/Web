@@ -260,7 +260,7 @@ class ProjectDetail extends Component {
         //TODO: User should see all their own data
         let role = JSON.parse(window.sessionStorage.current_user).type === "instructor" ? "" : "/approved"
         let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id + role;
-        let currUsersData = process.env.API_URL + "/api/user_associations/user/" + this.props.user.id + "/project/"+  this.props.match.params.project_id;
+        let currUsersData = process.env.API_URL + "/api/user_associations/user/project/"+  this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>
@@ -284,7 +284,13 @@ class ProjectDetail extends Component {
           this.props.showError(err.toString())
         })
 
-        fetch(currUsersData)
+        fetch(currUsersData, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            credentials: 'include'
+        })
         .then(res => res.json())
         .then(res =>
             this.setState({
