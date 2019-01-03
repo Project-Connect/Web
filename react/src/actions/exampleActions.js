@@ -23,40 +23,38 @@ export function addTodo(text) {
 // This example we return a function that dispatches an type to the store
 // which we will use to determine what state to mutate in the store.
 export function callExample() {
-  return function (dispatch) {
-    dispatch({
+  return{
       type: "EXAMPLE"
-    })
   }
 }
 
 // we can create a function that takes a parameter and attach it as a payload
 // to update some attribute to the store
 export function callExampleTwo(number) {
-  return function (dispatch) {
-    dispatch({
+  return {
       type: "ANOTHER_EXAMPLE",
       payload: number
-    })
   }
 }
 
-/*
-* Normally the payload is a some parameter value we delared as an input of the function,
-* but in this case, we can specify it as a promise.
-*/
-export function callAsyncExample(param) {
-  return function (dispatch) {
-      dispatch({
-          type: "FETCH_EVENT",
-          payload: delay(1000, param)
-        })
-  }
+
+import {apiAction} from './apiHandlerAction';
+import {showSuccess, showError} from './globalPopupAction';
+export const TEST = 'TEST'
+
+export function test() {
+  return apiAction({
+    url: "api",
+    param: "GET",
+    onSuccess: successTest,
+    onFailure: failTest
+  });
 }
 
-//an async function that return a promise that will eventually resolve by returning v
-function delay(t,v) {
-   return new Promise(function(resolve) {
-       setTimeout(resolve.bind(null, v), t)
-   });
+//write your own data handler
+function successTest(data){
+    return showSuccess(data.message)
+}
+
+function failTest(){
 }
