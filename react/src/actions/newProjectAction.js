@@ -27,7 +27,6 @@ export function newProjectSubmit() {
     return function (dispatch) {
         dispatch({
             type: "FETCH_EVENT2_FULFILLED",
-
         })
 
     }

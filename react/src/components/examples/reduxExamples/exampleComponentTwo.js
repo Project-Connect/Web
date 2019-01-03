@@ -7,20 +7,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux"
 
 //
-import * as example from "../../../actions/exampleActions"
-
+import {callExampleTwo, callAsyncExample, test} from "../../../actions/exampleActions"
 
 class ExampleTwo extends Component {
   constructor(props) {
     super(props);
     // here we call the function in exampleActions.js under actions
-    this.props.dispatch(example.callExampleTwo(2));
+    this.props.callExampleTwo(2);
     this.async_dispatch = this.async_dispatch.bind(this);
   }
 
   async_dispatch(){
     let flip = this.props.attribute4 ? false : true
-    this.props.dispatch(example.callAsyncExample(flip));
+    this.props.callAsyncExample(flip);
   }
   render() {
     if (this.props.attribute4) {
@@ -36,9 +35,18 @@ class ExampleTwo extends Component {
       <div>
           <h1> EXAMPLE!!!! </h1>
           <button onClick={this.async_dispatch}>CLICK ME</button>
+          <button onClick={() => this.props.test()}>TEST</button>
       </div>
     );
   }
+}
+
+// here we map the actions to funtions available in this.this.props.
+// functions are imported from the src/actions folder
+const mapDispatchToProps = {
+  test,
+  callExampleTwo,
+  callAsyncExample
 }
 
 // here we map the states in the store onto the component, the left hand side
@@ -53,4 +61,5 @@ const mapStateToProps = (state) => ({
   attribute4: state.example2.attribute1
 })
 // this is the convention for connection the states from the store into the component
-export default connect(mapStateToProps)(ExampleTwo)
+
+export default connect(mapStateToProps,mapDispatchToProps)(ExampleTwo);

@@ -42,63 +42,15 @@ class SignIn extends React.Component{
         }
     }
 
-    handleClickStudent = (e) =>{
-      e.preventDefault();
-      window.OAuth.initialize('s4PMMItRaKOS228Ccz6uoW5nXMQ');
-      window.OAuth.popup('github').then((provider) => {
-        provider.me().then((data) => {
-          this.validateUser(data, "student");
-        });
-      });
-    }
     componentDidMount(){
         const oauthScript = document.createElement("script");
         oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
         document.body.appendChild(oauthScript);
     }
 
-    submit(){
-        if (this.state.name === "" || this.state.description === "") {
-            this.props.showError("Please fill in input field(s)")
-        }
-        else {
-            let url = process.env.API_URL + "/api/project";
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                },
-                body: JSON.stringify({...this.state, user_id:this.state.user_id})
-            })
-            .then(()=>{
-              this.props.showSuccess("Project Created Success")
-              this.navigate("projects")
-            })
-            .catch(err => {
-              this.props.showError(err.toString())
-            })
-        }
-
-    }
-
-    async validateUser(username){
-      const token = process.env.API_URL + `/api/user/token/${
-        username
-      }`;
-      const userToken = await fetch(token);
-      const userTokenJson = await userToken.json();
-      window.sessionStorage.setItem(
-        "current_user",
-        JSON.stringify(userTokenJson[0])
-      );
-      this.props.login(userTokenJson[0])
-      this.props.history.push('user/'+ userTokenJson[0].username)
-    }
-
     render(){
         const { classes } = this.props;
         return(
-
             <div className={classes.main}>
               <Paper className={classes.paper}>
                 <TextField
@@ -122,7 +74,7 @@ class SignIn extends React.Component{
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    onClick={() => {this.validateUser(this.state.username)}}
+                    onClick={() => {this.props.login(this.state.username)}}
                   >
                     Sign in
                   </Button>
@@ -135,13 +87,6 @@ class SignIn extends React.Component{
                   >
                     Sign up
                   </Button>
-                  <button
-                    onClick={(e) => {this.handleClickStudent(e)}}
-                    className="login-button"
-                    color="primary"
-                  >
-                  Sign in with Github
-                  </button>
                 </div>
               </Paper>
             </div>
@@ -155,4 +100,8 @@ const mapDispatchToProps = {
   login
 }
 
-export default withStyles(styles)(connect(null,mapDispatchToProps)(SignIn));
+const mapStateToProps = (state) => ({
+  user: state.globalStateReducer.current_user
+})
+
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(SignIn));

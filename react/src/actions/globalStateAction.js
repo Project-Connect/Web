@@ -1,21 +1,28 @@
 /*
 This file exports functions that dispatch events to the global popup store
 */
+import {showSuccess, showError} from './globalPopupAction'
+import {apiAction} from './apiHandlerAction';
 
-export function login(content) {
-  return function (dispatch) {
-    dispatch({
+//set user credentials after login
+function setUserCredentials(userToken) {
+  return {
       type: "SET_USER",
-      payload: content
-    })
-  }
+      payload: userToken[0]
+    }
+}
+
+
+export function login(username){
+  return apiAction({
+    url: "api/user/token/" + username,
+    param: "GET",
+    onSuccess: setUserCredentials
+  });
 }
 
 export function logout() {
-  return function (dispatch) {
-    dispatch({
+  return {
       type: "CLEAR_USER"
-    })
-    window.sessionStorage.clear()
-  }
+    }
 }
