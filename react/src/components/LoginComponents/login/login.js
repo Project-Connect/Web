@@ -40,8 +40,13 @@ class SignIn extends React.Component{
           username: "",
           password: ""
         }
+        this.props.user && this.props.history.push(`user/${this.props.user.username}`)
+
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot){
+      this.props.user && this.props.history.push(`user/${this.props.user.username}`)
+    }
     componentDidMount(){
         const oauthScript = document.createElement("script");
         oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
