@@ -43,7 +43,7 @@ module.exports = {
     return Users
       .findAll({
         where: {
-          username: req.params.username
+          id: req.body.user
         },
         attributes: ['id', 'username', 'name', 'bio', 'type'],
         order: [

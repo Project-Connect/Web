@@ -44,7 +44,7 @@ module.exports = (app) => {
   // get all users
   app.get('/api/users', usersController.list);
   // get a single user info TODO
-  app.get('/api/users/:username', usersController.getUser);
+  app.get('/api/users/:username', authenticate, usersController.getUser);
   // remove a single user TODO
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
@@ -52,7 +52,7 @@ module.exports = (app) => {
   // * login routes *
   app.post('/api/user/login', usersController.login);
   // * login routes *
-  app.get('/api/user/token/:username', usersController.token);
+  app.get('/api/user/token/', authenticate, usersController.token);
   // logout routes
   app.get('/api/user/logout', usersController.logout);
 
