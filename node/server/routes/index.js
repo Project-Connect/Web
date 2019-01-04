@@ -2,12 +2,34 @@ const usersController = require('../controllers').users;
 const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
 const upload = require('../controllers').upload;
+const Users = require('../models').users;
+
+// Authentication for user resource routes
+const authenticate = (req, res, next) => {
+	if (req.session.user) {
+    req.body.user = req.session.user
+    next()
+	} else {
+		res.status(401).send()
+	}
+}
+
+// Authentication for user resource routes
+const adminAuthenticate = (req, res, next) => {
+	if (req.session.user && req.session.type == "admin") {
+    req.body.user = req.session.user
+    next()
+	} else {
+		res.status(401).send()
+	}
+}
 
 
 module.exports = (app) => {
   app.use((req, res, next)=>{
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept");
+    res.header('Access-Control-Allow-Credentials',' true');
     next();
   });
   app.get('/api', (req, res) => res.status(200).send({
@@ -18,17 +40,23 @@ module.exports = (app) => {
   // create new users
   app.post('/api/users/:type', usersController.create);
   // update a single usesr
-  app.post('/api/user/update', usersController.update);
+	// for requiring authentication
+	// app.post('/api/user/update', authenticate, usersController.update);
+  app.post('/api/user/update', authenticate, usersController.update);
   // get all users
   app.get('/api/users', usersController.list);
   // get a single user info TODO
-  app.get('/api/users/:username', usersController.getUser);
+  app.get('/api/users/:username', authenticate, usersController.getUser);
   // remove a single user TODO
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *
   app.post('/api/user/createorfind/:type', usersController.createOrFind);
   // * login routes *
-  app.get('/api/user/token/:username', usersController.token);
+  app.post('/api/user/login', usersController.login);
+  // * login routes *
+  app.get('/api/user/token/', authenticate, usersController.token);
+  // logout routes
+  app.get('/api/user/logout', usersController.logout);
 
   // * project routes *
   // creates and new project and
@@ -58,11 +86,11 @@ module.exports = (app) => {
   // get all users associations for a project (equal to getting all users for a project)
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
   //get all users associations for a User (equal to getting all porjects for a User)
-  app.get('/api/user_associations/user/:user', userAssociationsController.listProjects);
+  app.get('/api/user_associations/user', authenticate, userAssociationsController.listProjects);
   // get your status on a project
-  app.get('/api/user_associations/user/:user/project/:project', userAssociationsController.yourProjectStatus);
+  app.get('/api/user_associations/user/project/:project', authenticate, userAssociationsController.yourProjectStatus);
   // get all users associations a user is not aprt (equal to getting all porjects a user is not apart of)
-  app.get('/api/user_associations/user/:user/not', userAssociationsController.listNotInProjects);
+  app.get('/api/user_associations/user/not', authenticate, userAssociationsController.listNotInProjects);
 
   // remove a users association user TODO
 

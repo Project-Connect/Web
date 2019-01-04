@@ -61,8 +61,14 @@ class Discover extends Component {
     }
 
     async getData(){
-        let url=process.env.API_URL + "/api/user_associations/user/"+ JSON.parse(window.sessionStorage.current_user).id + "/not"
-        fetch(url)
+        let url=process.env.API_URL + "/api/user_associations/user/not"
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            credentials: 'include'
+        })
         .then(res => res.json())
         .then(res =>
           {

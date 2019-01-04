@@ -79,7 +79,7 @@ class SignIn extends React.Component{
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    onClick={() => {this.props.login(this.state.username)}}
+                    onClick={() => {this.props.login({...this.state})}}
                   >
                     Sign in
                   </Button>

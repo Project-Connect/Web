@@ -8,20 +8,31 @@ import {apiAction} from './apiHandlerAction';
 function setUserCredentials(userToken) {
   return {
       type: "SET_USER",
-      payload: userToken[0]
+      payload: userToken
     }
 }
 
 
-export function login(username){
+export function login(loginObject){
   return apiAction({
-    url: "api/user/token/" + username,
-    param: "GET",
-    onSuccess: setUserCredentials
+    url: "api/user/login",
+    method: "POST",
+    onSuccess: setUserCredentials,
+    data:  {...loginObject}
   });
 }
 
 export function logout() {
+  window.sessionStorage.clear()
+  const logoutUrl = process.env.API_URL + '/api/user/logout';
+  fetch(logoutUrl, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json; charset=utf-8"
+      },
+      credentials: 'include'
+  })
+  .then((res)=>{console.log(res)});
   return {
       type: "CLEAR_USER"
     }
