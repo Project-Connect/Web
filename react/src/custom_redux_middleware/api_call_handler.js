@@ -19,20 +19,21 @@ const apiHandler = ({ dispatch }) => next => action => {
   // axios default configs
   axios.defaults.baseURL = process.env.API_URL || "";
   axios.defaults.headers.common["Content-Type"]="application/json";
-  axios.defaults.headers.common["Access-Control-Allow-Origin"]="http://localhost:8000";
-
+  console.log(action.payload);
   axios
     .request({
       url,
       method,
       headers,
-      // withCredentials: 'true',
+      withCredentials: 'true',
       [dataOrParams]: data
     })
     .then(({ data }) => {
+      console.log(data);
       dispatch(onSuccess(data))
     })
     .catch(error => {
+      console.log(error);
       dispatch(showError("Something Wrong Happened")); // default error notification
       dispatch(onFailure(error)); // fallback procedure
     })
