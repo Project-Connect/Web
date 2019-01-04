@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "node ./bin/www",
+    "start": "node ./bin/www",
     "test": "jest",
     "setup_test": "node_modules/.bin/sequelize db:migrate && psql -U postgres < db/sample_data.sql && npm run test"
   },

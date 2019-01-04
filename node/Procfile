@@ -1,0 +1,4 @@
+web: psql -U postgres < node/db/setup.sql
+web: npm run setup_test
+web: npm install -g nodemon
+web: npm run start

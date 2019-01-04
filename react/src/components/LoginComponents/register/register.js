@@ -26,7 +26,8 @@ class Register extends React.Component{
             fetch(url, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json; charset=utf-8"
+                    "Content-Type": "application/json; charset=utf-8",
+                    "Credentials": "include"
                 },
                 body: JSON.stringify({...this.state})
             })
