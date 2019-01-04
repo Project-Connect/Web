@@ -39,9 +39,6 @@ class MiniProjectComponent extends Component {
 
     constructor(props) {
         super(props)
-        this.state ={
-          invisible: false
-        }
         this.navigate_to_project_details = this.navigate_to_project_details.bind(this);
     }
 
@@ -96,9 +93,6 @@ class MiniProjectComponent extends Component {
             <CardActions className={classes.cardAction} >
               {this.props.user.type === "student" && this.render_student_view()}
               {this.props.user.type === "instructor" && this.props.status === "unapproved" && this.render_instructor_view()}
-              <Badge color="secondary" badgeContent={4} invisible={this.state.invisible}>
-                <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
-              </Badge>
             </CardActions>
             </Grid>
             </Grid>
