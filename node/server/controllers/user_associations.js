@@ -45,7 +45,7 @@ module.exports = {
     return Associations
       .findAll({
         where: {
-          user_id: req.params.user,
+          user_id: req.body.user,
         },
         order: [
           ['createdAt', 'DESC'],
@@ -66,7 +66,7 @@ module.exports = {
     return Associations
       .findAll({
         where: {
-          user_id: req.params.user,
+          user_id: req.body.user,
           project_id: req.params.project
         },
         order: [
@@ -87,7 +87,7 @@ module.exports = {
     return Associations
       .findAll({
         where: {
-          user_id: req.params.user,
+          user_id: req.body.user,
         },
         order: [
           ['createdAt', 'DESC'],

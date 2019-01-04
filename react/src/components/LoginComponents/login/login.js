@@ -82,15 +82,25 @@ class SignIn extends React.Component{
     }
 
     async validateUser(username){
-      const token = process.env.API_URL + `/api/user/token/${
-        username
-      }`;
-      const userToken = await fetch(token);
+      let url = process.env.API_URL + "/api/user/login";
+      const userReturn = await fetch(url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json; charset=utf-8"
+          },
+          credentials: 'include',
+          body: JSON.stringify({...this.state})
+      });
+
+      const token = process.env.API_URL + '/api/user/token/';
+      const userToken = await fetch(token{
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json; charset=utf-8"
+          },
+          credentials: 'include'
+      });
       const userTokenJson = await userToken.json();
-      window.sessionStorage.setItem(
-        "current_user",
-        JSON.stringify(userTokenJson[0])
-      );
       this.props.login(userTokenJson[0])
       this.props.history.push('user/'+ userTokenJson[0].username)
     }

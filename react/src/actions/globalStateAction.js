@@ -17,5 +17,14 @@ export function logout() {
       type: "CLEAR_USER"
     })
     window.sessionStorage.clear()
+    const logoutUrl = process.env.API_URL + '/api/user/logout';
+    fetch(logoutUrl, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        credentials: 'include'
+    })
+    .then((res)=>{console.log(res)});
   }
 }
