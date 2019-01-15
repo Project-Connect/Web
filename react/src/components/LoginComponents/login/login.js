@@ -68,6 +68,7 @@ class SignIn extends React.Component{
 
                 <TextField
                 label="password"
+                type="password"
                 id="standard-required"
                 value={this.state.password}
                 onChange={(event)=>{this.setState({password:event.target.value})}}
@@ -82,15 +83,6 @@ class SignIn extends React.Component{
                     onClick={() => {this.props.login({...this.state})}}
                   >
                     Sign in
-                  </Button>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={() => {this.props.history.push('/register')}}
-                  >
-                    Sign up
                   </Button>
                 </div>
               </Paper>
