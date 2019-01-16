@@ -65,11 +65,11 @@ class Projects extends Component {
             //TODO DATA SHOULD BE MORE CONSISTENT
             if (this.props.user.type  === "instructor") {
               projects = this.state.projects.filter((el)=>el.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
-                <MiniProjectComponent key={el.id} id={el.id} data={el.description} status={el.status} history={this.props.history}/>
+                <MiniProjectComponent key={el.id} id={el.id} data={el} status={el.status} history={this.props.history}/>
               ))
             }else{
               projects = this.state.projects.filter((el)=>el.project.name.toLowerCase().includes(this.state.search.toLowerCase())).map((el) => (
-                <MiniProjectComponent key={el.id} id={el.project.id} data={el.project.description} status={el.status} history={this.props.history}/>
+                <MiniProjectComponent key={el.id} id={el.project.id} data={el.project} status={el.status} history={this.props.history}/>
               ))
             }
         }

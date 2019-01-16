@@ -11,8 +11,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import JsxParser from 'react-jsx-parser'
-import Badge from '@material-ui/core/Badge';
+import JsxParser from 'react-jsx-parser';
+import Typography from '@material-ui/core/Typography';
 
 import './miniProjectComponent.css';
 
@@ -87,8 +87,11 @@ class MiniProjectComponent extends Component {
            <Grid container spacing={16}>
            <Grid item xs={6}>
             <CardContent>
+                <Typography className={classes.title} gutterBottom>
+                  {this.props.data.name}
+                </Typography>
                 <JsxParser
-                  jsx={this.props.data}
+                  jsx={this.props.data.description}
                 />
             </CardContent>
             </Grid>
@@ -96,9 +99,7 @@ class MiniProjectComponent extends Component {
             <CardActions className={classes.cardAction} >
               {this.props.user.type === "student" && this.render_student_view()}
               {this.props.user.type === "instructor" && this.props.status === "unapproved" && this.render_instructor_view()}
-              <Badge color="secondary" badgeContent={4} invisible={this.state.invisible}>
-                <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
-              </Badge>
+              <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
             </CardActions>
             </Grid>
             </Grid>
