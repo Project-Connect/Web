@@ -19,7 +19,6 @@ const apiHandler = ({ dispatch }) => next => action => {
   // axios default configs
   axios.defaults.baseURL = process.env.API_URL || "";
   axios.defaults.headers.common["Content-Type"]="application/json";
-  console.log(action.payload);
   axios
     .request({
       url,

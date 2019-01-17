@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 \c project-collab-db;
+=======
+>>>>>>> master
 INSERT INTO users (username, name, bio, password, type) VALUES ('student1','Marie Bailey','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'student');
 INSERT INTO users (username, name, bio, password, type) VALUES ('student2','James Freeman','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'student');
 INSERT INTO users (username, name, bio, password, type) VALUES ('student3','Peter Barnes','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'student');
