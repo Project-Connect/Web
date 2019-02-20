@@ -20,66 +20,11 @@ class ProjectDetail extends Component {
             usersData: [],
             currUsersData: {}
         }
-        this.apply = this.apply.bind(this);
-        this.renderApplication = this.renderApplication.bind(this);
         this.renderStatus = this.renderStatus.bind(this);
-        this.approve = this.approve.bind(this);
-        this.reject = this.reject.bind(this);
         this.renderUsers = this.renderUsers.bind(this);
         this.renderButtons = this.renderButtons.bind(this);
 
     }
-    apply = () => {
-      let url = process.env.API_URL + "/api/user_associations/add";
-      let data = {
-          user_id: this.props.user.id,
-          project_id: this.state.projData.id,
-          status: "unapproved",
-          is_admin: false
-      }
-      fetch(url, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json; charset=utf-8"
-          },
-          body: JSON.stringify(data)
-      })
-      .then(()=>{
-        this.props.showSuccess("Applicaiton Success")
-        let updatedData = {
-          is_admin: false,
-          status: "unapproved"
-        }
-        this.setState({currUsersData:updatedData})
-      })
-      .catch(err => {
-        this.props.showError(err.toString())
-      })
-    }
-
-    renderDescription(jsx_in_string){
-      return <JsxParser
-        jsx={jsx_in_string}
-      />
-    }
-    renderApplication = () => {
-      if(this.state.currUsersData){
-          if (this.state.currUsersData.is_admin) {
-              return "Admin"
-          }
-          if(this.state.currUsersData.status === "unapproved"){
-              return "pending"
-          }
-          return this.state.currUsersData.status
-      }else{
-          if (this.props.user.type === "student"){
-              return <Button className="buttons" variant="contained" color="primary" onClick = {() => {this.apply()}}>Apply</Button>
-          }else{
-              return this.props.user.type
-          }
-      }
-    }
-
     render() {
 
         let github_icon;
@@ -117,7 +62,7 @@ class ProjectDetail extends Component {
                     </Typography>
 
                     <Typography variant="body1" gutterBottom>
-                        {this.renderDescription(this.state.projData.description)}
+                        {this.state.projData.description}
                     </Typography>
 
                     <Typography variant="body1" gutterBottom>
@@ -134,10 +79,10 @@ class ProjectDetail extends Component {
                     </div>
                 </div>
                 <div className="project-owner">
-                    <Typography variant="h6" gutterBottom className="members">
+                    {/* <Typography variant="h6" gutterBottom className="members">
                         Your Role:
-                    </Typography>
-                    {this.renderApplication()}
+                    </Typography> */}
+                    {/* {this.renderApplication()} */}
                     <Typography variant="h6" gutterBottom className="members">
                         Participating Members
                     </Typography>
@@ -182,85 +127,19 @@ class ProjectDetail extends Component {
         if(association.status === "approved"){
           return "member";
         }
-        if(association.status === "unapproved"){
-          return this.renderButtons(association.user_id)
-        }
+        // if(association.status === "unapproved"){
+        //   return this.renderButtons(association.user_id)
+        // }
     }
 
-    approve = (user_id) => {
-        let user = this.props.user.type === "instructor" ? "instr/" : "";
-        let urlData = process.env.API_URL + `/api/user_associations/${user}update/approved`;
-        let body = {
-          instructor_id: this.props.user.id,
-          user_id: user_id,
-          project_id: this.state.projData.id,
-          admin_id: this.props.user.id
-        }
-        fetch(urlData, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body : JSON.stringify(body)
-          }
-        )
-        .then(res => res.json())
-        .then(res => {
-            this.props.showSuccess("User Approved")
-            let newusersData = this.state.usersData.map(el => {
-              if(el.user.id === user_id){
-                el.status = "approved"
-              }
-              return el
-            })
-            this.setState({usersData:newusersData})
-        })
-        .catch(function (err) {
-            this.props.showError(err.toString())
-        })
-    }
-
-    reject = (user_id) => {
-        let user = this.props.user.type === "instructor" ? "instr/" : "";
-        let urlData = process.env.API_URL + `/api/user_associations/${user}update/rejected`;
-        let body = {
-          instructor_id: this.props.user.id,
-          user_id: user_id,
-          project_id: this.state.projData.id,
-          admin_id: this.props.user.id
-        }
-        fetch(urlData, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body : JSON.stringify(body)
-          }
-        )
-        .then(res => res.json())
-        .then(res =>
-          {
-            this.props.showSuccess("User Rejected")
-            let newusersData = this.state.usersData.map(el => {
-              if(el.user.id === user_id){
-                el.status = "rejected"
-              }
-              return el
-            })
-            this.setState({usersData:newusersData})
-        })
-        .catch(function (err) {
-            this.props.showError(err.toString())
-        })
-    }
 
     componentDidMount(){
         let urlProjectData = process.env.API_URL + "/api/project/"  + this.props.match.params.project_id;
         //Students shouldn't see all the unapproved applicaitons except their own
         //TODO: User should see all their own data
-        let role = this.props.user.type === "instructor" ? "" : "/approved"
-        let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id + role;
-        let currUsersData = process.env.API_URL + "/api/user_associations/user/project/"+  this.props.match.params.project_id;
+        // let role = this.props.user.type === "instructor" ? "" : "/approved"
+        // let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id + role;
+        // let currUsersData = process.env.API_URL + "/api/user_associations/user/project/"+  this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>
@@ -271,34 +150,6 @@ class ProjectDetail extends Component {
         .catch(function (err) {
             this.props.showError(err.toString())
 
-        })
-
-        fetch(urlUsersData)
-        .then(res => res.json())
-        .then(res =>
-            this.setState({
-                usersData: res
-            })
-          )
-        .catch(err => {
-          this.props.showError(err.toString())
-        })
-
-        fetch(currUsersData, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            credentials: 'include'
-        })
-        .then(res => res.json())
-        .then(res =>
-            this.setState({
-                currUsersData: res[0]
-            })
-          )
-        .catch(err => {
-          this.props.showError(err.toString())
         })
     }
 }
@@ -311,5 +162,4 @@ const mapStateToProps = (state) => ({
   user: state.globalStateReducer.current_user
 })
 
-//export default connect(null,mapDispatchToProps)(ProjectDetail);
 export default connect(mapStateToProps,mapDispatchToProps)(ProjectDetail);

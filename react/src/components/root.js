@@ -41,9 +41,6 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <div>
-        {
-          !isLoggedIn(store) && <Redirect to='/login' />
-        }
         <Navigation/>
         <SuccessPopup />
         <ErrorPopup />
@@ -51,7 +48,8 @@ const Root = ({ store }) => (
         <Route exact path="/ReduxExamples" component={ReduxExamples} />
         <Route exact path="/newProject" component={NewProject}/>
         <Route exact path="/userEdit" component={UserEditView}/>
-        <Route exact path="/" component={LoginPageGitHub}/>
+        <Route exact path="/" component={Discover}/>
+        <Route exact path="/about" component={LoginPageGitHub}/>
         <Route exact path="/projects" component={Projects}/>
         <Route path={"/project/:project_id"} component={ProjectDetail}/>
         <Route exact path="/discover" component={Discover}/>
@@ -66,7 +64,6 @@ const Root = ({ store }) => (
 )
 function isLoggedIn(store){
     if(!window.sessionStorage.getItem("current_user")){
-      console.log(window.location.pathname);
       if (window.location.pathname === "/" || window.location.pathname === "/login" || window.location.pathname === "/register"){
         return true
       }

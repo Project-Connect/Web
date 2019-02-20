@@ -61,13 +61,12 @@ class Discover extends Component {
     }
 
     async getData(){
-        let url=process.env.API_URL + "/api/user_associations/user/not"
+        let url=process.env.API_URL + "/api/projects"
         fetch(url, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json; charset=utf-8"
-            },
-            credentials: 'include'
+            }
         })
         .then(res => res.json())
         .then(res =>

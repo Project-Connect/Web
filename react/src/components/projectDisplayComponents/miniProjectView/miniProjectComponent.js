@@ -87,15 +87,11 @@ class MiniProjectComponent extends Component {
                 <Typography className={classes.title} gutterBottom>
                   {this.props.data.name}
                 </Typography>
-                <JsxParser
-                  jsx={this.props.data.description}
-                />
+                {this.props.data.description}
             </CardContent>
             </Grid>
             <Grid item xs={6} container justify="flex-end" alignContent="flex-end">
             <CardActions className={classes.cardAction} >
-              {this.props.user.type === "student" && this.render_student_view()}
-              {this.props.user.type === "instructor" && this.props.status === "unapproved" && this.render_instructor_view()}
               <Button variant="contained" onClick={() => {this.navigate_to_project_details(this.props.id)}}>Learn More</Button>
             </CardActions>
             </Grid>
