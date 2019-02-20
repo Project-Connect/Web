@@ -5,7 +5,9 @@
     text-align: center;
 }
 
-
+p {
+    white-space: unset
+}
 .description-2{
     width:100px;
     margin:auto;

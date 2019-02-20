@@ -18,7 +18,6 @@ let profile = require("../../../assets/profile_1.png");
 class Users extends Component {
     constructor(props){
         super(props);
-        console.log(this.props);
         this.state={
             displayModal:false,
             resume: null,
@@ -51,7 +50,6 @@ class Users extends Component {
     render() {
         return (
             <div>
-                {process.env.API_URL}
                 <Modal isOpen={this.state.displayModal} contentLabel="Minimal Modal" ariaHideApp={false}>
                     <div className="modal">
                          <IconButton onClick={this.handleCloseModal}>
@@ -62,17 +60,6 @@ class Users extends Component {
                 </Modal>
 
                 <h1> User Information. </h1>
-
-                <div className="buttonSurrounding">
-                     <button className="add" onClick={()=>{this.handleOpenModal()}}>
-                        Edit
-                    </button>
-                </div>
-                <div className="buttonSurrounding">
-                     <button className="add" onClick={()=>{this.showResume()}}>
-                        See Resume
-                    </button>
-                </div>
                 <div className = "description-2">
                     <img width={200} src = {profile} alt = "" />
                 </div>
