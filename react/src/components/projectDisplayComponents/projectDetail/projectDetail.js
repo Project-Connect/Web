@@ -138,13 +138,24 @@ class ProjectDetail extends Component {
         //Students shouldn't see all the unapproved applicaitons except their own
         //TODO: User should see all their own data
         // let role = this.props.user.type === "instructor" ? "" : "/approved"
-        // let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id + role;
+        let urlUsersData = process.env.API_URL + "/api/user_associations/project/" + this.props.match.params.project_id;
         // let currUsersData = process.env.API_URL + "/api/user_associations/user/project/"+  this.props.match.params.project_id;
         fetch(urlProjectData)
         .then(res => res.json())
         .then(res =>
             this.setState({
                 projData: res
+            })
+            )
+        .catch(function (err) {
+            this.props.showError(err.toString())
+
+        })
+        fetch(urlUsersData)
+        .then(res => res.json())
+        .then(res =>
+            this.setState({
+                usersData: res
             })
             )
         .catch(function (err) {
